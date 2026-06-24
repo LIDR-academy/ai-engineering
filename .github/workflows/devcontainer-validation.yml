@@ -1,0 +1,50 @@
+name: Devcontainer validation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate-devcontainer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate devcontainer JSON contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('.devcontainer/devcontainer.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+
+          assert data['remoteUser'] == 'vscode', data.get('remoteUser')
+          assert data['remoteEnv']['UV_LINK_MODE'] == 'copy'
+          assert data['remoteEnv']['ESTIMADOR_START_MODE'] == 'none'
+
+          settings = data['customizations']['vscode']['settings']
+          assert settings['terminal.integrated.defaultProfile.linux'] == 'zsh'
+          assert settings['terminal.integrated.profiles.linux']['zsh']['path'] == '/bin/zsh'
+          assert settings['terminal.integrated.profiles.linux']['bash']['path'] == '/bin/bash'
+
+          print('devcontainer JSON contract passed')
+          PY
+
+      - name: Build and smoke devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/devcontainer.json
+          push: never
+          runCmd: |
+            set -eux
+            echo "whoami=$(whoami)"
+            test "$(whoami)" = "vscode"
+            test -x /bin/zsh
+            grep -q '^vscode:' /etc/passwd
+            test "${ESTIMADOR_START_MODE}" = "none"
+            python --version
+            uv --version
+            git --version
+            gh --version
+            bash .devcontainer/verify-estimador.sh

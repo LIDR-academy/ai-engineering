@@ -1,0 +1,90 @@
+{
+  "name": "LIDR - Kimi/DeepSeek + Streamlit + Cline",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bookworm",
+  "remoteEnv": {
+    "UV_LINK_MODE": "copy",
+    "ESTIMADOR_START_MODE": "none",
+    "GIT_PAGER": "cat",
+    "PAGER": "cat",
+    "LESS": "FRX"
+  },
+  "waitFor": "postCreateCommand",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "estimador-cag/README.md"
+      ]
+    },
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "ms-toolsai.jupyter",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-github-actions",
+        "Google.gemini-code-assist",
+        "JohnnyZ93.oai-compatible-copilot",
+        "saoudrizwan.claude-dev"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/estimador-cag/.venv/bin/python",
+        "github.copilot.enable": {
+          "*": true,
+          "plaintext": true,
+          "markdown": true
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          },
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup-estimador.sh",
+  "postStartCommand": "bash .devcontainer/verify-estimador.sh && bash .devcontainer/start-estimador-services.sh ${ESTIMADOR_START_MODE:-none}",
+  "forwardPorts": [
+    8000,
+    8501,
+    8888,
+    5432,
+    6379
+  ],
+  "portsAttributes": {
+    "8000": {
+      "label": "FastAPI backend and /demo",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "8501": {
+      "label": "Streamlit UI manual",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "8888": {
+      "label": "Jupyter",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    }
+  },
+  "remoteUser": "vscode"
+}

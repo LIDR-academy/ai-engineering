@@ -1,0 +1,122 @@
+Session 08 query examples
+Base URL: http://ai_service:8000
+Top K: 5
+
+Ingesting example corpus...
+{
+  "document_id": 5,
+  "chunks_created": 4,
+  "embedding_dimension": 1536,
+  "ingestion_time_ms": 2879,
+  "_client_elapsed_ms": 2918
+}
+
+========================================================================================
+Query 1: REST API development with JWT authentication for financial sector
+Server search_time_ms: 199
+Client elapsed_ms: 205
+Results returned: 4
+
+1. chunk_id=9 distance=0.3081 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::AUTH-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["python", "fastapi", "postgresql", "redis"], "client_name": "FintechCorp", "token_count": 112, "component_id": "AUTH-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 140, "main_technology": "python"}
+
+2. chunk_id=10 distance=0.4138 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::INT-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["python", "fastapi", "postgresql"], "client_name": "FintechCorp", "token_count": 112, "component_id": "INT-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 120, "main_technology": "python"}
+
+3. chunk_id=12 distance=0.4999 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::UI-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["typescript", "react"], "client_name": "FintechCorp", "token_count": 106, "component_id": "UI-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 80, "main_technology": "python"}
+
+4. chunk_id=11 distance=0.5035 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::MIG-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["docker", "kubernetes", "python"], "client_name": "FintechCorp", "token_count": 116, "component_id": "MIG-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 180, "main_technology": "python"}
+
+========================================================================================
+Query 2: secure backend service with token-based access control for banking applications
+Server search_time_ms: 472
+Client elapsed_ms: 476
+Results returned: 4
+
+1. chunk_id=9 distance=0.5195 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::AUTH-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["python", "fastapi", "postgresql", "redis"], "client_name": "FintechCorp", "token_count": 112, "component_id": "AUTH-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 140, "main_technology": "python"}
+
+2. chunk_id=10 distance=0.5586 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::INT-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["python", "fastapi", "postgresql"], "client_name": "FintechCorp", "token_count": 112, "component_id": "INT-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 120, "main_technology": "python"}
+
+3. chunk_id=11 distance=0.6341 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::MIG-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["docker", "kubernetes", "python"], "client_name": "FintechCorp", "token_count": 116, "component_id": "MIG-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 180, "main_technology": "python"}
+
+4. chunk_id=12 distance=0.6389 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::UI-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["typescript", "react"], "client_name": "FintechCorp", "token_count": 106, "component_id": "UI-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 80, "main_technology": "python"}
+
+========================================================================================
+Query 3: mobile application for restaurant reservations
+Server search_time_ms: 224
+Client elapsed_ms: 227
+Results returned: 4
+
+1. chunk_id=12 distance=0.7374 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::UI-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["typescript", "react"], "client_name": "FintechCorp", "token_count": 106, "component_id": "UI-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 80, "main_technology": "python"}
+
+2. chunk_id=10 distance=0.7530 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::INT-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["python", "fastapi", "postgresql"], "client_name": "FintechCorp", "token_count": 112, "component_id": "INT-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 120, "main_technology": "python"}
+
+3. chunk_id=9 distance=0.7594 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::AUTH-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["python", "fastapi", "postgresql", "redis"], "client_name": "FintechCorp", "token_count": 112, "component_id": "AUTH-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 140, "main_technology": "python"}
+
+4. chunk_id=11 distance=0.7709 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::MIG-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["docker", "kubernetes", "python"], "client_name": "FintechCorp", "token_count": 116, "component_id": "MIG-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 180, "main_technology": "python"}
+
+========================================================================================
+Query 4: integration with external system
+Server search_time_ms: 180
+Client elapsed_ms: 183
+Results returned: 4
+
+1. chunk_id=10 distance=0.5134 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::INT-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["python", "fastapi", "postgresql"], "client_name": "FintechCorp", "token_count": 112, "component_id": "INT-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 120, "main_technology": "python"}
+
+2. chunk_id=12 distance=0.6309 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::UI-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["typescript", "react"], "client_name": "FintechCorp", "token_count": 106, "component_id": "UI-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 80, "main_technology": "python"}
+
+3. chunk_id=11 distance=0.6492 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::MIG-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["docker", "kubernetes", "python"], "client_name": "FintechCorp", "token_count": 116, "component_id": "MIG-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 180, "main_technology": "python"}
+
+4. chunk_id=9 distance=0.6553 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::AUTH-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["python", "fastapi", "postgresql", "redis"], "client_name": "FintechCorp", "token_count": 112, "component_id": "AUTH-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 140, "main_technology": "python"}
+
+========================================================================================
+Query 5: migration from monolith to microservices architecture using Kubernetes
+Server search_time_ms: 174
+Client elapsed_ms: 177
+Results returned: 4
+
+1. chunk_id=11 distance=0.4361 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::MIG-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["docker", "kubernetes", "python"], "client_name": "FintechCorp", "token_count": 116, "component_id": "MIG-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 180, "main_technology": "python"}
+
+2. chunk_id=12 distance=0.6250 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::UI-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["typescript", "react"], "client_name": "FintechCorp", "token_count": 106, "component_id": "UI-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 80, "main_technology": "python"}
+
+3. chunk_id=9 distance=0.6514 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::AUTH-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "high", "tech_stack": ["python", "fastapi", "postgresql", "redis"], "client_name": "FintechCorp", "token_count": 112, "component_id": "AUTH-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 140, "main_technology": "python"}
+
+4. chunk_id=10 distance=0.6593 chunk_type=budget_component
+   content=[Project: Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration,
+   metadata={"year": 2024, "chunk_id": "BUD-SESSION08-EXAMPLE::INT-001", "budget_id": "BUD-SESSION08-EXAMPLE", "complexity": "medium", "tech_stack": ["python", "fastapi", "postgresql"], "client_name": "FintechCorp", "token_count": 112, "component_id": "INT-001", "client_sector": "finance", "client_country": "ES", "estimated_hours": 120, "main_technology": "python"}

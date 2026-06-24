@@ -1,0 +1,87 @@
+services:
+  ai_service:
+    image: ghcr.io/astral-sh/uv:python3.11-bookworm
+    working_dir: /workspace/estimador-cag
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://estimator:estimator@postgres:5432/estimator
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-}
+      - KIMI_API_KEY=${KIMI_API_KEY:-}
+      - UV_PROJECT_ENVIRONMENT=/opt/estimador-cag-venv
+      - UV_LINK_MODE=copy
+      - GIT_PAGER=cat
+      - PAGER=cat
+      - LESS=FRX
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/workspace
+      - uv-cache:/root/.cache/uv
+      - uv-venv:/opt/estimador-cag-venv
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command:
+      [
+        "uv",
+        "run",
+        "uvicorn",
+        "app.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000"
+      ]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: estimator
+      POSTGRES_USER: estimator
+      POSTGRES_PASSWORD: estimator
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U estimator -d estimator"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: lidr-estimador-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis-data:
+  uv-cache:
+  uv-venv:

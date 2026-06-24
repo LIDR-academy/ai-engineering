@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Synchronous vs SSE streaming</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 1120px;
+      margin: 48px auto;
+      padding: 0 24px;
+      color: #1f2937;
+    }
+
+    h1 {
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 28px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button.primary {
+      background: #111827;
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 24px;
+      background: #ffffff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline {
+      margin: 20px 0;
+      border-left: 2px solid #e5e7eb;
+      padding-left: 22px;
+    }
+
+    .step {
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .step.active::before {
+      background: #059669;
+    }
+
+    .step.sync.active::before {
+      background: #92400e;
+    }
+
+    .label {
+      font-weight: 700;
+    }
+
+    .time {
+      font-family: ui-monospace, monospace;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .status {
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin: 16px 0;
+      background: #f3f4f6;
+      font-family: ui-monospace, monospace;
+      font-size: 14px;
+    }
+
+    .status.streaming {
+      background: #d1fae5;
+    }
+
+    .status.sync {
+      background: #ffedd5;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 260px;
+      background: #fafafa;
+      font-family: ui-monospace, monospace;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <h1>Synchronous response vs SSE streaming</h1>
+  <p class="subtitle">Same LLM call, different user experience.</p>
+
+  <div class="controls">
+    <button class="primary" onclick="runSync()">Run synchronous call</button>
+    <button class="primary" onclick="runStream()">Run SSE stream</button>
+    <button onclick="resetAll()">Reset</button>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Synchronous POST /estimate</h2>
+      <p>The client waits until the full response is ready.</p>
+
+      <div class="timeline">
+        <div id="sync-step-1" class="step sync">
+          <div class="label">Request sent</div>
+          <div class="time">0.0s</div>
+        </div>
+        <div id="sync-step-2" class="step sync">
+          <div class="label">Waiting</div>
+          <div class="time">LLM generates full response</div>
+        </div>
+        <div id="sync-step-3" class="step sync">
+          <div class="label">Response received</div>
+          <div class="time">Full estimation appears at once</div>
+        </div>
+      </div>
+
+      <div id="sync-status" class="status sync">idle</div>
+      <pre id="sync-output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>SSE POST /estimate/stream</h2>
+      <p>The client receives tokens as Server Sent Events.</p>
+
+      <div class="timeline">
+        <div id="stream-step-1" class="step">
+          <div class="label">Request sent</div>
+          <div class="time">0.0s</div>
+        </div>
+        <div id="stream-step-2" class="step">
+          <div class="label">First token arrives</div>
+          <div class="time">User sees text early</div>
+        </div>
+        <div id="stream-step-3" class="step">
+          <div class="label">Streaming</div>
+          <div class="time">Text grows progressively</div>
+        </div>
+        <div id="stream-step-4" class="step">
+          <div class="label">Stream complete</div>
+          <div class="time">Same final answer, better UX</div>
+        </div>
+      </div>
+
+      <div id="stream-status" class="status streaming">idle</div>
+      <pre id="stream-output"></pre>
+    </section>
+  </div>
+
+ <script>
+  const API_BASE = window.location.origin;
+
+  const payload = {
+    transcription:
+      "En la reunión con el equipo de marketing, el cliente explicó que necesita una landing page con formulario de contacto, integración con su CRM actual HubSpot y una sección de blog con editor WYSIWYG. El plazo ideal sería tenerlo listo en 4 semanas. El diseño ya existe en Figma.",
+    tier: "flash"
+  };
+
+  function activate(id) {
+    document.getElementById(id).classList.add("active");
+  }
+
+  function setText(id, value) {
+    document.getElementById(id).textContent = value;
+  }
+
+  function appendText(id, value) {
+    document.getElementById(id).textContent += value;
+  }
+
+  function resetAll() {
+    for (const id of [
+      "sync-step-1", "sync-step-2", "sync-step-3",
+      "stream-step-1", "stream-step-2", "stream-step-3", "stream-step-4"
+    ]) {
+      document.getElementById(id).classList.remove("active");
+    }
+
+    setText("sync-output", "");
+    setText("stream-output", "");
+    setText("sync-status", "idle");
+    setText("stream-status", "idle");
+  }
+
+  async function runSync() {
+    resetAll();
+
+    try {
+      activate("sync-step-1");
+      activate("sync-step-2");
+      setText("sync-status", "waiting for full response");
+
+      const response = await fetch(`${API_BASE}/api/v1/estimate`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+      });
+
+      const raw = await response.text();
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${raw}`);
+      }
+
+      const data = JSON.parse(raw);
+
+      activate("sync-step-3");
+      setText("sync-status", "complete");
+      setText("sync-output", data.estimation || JSON.stringify(data, null, 2));
+    } catch (error) {
+      setText("sync-status", "error");
+      setText("sync-output", String(error));
+      console.error(error);
+    }
+  }
+
+  function parseSseEvent(eventText) {
+    const event = {event: "message", data: ""};
+
+    for (const line of eventText.split("\n")) {
+      if (line.startsWith("event:")) {
+        event.event = line.slice("event:".length).trim();
+      }
+
+      if (line.startsWith("data:")) {
+        event.data += line.slice("data:".length).replace(/^ /, "");
+      }
+    }
+
+    return event;
+  }
+
+  async function runStream() {
+    resetAll();
+
+    try {
+      activate("stream-step-1");
+      setText("stream-status", "streaming");
+
+      const response = await fetch(`${API_BASE}/api/v1/estimate/stream`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const raw = await response.text();
+        throw new Error(`HTTP ${response.status}: ${raw}`);
+      }
+
+      if (!response.body) {
+        throw new Error("ReadableStream is not available in this browser.");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+
+      let buffer = "";
+      let firstToken = true;
+
+      while (true) {
+        const {value, done} = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        buffer += decoder.decode(value, {stream: true});
+        buffer = buffer.replace(/\r\n/g, "\n");
+
+        const rawEvents = buffer.split("\n\n");
+        buffer = rawEvents.pop() || "";
+
+        for (const rawEvent of rawEvents) {
+          if (!rawEvent.trim()) {
+            continue;
+          }
+
+          const parsed = parseSseEvent(rawEvent);
+
+          if (parsed.event === "token") {
+            if (firstToken) {
+              activate("stream-step-2");
+              activate("stream-step-3");
+              firstToken = false;
+            }
+
+            appendText("stream-output", parsed.data);
+          }
+
+          if (parsed.event === "done") {
+            activate("stream-step-4");
+            setText("stream-status", "complete");
+          }
+
+          if (parsed.event === "error") {
+            setText("stream-status", "error");
+            appendText("stream-output", `\n\nERROR: ${parsed.data}`);
+          }
+        }
+      }
+    } catch (error) {
+      setText("stream-status", "error");
+      setText("stream-output", String(error));
+      console.error(error);
+    }
+  }
+</script>
+</body>
+</html>

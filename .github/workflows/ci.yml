@@ -1,0 +1,51 @@
+name: CI - Estimador CAG
+
+on:
+  push:
+    branches:
+      - main
+      - "gg-**"
+      - "sesion-**"
+      - "session**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-estimador-cag:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: estimador-cag
+    env:
+      OPENAI_API_KEY: test
+      DEEPSEEK_API_KEY: test
+      KIMI_API_KEY: test
+      PYTHONUNBUFFERED: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --frozen --extra dev
+
+      - name: Ruff
+        run: |
+          TARGETS="app tests"
+          test -f streamlit_app.py && TARGETS="$TARGETS streamlit_app.py"
+          test -d evals && TARGETS="$TARGETS evals"
+          uv run ruff check $TARGETS
+
+      - name: Compile Python
+        run: uv run python -m py_compile $(find app tests evals -name '*.py' -type f 2>/dev/null)
+
+      - name: Tests
+        run: uv run pytest -q

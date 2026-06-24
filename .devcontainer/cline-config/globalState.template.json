@@ -1,0 +1,36 @@
+{
+  "welcomeViewCompleted": true,
+  "__vscodeMigrationVersion": 1,
+  "clineVersion": "3.82.0",
+  "remoteRulesToggles": {},
+  "remoteWorkflowToggles": {},
+  "remoteSkillsToggles": {},
+  "openAiHeaders": {},
+  "sapAiCoreUseOrchestrationMode": true,
+  "ocaMode": "internal",
+  "planModeApiProvider": "openai-compatible",
+  "planModeOpenAiModelId": "deepseek-v4-pro",
+  "actModeApiProvider": "openai-compatible",
+  "actModeOpenAiModelId": "deepseek-v4-flash",
+  "planModeApiModelId": "deepseek-v4-pro",
+  "actModeApiModelId": "deepseek-v4-flash",
+  "planActSeparateModelsSetting": true,
+  "lastShownAnnouncementId": "3.82",
+  "autoApprovalSettings": {
+    "version": 3,
+    "enabled": true,
+    "favorites": [],
+    "maxRequests": 20,
+    "actions": {
+      "readFiles": true,
+      "readFilesExternally": false,
+      "editFiles": false,
+      "editFilesExternally": false,
+      "executeSafeCommands": true,
+      "executeAllCommands": false,
+      "useBrowser": false,
+      "useMcp": true
+    },
+    "enableNotifications": false
+  }
+}

@@ -1,0 +1,130 @@
+[
+  {
+    "budget_id": "BUD-2024-014",
+    "client_metadata": {
+      "name": "FintechCorp",
+      "sector": "finance",
+      "country": "ES"
+    },
+    "project_summary": "Mobile banking API with OAuth 2.0 authentication, JWT sessions, and PSD2 compliance",
+    "main_technology": "ruby_on_rails",
+    "year": 2024,
+    "total_estimated_hours": 480,
+    "components": [
+      {
+        "component_id": "AUTH-001",
+        "name": "OAuth 2.0 authentication backend",
+        "description": "Implementation of OAuth 2.0 authorization code and refresh token flows with JWT-based session management, multi-tenant token isolation, and rate limiting per client.",
+        "tech_stack": ["ruby_on_rails", "postgresql", "redis"],
+        "estimated_hours": 120,
+        "complexity": "high",
+        "dependencies": []
+      },
+      {
+        "component_id": "AUDIT-001",
+        "name": "Regulatory audit logging",
+        "description": "Immutable audit trail for authentication, consent changes, account access, and sensitive banking operations.",
+        "tech_stack": ["ruby_on_rails", "postgresql"],
+        "estimated_hours": 80,
+        "complexity": "medium",
+        "dependencies": ["AUTH-001"]
+      }
+    ]
+  },
+  {
+    "budget_id": "BUD-2024-021",
+    "client_metadata": {
+      "name": "MarketNest",
+      "sector": "e-commerce",
+      "country": "PL"
+    },
+    "project_summary": "Marketplace checkout modernization with inventory synchronization and merchant dashboards",
+    "main_technology": "python_fastapi",
+    "year": 2024,
+    "total_estimated_hours": 390,
+    "components": [
+      {
+        "component_id": "CHECKOUT-001",
+        "name": "Checkout orchestration API",
+        "description": "Backend service coordinating cart validation, payment authorization, discount rules, and order creation for marketplace purchases.",
+        "tech_stack": ["python_fastapi", "postgresql", "redis"],
+        "estimated_hours": 140,
+        "complexity": "high",
+        "dependencies": []
+      },
+      {
+        "component_id": "INV-001",
+        "name": "Inventory synchronization worker",
+        "description": "Scheduled worker that synchronizes merchant stock levels, detects conflicts, and emits inventory update events.",
+        "tech_stack": ["python_fastapi", "postgresql", "celery"],
+        "estimated_hours": 90,
+        "complexity": "medium",
+        "dependencies": ["CHECKOUT-001"]
+      }
+    ]
+  },
+  {
+    "budget_id": "BUD-2025-003",
+    "client_metadata": {
+      "name": "CareFlow",
+      "sector": "healthcare",
+      "country": "DE"
+    },
+    "project_summary": "Patient intake platform with document upload, triage rules, and clinician review workflow",
+    "main_technology": "java_spring_boot",
+    "year": 2025,
+    "total_estimated_hours": 520,
+    "components": [
+      {
+        "component_id": "INTAKE-001",
+        "name": "Patient intake form backend",
+        "description": "Spring Boot API for structured patient intake forms, validation rules, consent capture, and secure submission tracking.",
+        "tech_stack": ["java_spring_boot", "postgresql"],
+        "estimated_hours": 150,
+        "complexity": "high",
+        "dependencies": []
+      },
+      {
+        "component_id": "DOCS-001",
+        "name": "Clinical document upload",
+        "description": "Secure upload flow for referral documents and lab results with file type validation and metadata extraction.",
+        "tech_stack": ["java_spring_boot", "postgresql", "s3"],
+        "estimated_hours": 110,
+        "complexity": "medium",
+        "dependencies": ["INTAKE-001"]
+      }
+    ]
+  },
+  {
+    "budget_id": "BUD-2025-011",
+    "client_metadata": {
+      "name": "FactoryPulse",
+      "sector": "industrial",
+      "country": "NL"
+    },
+    "project_summary": "Industrial maintenance dashboard with equipment telemetry ingestion and alerting",
+    "main_technology": "node_typescript",
+    "year": 2025,
+    "total_estimated_hours": 430,
+    "components": [
+      {
+        "component_id": "TELEM-001",
+        "name": "Telemetry ingestion service",
+        "description": "API and queue consumer for ingesting machine telemetry, validating payloads, and storing normalized equipment events.",
+        "tech_stack": ["node_typescript", "postgresql", "rabbitmq"],
+        "estimated_hours": 130,
+        "complexity": "high",
+        "dependencies": []
+      },
+      {
+        "component_id": "ALERT-001",
+        "name": "Maintenance alert rules",
+        "description": "Rule engine that detects threshold violations, repeated machine faults, and maintenance windows for operations teams.",
+        "tech_stack": ["node_typescript", "postgresql"],
+        "estimated_hours": 95,
+        "complexity": "medium",
+        "dependencies": ["TELEM-001"]
+      }
+    ]
+  }
+]

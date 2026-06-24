@@ -1,0 +1,51 @@
+[
+  {
+    "query_id": "Q-AUTH-001",
+    "query": "OAuth JWT authentication token banking authorization flow",
+    "intent": "Find the authentication backend component in the fintech banking budget.",
+    "expected_budget_id": "BUD-2024-014",
+    "expected_component_ids": ["AUTH-001"]
+  },
+  {
+    "query_id": "Q-AUDIT-001",
+    "query": "immutable audit logging consent changes sensitive banking operations",
+    "intent": "Find the regulatory audit logging component.",
+    "expected_budget_id": "BUD-2024-014",
+    "expected_component_ids": ["AUDIT-001"]
+  },
+  {
+    "query_id": "Q-CHECKOUT-001",
+    "query": "checkout orchestration payment authorization discount rules order creation",
+    "intent": "Find the marketplace checkout orchestration API component.",
+    "expected_budget_id": "BUD-2024-021",
+    "expected_component_ids": ["CHECKOUT-001"]
+  },
+  {
+    "query_id": "Q-INVENTORY-001",
+    "query": "inventory synchronization worker merchant stock levels scheduled conflicts events",
+    "intent": "Find the inventory synchronization worker component.",
+    "expected_budget_id": "BUD-2024-021",
+    "expected_component_ids": ["INV-001"]
+  },
+  {
+    "query_id": "Q-DOCS-001",
+    "query": "clinical document upload referral lab results secure file validation metadata",
+    "intent": "Find the clinical document upload component.",
+    "expected_budget_id": "BUD-2025-003",
+    "expected_component_ids": ["DOCS-001"]
+  },
+  {
+    "query_id": "Q-TELEMETRY-001",
+    "query": "machine telemetry ingestion queue consumer equipment events industrial dashboard",
+    "intent": "Find the telemetry ingestion service component.",
+    "expected_budget_id": "BUD-2025-011",
+    "expected_component_ids": ["TELEM-001"]
+  },
+  {
+    "query_id": "Q-ALERTS-001",
+    "query": "maintenance alert rules threshold violations machine faults operations teams",
+    "intent": "Find the maintenance alert rules component.",
+    "expected_budget_id": "BUD-2025-011",
+    "expected_component_ids": ["ALERT-001"]
+  }
+]

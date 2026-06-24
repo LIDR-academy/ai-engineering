@@ -1,0 +1,86 @@
+name: Live provider smoke - Estimador CAG
+
+on:
+  workflow_dispatch:
+
+jobs:
+  live-smoke:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    defaults:
+      run:
+        working-directory: estimador-cag
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }}
+      REDIS_URL: redis://127.0.0.1:6379/0
+      PYTHONUNBUFFERED: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --frozen --extra dev
+
+      - name: Verify live secrets exist
+        run: |
+          test -n "$DEEPSEEK_API_KEY" || (echo "DEEPSEEK_API_KEY is missing" && exit 1)
+          test -n "$KIMI_API_KEY" || (echo "KIMI_API_KEY is missing" && exit 1)
+
+      - name: Start FastAPI
+        run: |
+          uv run uvicorn app.main:app --host 127.0.0.1 --port 8000 > /tmp/estimador-cag.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -sf -X POST http://127.0.0.1:8000/sessions >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/estimador-cag.log
+          exit 1
+
+      - name: Run bounded live stress smoke
+        run: |
+          uv run python -m evals.stress.run \
+            --http http://127.0.0.1:8000 \
+            --scenarios growing,pivot,contradiction \
+            --attachment-sizes 0,5,20,50,100 \
+            --repeats 3 \
+            --turn-count 2 \
+            --output evals/stress/live_smoke/results.csv
+
+          wc -l evals/stress/live_smoke/results.csv
+          sed -n '1,180p' evals/stress/live_smoke/REPORT.md
+
+      - name: Print FastAPI log on failure
+        if: failure()
+        run: |
+          cat /tmp/estimador-cag.log || true
+
+      - name: Upload live smoke artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-smoke-results
+          if-no-files-found: ignore
+          path: |
+            estimador-cag/evals/stress/live_smoke/results.csv
+            estimador-cag/evals/stress/live_smoke/REPORT.md

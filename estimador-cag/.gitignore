@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.uv/
+venv/
+.env
+.venv
+.vscode/
+.idea/
+*.swp
+*.swo
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Session 06 generated stress fixtures
+evals/stress/fixtures/generated/
+
+# Local stress evidence, not committed
+evals/stress/live_smoke/
+evals/stress/fixtures/generated/
+__pycache__/
+*.pyc

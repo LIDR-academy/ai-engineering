@@ -1,0 +1,901 @@
+scenario,attachment_size_kb,repeat,fact_to_remember,turn_index,session_id,enriched_transcript_chars,attachments_total_chars,messages_in_window,anchors_count,summary_chars,tokens_in,tokens_out,cost_usd,latency_ms,cache_hit_kind,last_resolved_tier,latency_budget_passed,cost_budget_passed,memory_drift_passed,memory_drift_score
+growing,0,1,project name: Nimbus Portal,1,82fae382-238e-46e6-a32d-deba26ac722d,96,0,3,0,0,25,220,6.335e-05,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes multi tenant workspaces,2,82fae382-238e-46e6-a32d-deba26ac722d,83,0,5,0,0,387,220,8.869e-05,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes audit log,3,82fae382-238e-46e6-a32d-deba26ac722d,72,0,7,0,0,743,220,0.00011361,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes CSV export,4,82fae382-238e-46e6-a32d-deba26ac722d,57,0,9,0,0,1093,220,0.00013811,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes reporting dashboard,5,82fae382-238e-46e6-a32d-deba26ac722d,75,0,11,0,0,1444,220,0.00016268,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes role permissions,6,82fae382-238e-46e6-a32d-deba26ac722d,76,0,13,0,0,1799,220,0.00018753,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes Slack alerts,7,82fae382-238e-46e6-a32d-deba26ac722d,79,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes Stripe billing,8,82fae382-238e-46e6-a32d-deba26ac722d,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes data import,9,82fae382-238e-46e6-a32d-deba26ac722d,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes admin panel,10,82fae382-238e-46e6-a32d-deba26ac722d,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes GDPR export,11,82fae382-238e-46e6-a32d-deba26ac722d,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes SAML SSO,12,82fae382-238e-46e6-a32d-deba26ac722d,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes API keys,13,82fae382-238e-46e6-a32d-deba26ac722d,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes webhook delivery,14,82fae382-238e-46e6-a32d-deba26ac722d,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes background jobs,15,82fae382-238e-46e6-a32d-deba26ac722d,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes usage analytics,16,82fae382-238e-46e6-a32d-deba26ac722d,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes onboarding checklist,17,82fae382-238e-46e6-a32d-deba26ac722d,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes billing reconciliation,18,82fae382-238e-46e6-a32d-deba26ac722d,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,0,1,scope includes incident notifications,19,82fae382-238e-46e6-a32d-deba26ac722d,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,0,1,project name: Nimbus Portal,20,82fae382-238e-46e6-a32d-deba26ac722d,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,0,2,project name: Nimbus Portal,1,0ffbf979-c826-4e01-be43-62167f53b2b5,96,0,3,0,0,25,220,6.335e-05,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes multi tenant workspaces,2,0ffbf979-c826-4e01-be43-62167f53b2b5,83,0,5,0,0,387,220,8.869e-05,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes audit log,3,0ffbf979-c826-4e01-be43-62167f53b2b5,72,0,7,0,0,743,220,0.00011361,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes CSV export,4,0ffbf979-c826-4e01-be43-62167f53b2b5,57,0,9,0,0,1093,220,0.00013811,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes reporting dashboard,5,0ffbf979-c826-4e01-be43-62167f53b2b5,75,0,11,0,0,1444,220,0.00016268,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes role permissions,6,0ffbf979-c826-4e01-be43-62167f53b2b5,76,0,13,0,0,1799,220,0.00018753,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes Slack alerts,7,0ffbf979-c826-4e01-be43-62167f53b2b5,79,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes Stripe billing,8,0ffbf979-c826-4e01-be43-62167f53b2b5,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes data import,9,0ffbf979-c826-4e01-be43-62167f53b2b5,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes admin panel,10,0ffbf979-c826-4e01-be43-62167f53b2b5,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes GDPR export,11,0ffbf979-c826-4e01-be43-62167f53b2b5,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes SAML SSO,12,0ffbf979-c826-4e01-be43-62167f53b2b5,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes API keys,13,0ffbf979-c826-4e01-be43-62167f53b2b5,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes webhook delivery,14,0ffbf979-c826-4e01-be43-62167f53b2b5,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes background jobs,15,0ffbf979-c826-4e01-be43-62167f53b2b5,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes usage analytics,16,0ffbf979-c826-4e01-be43-62167f53b2b5,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes onboarding checklist,17,0ffbf979-c826-4e01-be43-62167f53b2b5,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes billing reconciliation,18,0ffbf979-c826-4e01-be43-62167f53b2b5,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,0,2,scope includes incident notifications,19,0ffbf979-c826-4e01-be43-62167f53b2b5,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,0,2,project name: Nimbus Portal,20,0ffbf979-c826-4e01-be43-62167f53b2b5,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,0,3,project name: Nimbus Portal,1,60c44ef9-fb50-4483-acac-b9d9b32ae34e,96,0,3,0,0,25,220,6.335e-05,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes multi tenant workspaces,2,60c44ef9-fb50-4483-acac-b9d9b32ae34e,83,0,5,0,0,387,220,8.869e-05,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes audit log,3,60c44ef9-fb50-4483-acac-b9d9b32ae34e,72,0,7,0,0,743,220,0.00011361,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes CSV export,4,60c44ef9-fb50-4483-acac-b9d9b32ae34e,57,0,9,0,0,1093,220,0.00013811,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes reporting dashboard,5,60c44ef9-fb50-4483-acac-b9d9b32ae34e,75,0,11,0,0,1444,220,0.00016268,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes role permissions,6,60c44ef9-fb50-4483-acac-b9d9b32ae34e,76,0,13,0,0,1799,220,0.00018753,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes Slack alerts,7,60c44ef9-fb50-4483-acac-b9d9b32ae34e,79,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes Stripe billing,8,60c44ef9-fb50-4483-acac-b9d9b32ae34e,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes data import,9,60c44ef9-fb50-4483-acac-b9d9b32ae34e,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes admin panel,10,60c44ef9-fb50-4483-acac-b9d9b32ae34e,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes GDPR export,11,60c44ef9-fb50-4483-acac-b9d9b32ae34e,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes SAML SSO,12,60c44ef9-fb50-4483-acac-b9d9b32ae34e,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes API keys,13,60c44ef9-fb50-4483-acac-b9d9b32ae34e,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes webhook delivery,14,60c44ef9-fb50-4483-acac-b9d9b32ae34e,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes background jobs,15,60c44ef9-fb50-4483-acac-b9d9b32ae34e,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes usage analytics,16,60c44ef9-fb50-4483-acac-b9d9b32ae34e,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes onboarding checklist,17,60c44ef9-fb50-4483-acac-b9d9b32ae34e,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes billing reconciliation,18,60c44ef9-fb50-4483-acac-b9d9b32ae34e,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,0,3,scope includes incident notifications,19,60c44ef9-fb50-4483-acac-b9d9b32ae34e,60,0,13,0,0,2119,220,0.00020993,2,none,stress_fake,True,True,False,0.0
+growing,0,3,project name: Nimbus Portal,20,60c44ef9-fb50-4483-acac-b9d9b32ae34e,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,5,1,project name: Nimbus Portal,1,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,5118,4948,3,0,0,1280,220,0.0001512,22,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes multi tenant workspaces,2,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes audit log,3,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes CSV export,4,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes reporting dashboard,5,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes role permissions,6,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes Slack alerts,7,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes Stripe billing,8,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes data import,9,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes admin panel,10,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes GDPR export,11,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes SAML SSO,12,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes API keys,13,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes webhook delivery,14,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes background jobs,15,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes usage analytics,16,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes onboarding checklist,17,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes billing reconciliation,18,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,5,1,scope includes incident notifications,19,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,5,1,project name: Nimbus Portal,20,76c9a6ab-f63f-4fb8-9592-e6682e5aa974,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,5,2,project name: Nimbus Portal,1,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,5118,4948,3,0,0,1280,220,0.0001512,12,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes multi tenant workspaces,2,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes audit log,3,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes CSV export,4,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes reporting dashboard,5,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes role permissions,6,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes Slack alerts,7,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes Stripe billing,8,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes data import,9,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes admin panel,10,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes GDPR export,11,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes SAML SSO,12,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes API keys,13,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes webhook delivery,14,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes background jobs,15,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes usage analytics,16,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes onboarding checklist,17,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes billing reconciliation,18,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,5,2,scope includes incident notifications,19,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,5,2,project name: Nimbus Portal,20,a971bbed-d0ac-4a05-800c-7c3ad10f5ebb,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,5,3,project name: Nimbus Portal,1,2eda47d6-39db-429d-853c-1a225d77780b,5118,4948,3,0,0,1280,220,0.0001512,12,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes multi tenant workspaces,2,2eda47d6-39db-429d-853c-1a225d77780b,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes audit log,3,2eda47d6-39db-429d-853c-1a225d77780b,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes CSV export,4,2eda47d6-39db-429d-853c-1a225d77780b,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes reporting dashboard,5,2eda47d6-39db-429d-853c-1a225d77780b,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes role permissions,6,2eda47d6-39db-429d-853c-1a225d77780b,76,0,13,0,0,1831,220,0.00018977,2,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes Slack alerts,7,2eda47d6-39db-429d-853c-1a225d77780b,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes Stripe billing,8,2eda47d6-39db-429d-853c-1a225d77780b,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes data import,9,2eda47d6-39db-429d-853c-1a225d77780b,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes admin panel,10,2eda47d6-39db-429d-853c-1a225d77780b,62,0,13,0,0,2135,220,0.00021105,1,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes GDPR export,11,2eda47d6-39db-429d-853c-1a225d77780b,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes SAML SSO,12,2eda47d6-39db-429d-853c-1a225d77780b,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes API keys,13,2eda47d6-39db-429d-853c-1a225d77780b,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes webhook delivery,14,2eda47d6-39db-429d-853c-1a225d77780b,62,0,13,0,0,2115,220,0.00020965,4,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes background jobs,15,2eda47d6-39db-429d-853c-1a225d77780b,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes usage analytics,16,2eda47d6-39db-429d-853c-1a225d77780b,65,0,13,0,0,2109,220,0.00020923,2,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes onboarding checklist,17,2eda47d6-39db-429d-853c-1a225d77780b,70,0,13,0,0,2112,220,0.00020944,3,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes billing reconciliation,18,2eda47d6-39db-429d-853c-1a225d77780b,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,5,3,scope includes incident notifications,19,2eda47d6-39db-429d-853c-1a225d77780b,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,5,3,project name: Nimbus Portal,20,2eda47d6-39db-429d-853c-1a225d77780b,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,20,1,project name: Nimbus Portal,1,fb146892-cbc4-4dbe-87d6-61538cc6f474,8200,19290,3,0,0,2051,220,0.00020517,31,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes multi tenant workspaces,2,fb146892-cbc4-4dbe-87d6-61538cc6f474,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes audit log,3,fb146892-cbc4-4dbe-87d6-61538cc6f474,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes CSV export,4,fb146892-cbc4-4dbe-87d6-61538cc6f474,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes reporting dashboard,5,fb146892-cbc4-4dbe-87d6-61538cc6f474,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes role permissions,6,fb146892-cbc4-4dbe-87d6-61538cc6f474,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes Slack alerts,7,fb146892-cbc4-4dbe-87d6-61538cc6f474,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes Stripe billing,8,fb146892-cbc4-4dbe-87d6-61538cc6f474,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes data import,9,fb146892-cbc4-4dbe-87d6-61538cc6f474,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes admin panel,10,fb146892-cbc4-4dbe-87d6-61538cc6f474,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes GDPR export,11,fb146892-cbc4-4dbe-87d6-61538cc6f474,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes SAML SSO,12,fb146892-cbc4-4dbe-87d6-61538cc6f474,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes API keys,13,fb146892-cbc4-4dbe-87d6-61538cc6f474,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes webhook delivery,14,fb146892-cbc4-4dbe-87d6-61538cc6f474,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes background jobs,15,fb146892-cbc4-4dbe-87d6-61538cc6f474,62,0,13,0,0,2110,220,0.0002093,2,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes usage analytics,16,fb146892-cbc4-4dbe-87d6-61538cc6f474,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes onboarding checklist,17,fb146892-cbc4-4dbe-87d6-61538cc6f474,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes billing reconciliation,18,fb146892-cbc4-4dbe-87d6-61538cc6f474,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,20,1,scope includes incident notifications,19,fb146892-cbc4-4dbe-87d6-61538cc6f474,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,20,1,project name: Nimbus Portal,20,fb146892-cbc4-4dbe-87d6-61538cc6f474,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,20,2,project name: Nimbus Portal,1,7907944d-c6f5-4f89-b28d-1fe99fc077fa,8200,19290,3,0,0,2051,220,0.00020517,41,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes multi tenant workspaces,2,7907944d-c6f5-4f89-b28d-1fe99fc077fa,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes audit log,3,7907944d-c6f5-4f89-b28d-1fe99fc077fa,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes CSV export,4,7907944d-c6f5-4f89-b28d-1fe99fc077fa,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes reporting dashboard,5,7907944d-c6f5-4f89-b28d-1fe99fc077fa,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes role permissions,6,7907944d-c6f5-4f89-b28d-1fe99fc077fa,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes Slack alerts,7,7907944d-c6f5-4f89-b28d-1fe99fc077fa,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes Stripe billing,8,7907944d-c6f5-4f89-b28d-1fe99fc077fa,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes data import,9,7907944d-c6f5-4f89-b28d-1fe99fc077fa,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes admin panel,10,7907944d-c6f5-4f89-b28d-1fe99fc077fa,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes GDPR export,11,7907944d-c6f5-4f89-b28d-1fe99fc077fa,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes SAML SSO,12,7907944d-c6f5-4f89-b28d-1fe99fc077fa,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes API keys,13,7907944d-c6f5-4f89-b28d-1fe99fc077fa,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes webhook delivery,14,7907944d-c6f5-4f89-b28d-1fe99fc077fa,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes background jobs,15,7907944d-c6f5-4f89-b28d-1fe99fc077fa,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes usage analytics,16,7907944d-c6f5-4f89-b28d-1fe99fc077fa,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes onboarding checklist,17,7907944d-c6f5-4f89-b28d-1fe99fc077fa,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes billing reconciliation,18,7907944d-c6f5-4f89-b28d-1fe99fc077fa,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,20,2,scope includes incident notifications,19,7907944d-c6f5-4f89-b28d-1fe99fc077fa,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,20,2,project name: Nimbus Portal,20,7907944d-c6f5-4f89-b28d-1fe99fc077fa,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,20,3,project name: Nimbus Portal,1,6a17d714-1b07-4031-bd28-637fb5c700b6,8200,19290,3,0,0,2051,220,0.00020517,31,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes multi tenant workspaces,2,6a17d714-1b07-4031-bd28-637fb5c700b6,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes audit log,3,6a17d714-1b07-4031-bd28-637fb5c700b6,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes CSV export,4,6a17d714-1b07-4031-bd28-637fb5c700b6,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes reporting dashboard,5,6a17d714-1b07-4031-bd28-637fb5c700b6,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes role permissions,6,6a17d714-1b07-4031-bd28-637fb5c700b6,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes Slack alerts,7,6a17d714-1b07-4031-bd28-637fb5c700b6,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes Stripe billing,8,6a17d714-1b07-4031-bd28-637fb5c700b6,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes data import,9,6a17d714-1b07-4031-bd28-637fb5c700b6,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes admin panel,10,6a17d714-1b07-4031-bd28-637fb5c700b6,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes GDPR export,11,6a17d714-1b07-4031-bd28-637fb5c700b6,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes SAML SSO,12,6a17d714-1b07-4031-bd28-637fb5c700b6,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes API keys,13,6a17d714-1b07-4031-bd28-637fb5c700b6,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes webhook delivery,14,6a17d714-1b07-4031-bd28-637fb5c700b6,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes background jobs,15,6a17d714-1b07-4031-bd28-637fb5c700b6,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes usage analytics,16,6a17d714-1b07-4031-bd28-637fb5c700b6,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes onboarding checklist,17,6a17d714-1b07-4031-bd28-637fb5c700b6,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes billing reconciliation,18,6a17d714-1b07-4031-bd28-637fb5c700b6,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,20,3,scope includes incident notifications,19,6a17d714-1b07-4031-bd28-637fb5c700b6,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,20,3,project name: Nimbus Portal,20,6a17d714-1b07-4031-bd28-637fb5c700b6,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,50,1,project name: Nimbus Portal,1,164cc619-9285-4547-ae6c-69dd9c753ef1,8200,47772,3,0,0,2051,220,0.00020517,59,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes multi tenant workspaces,2,164cc619-9285-4547-ae6c-69dd9c753ef1,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes audit log,3,164cc619-9285-4547-ae6c-69dd9c753ef1,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes CSV export,4,164cc619-9285-4547-ae6c-69dd9c753ef1,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes reporting dashboard,5,164cc619-9285-4547-ae6c-69dd9c753ef1,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes role permissions,6,164cc619-9285-4547-ae6c-69dd9c753ef1,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes Slack alerts,7,164cc619-9285-4547-ae6c-69dd9c753ef1,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes Stripe billing,8,164cc619-9285-4547-ae6c-69dd9c753ef1,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes data import,9,164cc619-9285-4547-ae6c-69dd9c753ef1,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes admin panel,10,164cc619-9285-4547-ae6c-69dd9c753ef1,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes GDPR export,11,164cc619-9285-4547-ae6c-69dd9c753ef1,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes SAML SSO,12,164cc619-9285-4547-ae6c-69dd9c753ef1,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes API keys,13,164cc619-9285-4547-ae6c-69dd9c753ef1,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes webhook delivery,14,164cc619-9285-4547-ae6c-69dd9c753ef1,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes background jobs,15,164cc619-9285-4547-ae6c-69dd9c753ef1,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes usage analytics,16,164cc619-9285-4547-ae6c-69dd9c753ef1,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes onboarding checklist,17,164cc619-9285-4547-ae6c-69dd9c753ef1,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes billing reconciliation,18,164cc619-9285-4547-ae6c-69dd9c753ef1,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,50,1,scope includes incident notifications,19,164cc619-9285-4547-ae6c-69dd9c753ef1,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,50,1,project name: Nimbus Portal,20,164cc619-9285-4547-ae6c-69dd9c753ef1,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,50,2,project name: Nimbus Portal,1,76d50669-5ef7-492b-b229-c12198dba10a,8200,47772,3,0,0,2051,220,0.00020517,93,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes multi tenant workspaces,2,76d50669-5ef7-492b-b229-c12198dba10a,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes audit log,3,76d50669-5ef7-492b-b229-c12198dba10a,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes CSV export,4,76d50669-5ef7-492b-b229-c12198dba10a,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes reporting dashboard,5,76d50669-5ef7-492b-b229-c12198dba10a,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes role permissions,6,76d50669-5ef7-492b-b229-c12198dba10a,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes Slack alerts,7,76d50669-5ef7-492b-b229-c12198dba10a,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes Stripe billing,8,76d50669-5ef7-492b-b229-c12198dba10a,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes data import,9,76d50669-5ef7-492b-b229-c12198dba10a,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes admin panel,10,76d50669-5ef7-492b-b229-c12198dba10a,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes GDPR export,11,76d50669-5ef7-492b-b229-c12198dba10a,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes SAML SSO,12,76d50669-5ef7-492b-b229-c12198dba10a,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes API keys,13,76d50669-5ef7-492b-b229-c12198dba10a,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes webhook delivery,14,76d50669-5ef7-492b-b229-c12198dba10a,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes background jobs,15,76d50669-5ef7-492b-b229-c12198dba10a,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes usage analytics,16,76d50669-5ef7-492b-b229-c12198dba10a,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes onboarding checklist,17,76d50669-5ef7-492b-b229-c12198dba10a,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes billing reconciliation,18,76d50669-5ef7-492b-b229-c12198dba10a,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,50,2,scope includes incident notifications,19,76d50669-5ef7-492b-b229-c12198dba10a,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,50,2,project name: Nimbus Portal,20,76d50669-5ef7-492b-b229-c12198dba10a,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,50,3,project name: Nimbus Portal,1,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,8200,47772,3,0,0,2051,220,0.00020517,59,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes multi tenant workspaces,2,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes audit log,3,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes CSV export,4,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes reporting dashboard,5,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes role permissions,6,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes Slack alerts,7,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes Stripe billing,8,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes data import,9,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,65,0,13,0,0,2139,220,0.00021133,1,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes admin panel,10,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes GDPR export,11,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes SAML SSO,12,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes API keys,13,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes webhook delivery,14,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes background jobs,15,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes usage analytics,16,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes onboarding checklist,17,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes billing reconciliation,18,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,50,3,scope includes incident notifications,19,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,50,3,project name: Nimbus Portal,20,7171c0f3-cf1d-47f4-83be-7ba6516dd0ad,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,100,1,project name: Nimbus Portal,1,96f6674a-982b-4211-b528-9faffb84d9ca,8202,95040,3,0,0,2051,220,0.00020517,103,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes multi tenant workspaces,2,96f6674a-982b-4211-b528-9faffb84d9ca,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes audit log,3,96f6674a-982b-4211-b528-9faffb84d9ca,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes CSV export,4,96f6674a-982b-4211-b528-9faffb84d9ca,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes reporting dashboard,5,96f6674a-982b-4211-b528-9faffb84d9ca,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes role permissions,6,96f6674a-982b-4211-b528-9faffb84d9ca,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes Slack alerts,7,96f6674a-982b-4211-b528-9faffb84d9ca,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes Stripe billing,8,96f6674a-982b-4211-b528-9faffb84d9ca,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes data import,9,96f6674a-982b-4211-b528-9faffb84d9ca,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes admin panel,10,96f6674a-982b-4211-b528-9faffb84d9ca,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes GDPR export,11,96f6674a-982b-4211-b528-9faffb84d9ca,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes SAML SSO,12,96f6674a-982b-4211-b528-9faffb84d9ca,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes API keys,13,96f6674a-982b-4211-b528-9faffb84d9ca,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes webhook delivery,14,96f6674a-982b-4211-b528-9faffb84d9ca,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes background jobs,15,96f6674a-982b-4211-b528-9faffb84d9ca,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes usage analytics,16,96f6674a-982b-4211-b528-9faffb84d9ca,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes onboarding checklist,17,96f6674a-982b-4211-b528-9faffb84d9ca,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes billing reconciliation,18,96f6674a-982b-4211-b528-9faffb84d9ca,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,100,1,scope includes incident notifications,19,96f6674a-982b-4211-b528-9faffb84d9ca,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,100,1,project name: Nimbus Portal,20,96f6674a-982b-4211-b528-9faffb84d9ca,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,100,2,project name: Nimbus Portal,1,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,8202,95040,3,0,0,2051,220,0.00020517,97,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes multi tenant workspaces,2,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes audit log,3,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes CSV export,4,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes reporting dashboard,5,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes role permissions,6,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes Slack alerts,7,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes Stripe billing,8,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes data import,9,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes admin panel,10,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes GDPR export,11,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes SAML SSO,12,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes API keys,13,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes webhook delivery,14,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes background jobs,15,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes usage analytics,16,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes onboarding checklist,17,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes billing reconciliation,18,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,100,2,scope includes incident notifications,19,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,100,2,project name: Nimbus Portal,20,e41384fc-6ccc-4f4e-a5d2-9da800cae8b9,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+growing,100,3,project name: Nimbus Portal,1,65de0266-3af8-4355-8e25-9a822b3f4008,8202,95040,3,0,0,2051,220,0.00020517,95,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes multi tenant workspaces,2,65de0266-3af8-4355-8e25-9a822b3f4008,83,0,5,0,0,418,220,9.086e-05,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes audit log,3,65de0266-3af8-4355-8e25-9a822b3f4008,72,0,7,0,0,774,220,0.00011578,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes CSV export,4,65de0266-3af8-4355-8e25-9a822b3f4008,57,0,9,0,0,1124,220,0.00014028,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes reporting dashboard,5,65de0266-3af8-4355-8e25-9a822b3f4008,75,0,11,0,0,1475,220,0.00016485,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes role permissions,6,65de0266-3af8-4355-8e25-9a822b3f4008,76,0,13,0,0,1831,220,0.00018977,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes Slack alerts,7,65de0266-3af8-4355-8e25-9a822b3f4008,79,0,13,0,0,2187,220,0.00021469,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes Stripe billing,8,65de0266-3af8-4355-8e25-9a822b3f4008,73,0,13,0,0,2146,220,0.00021182,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes data import,9,65de0266-3af8-4355-8e25-9a822b3f4008,65,0,13,0,0,2139,220,0.00021133,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes admin panel,10,65de0266-3af8-4355-8e25-9a822b3f4008,62,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes GDPR export,11,65de0266-3af8-4355-8e25-9a822b3f4008,62,0,13,0,0,2137,220,0.00021119,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes SAML SSO,12,65de0266-3af8-4355-8e25-9a822b3f4008,62,0,13,0,0,2131,220,0.00021077,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes API keys,13,65de0266-3af8-4355-8e25-9a822b3f4008,62,0,13,0,0,2124,220,0.00021028,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes webhook delivery,14,65de0266-3af8-4355-8e25-9a822b3f4008,62,0,13,0,0,2115,220,0.00020965,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes background jobs,15,65de0266-3af8-4355-8e25-9a822b3f4008,62,0,13,0,0,2110,220,0.0002093,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes usage analytics,16,65de0266-3af8-4355-8e25-9a822b3f4008,65,0,13,0,0,2109,220,0.00020923,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes onboarding checklist,17,65de0266-3af8-4355-8e25-9a822b3f4008,70,0,13,0,0,2112,220,0.00020944,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes billing reconciliation,18,65de0266-3af8-4355-8e25-9a822b3f4008,73,0,13,0,0,2116,220,0.00020972,0,none,stress_fake,True,True,False,0.0
+growing,100,3,scope includes incident notifications,19,65de0266-3af8-4355-8e25-9a822b3f4008,60,0,13,0,0,2119,220,0.00020993,0,none,stress_fake,True,True,False,0.0
+growing,100,3,project name: Nimbus Portal,20,65de0266-3af8-4355-8e25-9a822b3f4008,107,0,13,0,0,2129,220,0.00021063,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,project name: Aurora Field,1,5f2cf811-3999-45ec-a3bf-63999b9e7c88,77,0,3,0,0,20,220,6.3e-05,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,stack includes FastAPI,2,5f2cf811-3999-45ec-a3bf-63999b9e7c88,67,0,5,0,0,373,220,8.771e-05,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes offline drafts,3,5f2cf811-3999-45ec-a3bf-63999b9e7c88,58,0,7,0,0,722,220,0.00011214,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes manager approval,4,5f2cf811-3999-45ec-a3bf-63999b9e7c88,47,0,9,0,0,1066,220,0.00013622,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,stack includes Flutter,5,5f2cf811-3999-45ec-a3bf-63999b9e7c88,91,0,11,0,0,1418,220,0.00016086,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,stack includes PostgreSQL,6,5f2cf811-3999-45ec-a3bf-63999b9e7c88,61,0,13,0,0,1774,220,0.00018578,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes push notifications,7,5f2cf811-3999-45ec-a3bf-63999b9e7c88,51,0,13,0,0,2120,220,0.00021,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes photo uploads,8,5f2cf811-3999-45ec-a3bf-63999b9e7c88,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes location check in,9,5f2cf811-3999-45ec-a3bf-63999b9e7c88,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes supervisor dashboard,10,5f2cf811-3999-45ec-a3bf-63999b9e7c88,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes role permissions,11,5f2cf811-3999-45ec-a3bf-63999b9e7c88,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes accounting export,12,5f2cf811-3999-45ec-a3bf-63999b9e7c88,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes tenant separation,13,5f2cf811-3999-45ec-a3bf-63999b9e7c88,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes blocked job alerts,14,5f2cf811-3999-45ec-a3bf-63999b9e7c88,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes audit trail,15,5f2cf811-3999-45ec-a3bf-63999b9e7c88,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes utilization reporting,16,5f2cf811-3999-45ec-a3bf-63999b9e7c88,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes emergency override,17,5f2cf811-3999-45ec-a3bf-63999b9e7c88,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes sign off templates,18,5f2cf811-3999-45ec-a3bf-63999b9e7c88,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,scope includes partner API,19,5f2cf811-3999-45ec-a3bf-63999b9e7c88,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,0,1,stack includes Flutter,20,5f2cf811-3999-45ec-a3bf-63999b9e7c88,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,project name: Aurora Field,1,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,77,0,3,0,0,20,220,6.3e-05,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,stack includes FastAPI,2,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,67,0,5,0,0,373,220,8.771e-05,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes offline drafts,3,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,58,0,7,0,0,722,220,0.00011214,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes manager approval,4,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,47,0,9,0,0,1066,220,0.00013622,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,stack includes Flutter,5,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,91,0,11,0,0,1418,220,0.00016086,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,stack includes PostgreSQL,6,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,61,0,13,0,0,1774,220,0.00018578,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes push notifications,7,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,51,0,13,0,0,2120,220,0.00021,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes photo uploads,8,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes location check in,9,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes supervisor dashboard,10,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes role permissions,11,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes accounting export,12,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes tenant separation,13,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes blocked job alerts,14,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes audit trail,15,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes utilization reporting,16,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes emergency override,17,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes sign off templates,18,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,scope includes partner API,19,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,0,2,stack includes Flutter,20,ff3108c6-31fa-4b19-95cd-7effe3c7d13a,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,project name: Aurora Field,1,1653655e-e2ae-4a99-9b37-2d4b4d12859f,77,0,3,0,0,20,220,6.3e-05,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,stack includes FastAPI,2,1653655e-e2ae-4a99-9b37-2d4b4d12859f,67,0,5,0,0,373,220,8.771e-05,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes offline drafts,3,1653655e-e2ae-4a99-9b37-2d4b4d12859f,58,0,7,0,0,722,220,0.00011214,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes manager approval,4,1653655e-e2ae-4a99-9b37-2d4b4d12859f,47,0,9,0,0,1066,220,0.00013622,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,stack includes Flutter,5,1653655e-e2ae-4a99-9b37-2d4b4d12859f,91,0,11,0,0,1418,220,0.00016086,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,stack includes PostgreSQL,6,1653655e-e2ae-4a99-9b37-2d4b4d12859f,61,0,13,0,0,1774,220,0.00018578,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes push notifications,7,1653655e-e2ae-4a99-9b37-2d4b4d12859f,51,0,13,0,0,2120,220,0.00021,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes photo uploads,8,1653655e-e2ae-4a99-9b37-2d4b4d12859f,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes location check in,9,1653655e-e2ae-4a99-9b37-2d4b4d12859f,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes supervisor dashboard,10,1653655e-e2ae-4a99-9b37-2d4b4d12859f,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes role permissions,11,1653655e-e2ae-4a99-9b37-2d4b4d12859f,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes accounting export,12,1653655e-e2ae-4a99-9b37-2d4b4d12859f,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes tenant separation,13,1653655e-e2ae-4a99-9b37-2d4b4d12859f,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes blocked job alerts,14,1653655e-e2ae-4a99-9b37-2d4b4d12859f,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes audit trail,15,1653655e-e2ae-4a99-9b37-2d4b4d12859f,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes utilization reporting,16,1653655e-e2ae-4a99-9b37-2d4b4d12859f,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes emergency override,17,1653655e-e2ae-4a99-9b37-2d4b4d12859f,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes sign off templates,18,1653655e-e2ae-4a99-9b37-2d4b4d12859f,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,scope includes partner API,19,1653655e-e2ae-4a99-9b37-2d4b4d12859f,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,0,3,stack includes Flutter,20,1653655e-e2ae-4a99-9b37-2d4b4d12859f,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,project name: Aurora Field,1,54c1bf03-fa39-481b-a964-af13c4eece25,5099,4948,3,0,0,1275,220,0.00015085,12,none,stress_fake,True,True,False,0.0
+pivot,5,1,stack includes FastAPI,2,54c1bf03-fa39-481b-a964-af13c4eece25,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes offline drafts,3,54c1bf03-fa39-481b-a964-af13c4eece25,58,0,7,0,0,759,220,0.00011473,1,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes manager approval,4,54c1bf03-fa39-481b-a964-af13c4eece25,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,stack includes Flutter,5,54c1bf03-fa39-481b-a964-af13c4eece25,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,stack includes PostgreSQL,6,54c1bf03-fa39-481b-a964-af13c4eece25,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes push notifications,7,54c1bf03-fa39-481b-a964-af13c4eece25,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes photo uploads,8,54c1bf03-fa39-481b-a964-af13c4eece25,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes location check in,9,54c1bf03-fa39-481b-a964-af13c4eece25,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes supervisor dashboard,10,54c1bf03-fa39-481b-a964-af13c4eece25,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes role permissions,11,54c1bf03-fa39-481b-a964-af13c4eece25,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes accounting export,12,54c1bf03-fa39-481b-a964-af13c4eece25,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes tenant separation,13,54c1bf03-fa39-481b-a964-af13c4eece25,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes blocked job alerts,14,54c1bf03-fa39-481b-a964-af13c4eece25,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes audit trail,15,54c1bf03-fa39-481b-a964-af13c4eece25,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes utilization reporting,16,54c1bf03-fa39-481b-a964-af13c4eece25,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes emergency override,17,54c1bf03-fa39-481b-a964-af13c4eece25,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes sign off templates,18,54c1bf03-fa39-481b-a964-af13c4eece25,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,scope includes partner API,19,54c1bf03-fa39-481b-a964-af13c4eece25,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,5,1,stack includes Flutter,20,54c1bf03-fa39-481b-a964-af13c4eece25,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,project name: Aurora Field,1,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,5099,4948,3,0,0,1275,220,0.00015085,13,none,stress_fake,True,True,False,0.0
+pivot,5,2,stack includes FastAPI,2,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes offline drafts,3,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes manager approval,4,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,stack includes Flutter,5,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,stack includes PostgreSQL,6,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes push notifications,7,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes photo uploads,8,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes location check in,9,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes supervisor dashboard,10,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes role permissions,11,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes accounting export,12,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes tenant separation,13,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes blocked job alerts,14,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes audit trail,15,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes utilization reporting,16,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes emergency override,17,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes sign off templates,18,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,scope includes partner API,19,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,5,2,stack includes Flutter,20,a40a39cc-cd88-40e1-9e00-3df6189c1cd2,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,project name: Aurora Field,1,4a32e224-cdc9-441b-a940-cebd389189c1,5099,4948,3,0,0,1275,220,0.00015085,12,none,stress_fake,True,True,False,0.0
+pivot,5,3,stack includes FastAPI,2,4a32e224-cdc9-441b-a940-cebd389189c1,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes offline drafts,3,4a32e224-cdc9-441b-a940-cebd389189c1,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes manager approval,4,4a32e224-cdc9-441b-a940-cebd389189c1,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,stack includes Flutter,5,4a32e224-cdc9-441b-a940-cebd389189c1,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,stack includes PostgreSQL,6,4a32e224-cdc9-441b-a940-cebd389189c1,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes push notifications,7,4a32e224-cdc9-441b-a940-cebd389189c1,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes photo uploads,8,4a32e224-cdc9-441b-a940-cebd389189c1,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes location check in,9,4a32e224-cdc9-441b-a940-cebd389189c1,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes supervisor dashboard,10,4a32e224-cdc9-441b-a940-cebd389189c1,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes role permissions,11,4a32e224-cdc9-441b-a940-cebd389189c1,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes accounting export,12,4a32e224-cdc9-441b-a940-cebd389189c1,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes tenant separation,13,4a32e224-cdc9-441b-a940-cebd389189c1,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes blocked job alerts,14,4a32e224-cdc9-441b-a940-cebd389189c1,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes audit trail,15,4a32e224-cdc9-441b-a940-cebd389189c1,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes utilization reporting,16,4a32e224-cdc9-441b-a940-cebd389189c1,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes emergency override,17,4a32e224-cdc9-441b-a940-cebd389189c1,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes sign off templates,18,4a32e224-cdc9-441b-a940-cebd389189c1,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,scope includes partner API,19,4a32e224-cdc9-441b-a940-cebd389189c1,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,5,3,stack includes Flutter,20,4a32e224-cdc9-441b-a940-cebd389189c1,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,project name: Aurora Field,1,6b7a086f-58fb-41b7-b7d8-a8472c261471,8181,19290,3,0,0,2046,220,0.00020482,48,none,stress_fake,True,True,False,0.0
+pivot,20,1,stack includes FastAPI,2,6b7a086f-58fb-41b7-b7d8-a8472c261471,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes offline drafts,3,6b7a086f-58fb-41b7-b7d8-a8472c261471,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes manager approval,4,6b7a086f-58fb-41b7-b7d8-a8472c261471,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,stack includes Flutter,5,6b7a086f-58fb-41b7-b7d8-a8472c261471,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,stack includes PostgreSQL,6,6b7a086f-58fb-41b7-b7d8-a8472c261471,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes push notifications,7,6b7a086f-58fb-41b7-b7d8-a8472c261471,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes photo uploads,8,6b7a086f-58fb-41b7-b7d8-a8472c261471,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes location check in,9,6b7a086f-58fb-41b7-b7d8-a8472c261471,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes supervisor dashboard,10,6b7a086f-58fb-41b7-b7d8-a8472c261471,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes role permissions,11,6b7a086f-58fb-41b7-b7d8-a8472c261471,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes accounting export,12,6b7a086f-58fb-41b7-b7d8-a8472c261471,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes tenant separation,13,6b7a086f-58fb-41b7-b7d8-a8472c261471,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes blocked job alerts,14,6b7a086f-58fb-41b7-b7d8-a8472c261471,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes audit trail,15,6b7a086f-58fb-41b7-b7d8-a8472c261471,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes utilization reporting,16,6b7a086f-58fb-41b7-b7d8-a8472c261471,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes emergency override,17,6b7a086f-58fb-41b7-b7d8-a8472c261471,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes sign off templates,18,6b7a086f-58fb-41b7-b7d8-a8472c261471,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,scope includes partner API,19,6b7a086f-58fb-41b7-b7d8-a8472c261471,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,20,1,stack includes Flutter,20,6b7a086f-58fb-41b7-b7d8-a8472c261471,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,project name: Aurora Field,1,93f80049-2fb3-4c27-b489-b04c080a4607,8181,19290,3,0,0,2046,220,0.00020482,33,none,stress_fake,True,True,False,0.0
+pivot,20,2,stack includes FastAPI,2,93f80049-2fb3-4c27-b489-b04c080a4607,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes offline drafts,3,93f80049-2fb3-4c27-b489-b04c080a4607,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes manager approval,4,93f80049-2fb3-4c27-b489-b04c080a4607,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,stack includes Flutter,5,93f80049-2fb3-4c27-b489-b04c080a4607,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,stack includes PostgreSQL,6,93f80049-2fb3-4c27-b489-b04c080a4607,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes push notifications,7,93f80049-2fb3-4c27-b489-b04c080a4607,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes photo uploads,8,93f80049-2fb3-4c27-b489-b04c080a4607,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes location check in,9,93f80049-2fb3-4c27-b489-b04c080a4607,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes supervisor dashboard,10,93f80049-2fb3-4c27-b489-b04c080a4607,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes role permissions,11,93f80049-2fb3-4c27-b489-b04c080a4607,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes accounting export,12,93f80049-2fb3-4c27-b489-b04c080a4607,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes tenant separation,13,93f80049-2fb3-4c27-b489-b04c080a4607,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes blocked job alerts,14,93f80049-2fb3-4c27-b489-b04c080a4607,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes audit trail,15,93f80049-2fb3-4c27-b489-b04c080a4607,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes utilization reporting,16,93f80049-2fb3-4c27-b489-b04c080a4607,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes emergency override,17,93f80049-2fb3-4c27-b489-b04c080a4607,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes sign off templates,18,93f80049-2fb3-4c27-b489-b04c080a4607,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,scope includes partner API,19,93f80049-2fb3-4c27-b489-b04c080a4607,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,20,2,stack includes Flutter,20,93f80049-2fb3-4c27-b489-b04c080a4607,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,project name: Aurora Field,1,71a2ce81-e0d0-4a97-abad-990ae307a989,8181,19290,3,0,0,2046,220,0.00020482,27,none,stress_fake,True,True,False,0.0
+pivot,20,3,stack includes FastAPI,2,71a2ce81-e0d0-4a97-abad-990ae307a989,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes offline drafts,3,71a2ce81-e0d0-4a97-abad-990ae307a989,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes manager approval,4,71a2ce81-e0d0-4a97-abad-990ae307a989,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,stack includes Flutter,5,71a2ce81-e0d0-4a97-abad-990ae307a989,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,stack includes PostgreSQL,6,71a2ce81-e0d0-4a97-abad-990ae307a989,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes push notifications,7,71a2ce81-e0d0-4a97-abad-990ae307a989,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes photo uploads,8,71a2ce81-e0d0-4a97-abad-990ae307a989,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes location check in,9,71a2ce81-e0d0-4a97-abad-990ae307a989,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes supervisor dashboard,10,71a2ce81-e0d0-4a97-abad-990ae307a989,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes role permissions,11,71a2ce81-e0d0-4a97-abad-990ae307a989,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes accounting export,12,71a2ce81-e0d0-4a97-abad-990ae307a989,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes tenant separation,13,71a2ce81-e0d0-4a97-abad-990ae307a989,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes blocked job alerts,14,71a2ce81-e0d0-4a97-abad-990ae307a989,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes audit trail,15,71a2ce81-e0d0-4a97-abad-990ae307a989,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes utilization reporting,16,71a2ce81-e0d0-4a97-abad-990ae307a989,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes emergency override,17,71a2ce81-e0d0-4a97-abad-990ae307a989,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes sign off templates,18,71a2ce81-e0d0-4a97-abad-990ae307a989,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,scope includes partner API,19,71a2ce81-e0d0-4a97-abad-990ae307a989,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,20,3,stack includes Flutter,20,71a2ce81-e0d0-4a97-abad-990ae307a989,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,project name: Aurora Field,1,36c059d9-3bbe-4305-a7eb-77703ad57255,8181,47772,3,0,0,2046,220,0.00020482,63,none,stress_fake,True,True,False,0.0
+pivot,50,1,stack includes FastAPI,2,36c059d9-3bbe-4305-a7eb-77703ad57255,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes offline drafts,3,36c059d9-3bbe-4305-a7eb-77703ad57255,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes manager approval,4,36c059d9-3bbe-4305-a7eb-77703ad57255,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,stack includes Flutter,5,36c059d9-3bbe-4305-a7eb-77703ad57255,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,stack includes PostgreSQL,6,36c059d9-3bbe-4305-a7eb-77703ad57255,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes push notifications,7,36c059d9-3bbe-4305-a7eb-77703ad57255,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes photo uploads,8,36c059d9-3bbe-4305-a7eb-77703ad57255,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes location check in,9,36c059d9-3bbe-4305-a7eb-77703ad57255,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes supervisor dashboard,10,36c059d9-3bbe-4305-a7eb-77703ad57255,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes role permissions,11,36c059d9-3bbe-4305-a7eb-77703ad57255,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes accounting export,12,36c059d9-3bbe-4305-a7eb-77703ad57255,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes tenant separation,13,36c059d9-3bbe-4305-a7eb-77703ad57255,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes blocked job alerts,14,36c059d9-3bbe-4305-a7eb-77703ad57255,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes audit trail,15,36c059d9-3bbe-4305-a7eb-77703ad57255,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes utilization reporting,16,36c059d9-3bbe-4305-a7eb-77703ad57255,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes emergency override,17,36c059d9-3bbe-4305-a7eb-77703ad57255,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes sign off templates,18,36c059d9-3bbe-4305-a7eb-77703ad57255,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,scope includes partner API,19,36c059d9-3bbe-4305-a7eb-77703ad57255,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,50,1,stack includes Flutter,20,36c059d9-3bbe-4305-a7eb-77703ad57255,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,project name: Aurora Field,1,c81a5063-b8f2-4cb1-854b-27ccab252806,8181,47772,3,0,0,2046,220,0.00020482,56,none,stress_fake,True,True,False,0.0
+pivot,50,2,stack includes FastAPI,2,c81a5063-b8f2-4cb1-854b-27ccab252806,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes offline drafts,3,c81a5063-b8f2-4cb1-854b-27ccab252806,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes manager approval,4,c81a5063-b8f2-4cb1-854b-27ccab252806,47,0,9,0,0,1103,220,0.00013881,1,none,stress_fake,True,True,False,0.0
+pivot,50,2,stack includes Flutter,5,c81a5063-b8f2-4cb1-854b-27ccab252806,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,stack includes PostgreSQL,6,c81a5063-b8f2-4cb1-854b-27ccab252806,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes push notifications,7,c81a5063-b8f2-4cb1-854b-27ccab252806,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes photo uploads,8,c81a5063-b8f2-4cb1-854b-27ccab252806,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes location check in,9,c81a5063-b8f2-4cb1-854b-27ccab252806,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes supervisor dashboard,10,c81a5063-b8f2-4cb1-854b-27ccab252806,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes role permissions,11,c81a5063-b8f2-4cb1-854b-27ccab252806,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes accounting export,12,c81a5063-b8f2-4cb1-854b-27ccab252806,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes tenant separation,13,c81a5063-b8f2-4cb1-854b-27ccab252806,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes blocked job alerts,14,c81a5063-b8f2-4cb1-854b-27ccab252806,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes audit trail,15,c81a5063-b8f2-4cb1-854b-27ccab252806,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes utilization reporting,16,c81a5063-b8f2-4cb1-854b-27ccab252806,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes emergency override,17,c81a5063-b8f2-4cb1-854b-27ccab252806,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes sign off templates,18,c81a5063-b8f2-4cb1-854b-27ccab252806,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,scope includes partner API,19,c81a5063-b8f2-4cb1-854b-27ccab252806,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,50,2,stack includes Flutter,20,c81a5063-b8f2-4cb1-854b-27ccab252806,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,project name: Aurora Field,1,13841e17-7022-4e5a-94fa-a30dc4d040e1,8181,47772,3,0,0,2046,220,0.00020482,60,none,stress_fake,True,True,False,0.0
+pivot,50,3,stack includes FastAPI,2,13841e17-7022-4e5a-94fa-a30dc4d040e1,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes offline drafts,3,13841e17-7022-4e5a-94fa-a30dc4d040e1,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes manager approval,4,13841e17-7022-4e5a-94fa-a30dc4d040e1,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,stack includes Flutter,5,13841e17-7022-4e5a-94fa-a30dc4d040e1,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,stack includes PostgreSQL,6,13841e17-7022-4e5a-94fa-a30dc4d040e1,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes push notifications,7,13841e17-7022-4e5a-94fa-a30dc4d040e1,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes photo uploads,8,13841e17-7022-4e5a-94fa-a30dc4d040e1,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes location check in,9,13841e17-7022-4e5a-94fa-a30dc4d040e1,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes supervisor dashboard,10,13841e17-7022-4e5a-94fa-a30dc4d040e1,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes role permissions,11,13841e17-7022-4e5a-94fa-a30dc4d040e1,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes accounting export,12,13841e17-7022-4e5a-94fa-a30dc4d040e1,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes tenant separation,13,13841e17-7022-4e5a-94fa-a30dc4d040e1,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes blocked job alerts,14,13841e17-7022-4e5a-94fa-a30dc4d040e1,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes audit trail,15,13841e17-7022-4e5a-94fa-a30dc4d040e1,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes utilization reporting,16,13841e17-7022-4e5a-94fa-a30dc4d040e1,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes emergency override,17,13841e17-7022-4e5a-94fa-a30dc4d040e1,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes sign off templates,18,13841e17-7022-4e5a-94fa-a30dc4d040e1,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,scope includes partner API,19,13841e17-7022-4e5a-94fa-a30dc4d040e1,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,50,3,stack includes Flutter,20,13841e17-7022-4e5a-94fa-a30dc4d040e1,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,project name: Aurora Field,1,878abbae-77b3-4419-bf82-357d7587dc75,8183,95040,3,0,0,2046,220,0.00020482,103,none,stress_fake,True,True,False,0.0
+pivot,100,1,stack includes FastAPI,2,878abbae-77b3-4419-bf82-357d7587dc75,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes offline drafts,3,878abbae-77b3-4419-bf82-357d7587dc75,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes manager approval,4,878abbae-77b3-4419-bf82-357d7587dc75,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,stack includes Flutter,5,878abbae-77b3-4419-bf82-357d7587dc75,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,stack includes PostgreSQL,6,878abbae-77b3-4419-bf82-357d7587dc75,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes push notifications,7,878abbae-77b3-4419-bf82-357d7587dc75,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes photo uploads,8,878abbae-77b3-4419-bf82-357d7587dc75,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes location check in,9,878abbae-77b3-4419-bf82-357d7587dc75,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes supervisor dashboard,10,878abbae-77b3-4419-bf82-357d7587dc75,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes role permissions,11,878abbae-77b3-4419-bf82-357d7587dc75,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes accounting export,12,878abbae-77b3-4419-bf82-357d7587dc75,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes tenant separation,13,878abbae-77b3-4419-bf82-357d7587dc75,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes blocked job alerts,14,878abbae-77b3-4419-bf82-357d7587dc75,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes audit trail,15,878abbae-77b3-4419-bf82-357d7587dc75,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes utilization reporting,16,878abbae-77b3-4419-bf82-357d7587dc75,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes emergency override,17,878abbae-77b3-4419-bf82-357d7587dc75,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes sign off templates,18,878abbae-77b3-4419-bf82-357d7587dc75,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,scope includes partner API,19,878abbae-77b3-4419-bf82-357d7587dc75,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,100,1,stack includes Flutter,20,878abbae-77b3-4419-bf82-357d7587dc75,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,project name: Aurora Field,1,e94cc39d-c2c0-4cc9-98ab-5525b246330e,8183,95040,3,0,0,2046,220,0.00020482,117,none,stress_fake,True,True,False,0.0
+pivot,100,2,stack includes FastAPI,2,e94cc39d-c2c0-4cc9-98ab-5525b246330e,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes offline drafts,3,e94cc39d-c2c0-4cc9-98ab-5525b246330e,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes manager approval,4,e94cc39d-c2c0-4cc9-98ab-5525b246330e,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,stack includes Flutter,5,e94cc39d-c2c0-4cc9-98ab-5525b246330e,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,stack includes PostgreSQL,6,e94cc39d-c2c0-4cc9-98ab-5525b246330e,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes push notifications,7,e94cc39d-c2c0-4cc9-98ab-5525b246330e,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes photo uploads,8,e94cc39d-c2c0-4cc9-98ab-5525b246330e,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes location check in,9,e94cc39d-c2c0-4cc9-98ab-5525b246330e,42,0,13,0,0,2092,220,0.00020804,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes supervisor dashboard,10,e94cc39d-c2c0-4cc9-98ab-5525b246330e,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes role permissions,11,e94cc39d-c2c0-4cc9-98ab-5525b246330e,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes accounting export,12,e94cc39d-c2c0-4cc9-98ab-5525b246330e,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes tenant separation,13,e94cc39d-c2c0-4cc9-98ab-5525b246330e,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes blocked job alerts,14,e94cc39d-c2c0-4cc9-98ab-5525b246330e,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes audit trail,15,e94cc39d-c2c0-4cc9-98ab-5525b246330e,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes utilization reporting,16,e94cc39d-c2c0-4cc9-98ab-5525b246330e,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes emergency override,17,e94cc39d-c2c0-4cc9-98ab-5525b246330e,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes sign off templates,18,e94cc39d-c2c0-4cc9-98ab-5525b246330e,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,scope includes partner API,19,e94cc39d-c2c0-4cc9-98ab-5525b246330e,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,100,2,stack includes Flutter,20,e94cc39d-c2c0-4cc9-98ab-5525b246330e,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,project name: Aurora Field,1,7b2a9837-2bd7-4606-adc5-1a9819f28020,8183,95040,3,0,0,2046,220,0.00020482,117,none,stress_fake,True,True,False,0.0
+pivot,100,3,stack includes FastAPI,2,7b2a9837-2bd7-4606-adc5-1a9819f28020,67,0,5,0,0,410,220,9.03e-05,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes offline drafts,3,7b2a9837-2bd7-4606-adc5-1a9819f28020,58,0,7,0,0,759,220,0.00011473,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes manager approval,4,7b2a9837-2bd7-4606-adc5-1a9819f28020,47,0,9,0,0,1103,220,0.00013881,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,stack includes Flutter,5,7b2a9837-2bd7-4606-adc5-1a9819f28020,91,0,11,0,0,1455,220,0.00016345,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,stack includes PostgreSQL,6,7b2a9837-2bd7-4606-adc5-1a9819f28020,61,0,13,0,0,1811,220,0.00018837,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes push notifications,7,7b2a9837-2bd7-4606-adc5-1a9819f28020,51,0,13,0,0,2156,220,0.00021252,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes photo uploads,8,7b2a9837-2bd7-4606-adc5-1a9819f28020,42,0,13,0,0,2105,220,0.00020895,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes location check in,9,7b2a9837-2bd7-4606-adc5-1a9819f28020,42,0,13,0,0,2092,220,0.00020804,3,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes supervisor dashboard,10,7b2a9837-2bd7-4606-adc5-1a9819f28020,51,0,13,0,0,2086,220,0.00020762,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes role permissions,11,7b2a9837-2bd7-4606-adc5-1a9819f28020,51,0,13,0,0,2088,220,0.00020776,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes accounting export,12,7b2a9837-2bd7-4606-adc5-1a9819f28020,49,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes tenant separation,13,7b2a9837-2bd7-4606-adc5-1a9819f28020,53,0,13,0,0,2063,220,0.00020601,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes blocked job alerts,14,7b2a9837-2bd7-4606-adc5-1a9819f28020,59,0,13,0,0,2065,220,0.00020615,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes audit trail,15,7b2a9837-2bd7-4606-adc5-1a9819f28020,35,0,13,0,0,2068,220,0.00020636,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes utilization reporting,16,7b2a9837-2bd7-4606-adc5-1a9819f28020,40,0,13,0,0,2066,220,0.00020622,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes emergency override,17,7b2a9837-2bd7-4606-adc5-1a9819f28020,44,0,13,0,0,2061,220,0.00020587,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes sign off templates,18,7b2a9837-2bd7-4606-adc5-1a9819f28020,43,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,scope includes partner API,19,7b2a9837-2bd7-4606-adc5-1a9819f28020,46,0,13,0,0,2055,220,0.00020545,0,none,stress_fake,True,True,False,0.0
+pivot,100,3,stack includes Flutter,20,7b2a9837-2bd7-4606-adc5-1a9819f28020,67,0,13,0,0,2057,220,0.00020559,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,project name: Boreal Ledger,1,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,64,0,3,0,0,17,220,6.279e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes invoice intake,2,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,74,0,5,0,0,368,220,8.736e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,budget locked: 30000 EUR,3,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,54,0,7,0,0,718,220,0.00011186,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,stack includes Spring Boot,4,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,76,0,9,0,0,1068,220,0.00013636,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes audit log,5,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,37,0,11,0,0,1414,220,0.00016058,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes OCR queue,6,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,40,0,13,0,0,1751,220,0.00018417,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes finance roles,7,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,64,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,budget changed to 80000 EUR,8,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,0,1,deadline changed to twelve weeks,9,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,0,1,scope includes SAML SSO,10,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes Slack notifications,11,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes CSV export,12,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes invoice search,13,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes approval dashboard,14,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes escalation workflow,15,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes immutable event log,16,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes data retention,17,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes admin panel,18,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,scope includes integration tests,19,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,0,1,budget changed to 80000 EUR,20,be8ee04d-0bc8-4e7c-b935-1cf2a207fc3e,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,0,2,project name: Boreal Ledger,1,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,64,0,3,0,0,17,220,6.279e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes invoice intake,2,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,74,0,5,0,0,368,220,8.736e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,budget locked: 30000 EUR,3,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,54,0,7,0,0,718,220,0.00011186,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,stack includes Spring Boot,4,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,76,0,9,0,0,1068,220,0.00013636,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes audit log,5,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,37,0,11,0,0,1414,220,0.00016058,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes OCR queue,6,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,40,0,13,0,0,1751,220,0.00018417,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes finance roles,7,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,64,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,budget changed to 80000 EUR,8,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,0,2,deadline changed to twelve weeks,9,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,0,2,scope includes SAML SSO,10,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes Slack notifications,11,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes CSV export,12,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes invoice search,13,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes approval dashboard,14,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes escalation workflow,15,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes immutable event log,16,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes data retention,17,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes admin panel,18,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,scope includes integration tests,19,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,0,2,budget changed to 80000 EUR,20,3b53a64f-f0d7-41e0-b1da-ea738bfd8a4f,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,0,3,project name: Boreal Ledger,1,61d34c54-2544-4d04-aa1d-c080511b1cf2,64,0,3,0,0,17,220,6.279e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes invoice intake,2,61d34c54-2544-4d04-aa1d-c080511b1cf2,74,0,5,0,0,368,220,8.736e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,budget locked: 30000 EUR,3,61d34c54-2544-4d04-aa1d-c080511b1cf2,54,0,7,0,0,718,220,0.00011186,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,stack includes Spring Boot,4,61d34c54-2544-4d04-aa1d-c080511b1cf2,76,0,9,0,0,1068,220,0.00013636,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes audit log,5,61d34c54-2544-4d04-aa1d-c080511b1cf2,37,0,11,0,0,1414,220,0.00016058,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes OCR queue,6,61d34c54-2544-4d04-aa1d-c080511b1cf2,40,0,13,0,0,1751,220,0.00018417,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes finance roles,7,61d34c54-2544-4d04-aa1d-c080511b1cf2,64,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,budget changed to 80000 EUR,8,61d34c54-2544-4d04-aa1d-c080511b1cf2,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,0,3,deadline changed to twelve weeks,9,61d34c54-2544-4d04-aa1d-c080511b1cf2,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,0,3,scope includes SAML SSO,10,61d34c54-2544-4d04-aa1d-c080511b1cf2,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes Slack notifications,11,61d34c54-2544-4d04-aa1d-c080511b1cf2,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes CSV export,12,61d34c54-2544-4d04-aa1d-c080511b1cf2,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes invoice search,13,61d34c54-2544-4d04-aa1d-c080511b1cf2,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes approval dashboard,14,61d34c54-2544-4d04-aa1d-c080511b1cf2,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes escalation workflow,15,61d34c54-2544-4d04-aa1d-c080511b1cf2,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes immutable event log,16,61d34c54-2544-4d04-aa1d-c080511b1cf2,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes data retention,17,61d34c54-2544-4d04-aa1d-c080511b1cf2,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes admin panel,18,61d34c54-2544-4d04-aa1d-c080511b1cf2,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,scope includes integration tests,19,61d34c54-2544-4d04-aa1d-c080511b1cf2,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,0,3,budget changed to 80000 EUR,20,61d34c54-2544-4d04-aa1d-c080511b1cf2,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,5,1,project name: Boreal Ledger,1,954c7227-3dfe-45c7-9f46-a8ddf971f942,5086,4948,3,0,0,1272,220,0.00015064,14,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes invoice intake,2,954c7227-3dfe-45c7-9f46-a8ddf971f942,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,budget locked: 30000 EUR,3,954c7227-3dfe-45c7-9f46-a8ddf971f942,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,stack includes Spring Boot,4,954c7227-3dfe-45c7-9f46-a8ddf971f942,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes audit log,5,954c7227-3dfe-45c7-9f46-a8ddf971f942,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes OCR queue,6,954c7227-3dfe-45c7-9f46-a8ddf971f942,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes finance roles,7,954c7227-3dfe-45c7-9f46-a8ddf971f942,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,budget changed to 80000 EUR,8,954c7227-3dfe-45c7-9f46-a8ddf971f942,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,5,1,deadline changed to twelve weeks,9,954c7227-3dfe-45c7-9f46-a8ddf971f942,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,5,1,scope includes SAML SSO,10,954c7227-3dfe-45c7-9f46-a8ddf971f942,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes Slack notifications,11,954c7227-3dfe-45c7-9f46-a8ddf971f942,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes CSV export,12,954c7227-3dfe-45c7-9f46-a8ddf971f942,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes invoice search,13,954c7227-3dfe-45c7-9f46-a8ddf971f942,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes approval dashboard,14,954c7227-3dfe-45c7-9f46-a8ddf971f942,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes escalation workflow,15,954c7227-3dfe-45c7-9f46-a8ddf971f942,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes immutable event log,16,954c7227-3dfe-45c7-9f46-a8ddf971f942,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes data retention,17,954c7227-3dfe-45c7-9f46-a8ddf971f942,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes admin panel,18,954c7227-3dfe-45c7-9f46-a8ddf971f942,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,scope includes integration tests,19,954c7227-3dfe-45c7-9f46-a8ddf971f942,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,5,1,budget changed to 80000 EUR,20,954c7227-3dfe-45c7-9f46-a8ddf971f942,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,5,2,project name: Boreal Ledger,1,4a7c654e-4971-410b-9ffc-62f56e6ad066,5086,4948,3,0,0,1272,220,0.00015064,12,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes invoice intake,2,4a7c654e-4971-410b-9ffc-62f56e6ad066,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,budget locked: 30000 EUR,3,4a7c654e-4971-410b-9ffc-62f56e6ad066,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,stack includes Spring Boot,4,4a7c654e-4971-410b-9ffc-62f56e6ad066,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes audit log,5,4a7c654e-4971-410b-9ffc-62f56e6ad066,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes OCR queue,6,4a7c654e-4971-410b-9ffc-62f56e6ad066,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes finance roles,7,4a7c654e-4971-410b-9ffc-62f56e6ad066,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,budget changed to 80000 EUR,8,4a7c654e-4971-410b-9ffc-62f56e6ad066,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,5,2,deadline changed to twelve weeks,9,4a7c654e-4971-410b-9ffc-62f56e6ad066,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,5,2,scope includes SAML SSO,10,4a7c654e-4971-410b-9ffc-62f56e6ad066,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes Slack notifications,11,4a7c654e-4971-410b-9ffc-62f56e6ad066,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes CSV export,12,4a7c654e-4971-410b-9ffc-62f56e6ad066,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes invoice search,13,4a7c654e-4971-410b-9ffc-62f56e6ad066,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes approval dashboard,14,4a7c654e-4971-410b-9ffc-62f56e6ad066,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes escalation workflow,15,4a7c654e-4971-410b-9ffc-62f56e6ad066,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes immutable event log,16,4a7c654e-4971-410b-9ffc-62f56e6ad066,43,0,13,0,0,2049,220,0.00020503,1,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes data retention,17,4a7c654e-4971-410b-9ffc-62f56e6ad066,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes admin panel,18,4a7c654e-4971-410b-9ffc-62f56e6ad066,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,scope includes integration tests,19,4a7c654e-4971-410b-9ffc-62f56e6ad066,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,5,2,budget changed to 80000 EUR,20,4a7c654e-4971-410b-9ffc-62f56e6ad066,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,5,3,project name: Boreal Ledger,1,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,5086,4948,3,0,0,1272,220,0.00015064,12,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes invoice intake,2,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,budget locked: 30000 EUR,3,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,stack includes Spring Boot,4,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes audit log,5,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes OCR queue,6,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes finance roles,7,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,budget changed to 80000 EUR,8,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,5,3,deadline changed to twelve weeks,9,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,5,3,scope includes SAML SSO,10,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes Slack notifications,11,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes CSV export,12,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes invoice search,13,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes approval dashboard,14,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes escalation workflow,15,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes immutable event log,16,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes data retention,17,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes admin panel,18,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,scope includes integration tests,19,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,5,3,budget changed to 80000 EUR,20,9bfc5dc7-15fe-4a46-bea0-18109a75fd1c,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,20,1,project name: Boreal Ledger,1,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,8168,19290,3,0,0,2043,220,0.00020461,40,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes invoice intake,2,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,budget locked: 30000 EUR,3,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,stack includes Spring Boot,4,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes audit log,5,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes OCR queue,6,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes finance roles,7,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,budget changed to 80000 EUR,8,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,20,1,deadline changed to twelve weeks,9,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,20,1,scope includes SAML SSO,10,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes Slack notifications,11,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes CSV export,12,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes invoice search,13,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes approval dashboard,14,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes escalation workflow,15,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes immutable event log,16,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,43,0,13,0,0,2049,220,0.00020503,1,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes data retention,17,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes admin panel,18,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,scope includes integration tests,19,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,20,1,budget changed to 80000 EUR,20,0998a07f-0d5a-4f06-a356-7fb9ab45a6a9,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,20,2,project name: Boreal Ledger,1,64e942bf-59fb-4114-8599-f484dab01844,8168,19290,3,0,0,2043,220,0.00020461,34,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes invoice intake,2,64e942bf-59fb-4114-8599-f484dab01844,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,budget locked: 30000 EUR,3,64e942bf-59fb-4114-8599-f484dab01844,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,stack includes Spring Boot,4,64e942bf-59fb-4114-8599-f484dab01844,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes audit log,5,64e942bf-59fb-4114-8599-f484dab01844,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes OCR queue,6,64e942bf-59fb-4114-8599-f484dab01844,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes finance roles,7,64e942bf-59fb-4114-8599-f484dab01844,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,budget changed to 80000 EUR,8,64e942bf-59fb-4114-8599-f484dab01844,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,20,2,deadline changed to twelve weeks,9,64e942bf-59fb-4114-8599-f484dab01844,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,20,2,scope includes SAML SSO,10,64e942bf-59fb-4114-8599-f484dab01844,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes Slack notifications,11,64e942bf-59fb-4114-8599-f484dab01844,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes CSV export,12,64e942bf-59fb-4114-8599-f484dab01844,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes invoice search,13,64e942bf-59fb-4114-8599-f484dab01844,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes approval dashboard,14,64e942bf-59fb-4114-8599-f484dab01844,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes escalation workflow,15,64e942bf-59fb-4114-8599-f484dab01844,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes immutable event log,16,64e942bf-59fb-4114-8599-f484dab01844,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes data retention,17,64e942bf-59fb-4114-8599-f484dab01844,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes admin panel,18,64e942bf-59fb-4114-8599-f484dab01844,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,scope includes integration tests,19,64e942bf-59fb-4114-8599-f484dab01844,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,20,2,budget changed to 80000 EUR,20,64e942bf-59fb-4114-8599-f484dab01844,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,20,3,project name: Boreal Ledger,1,74ad17b5-642f-42ec-b7a1-4d3e098de732,8168,19290,3,0,0,2043,220,0.00020461,32,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes invoice intake,2,74ad17b5-642f-42ec-b7a1-4d3e098de732,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,budget locked: 30000 EUR,3,74ad17b5-642f-42ec-b7a1-4d3e098de732,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,stack includes Spring Boot,4,74ad17b5-642f-42ec-b7a1-4d3e098de732,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes audit log,5,74ad17b5-642f-42ec-b7a1-4d3e098de732,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes OCR queue,6,74ad17b5-642f-42ec-b7a1-4d3e098de732,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes finance roles,7,74ad17b5-642f-42ec-b7a1-4d3e098de732,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,budget changed to 80000 EUR,8,74ad17b5-642f-42ec-b7a1-4d3e098de732,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,20,3,deadline changed to twelve weeks,9,74ad17b5-642f-42ec-b7a1-4d3e098de732,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,20,3,scope includes SAML SSO,10,74ad17b5-642f-42ec-b7a1-4d3e098de732,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes Slack notifications,11,74ad17b5-642f-42ec-b7a1-4d3e098de732,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes CSV export,12,74ad17b5-642f-42ec-b7a1-4d3e098de732,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes invoice search,13,74ad17b5-642f-42ec-b7a1-4d3e098de732,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes approval dashboard,14,74ad17b5-642f-42ec-b7a1-4d3e098de732,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes escalation workflow,15,74ad17b5-642f-42ec-b7a1-4d3e098de732,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes immutable event log,16,74ad17b5-642f-42ec-b7a1-4d3e098de732,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes data retention,17,74ad17b5-642f-42ec-b7a1-4d3e098de732,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes admin panel,18,74ad17b5-642f-42ec-b7a1-4d3e098de732,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,scope includes integration tests,19,74ad17b5-642f-42ec-b7a1-4d3e098de732,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,20,3,budget changed to 80000 EUR,20,74ad17b5-642f-42ec-b7a1-4d3e098de732,56,0,13,0,0,2050,220,0.0002051,1,none,stress_fake,True,True,True,1.0
+contradiction,50,1,project name: Boreal Ledger,1,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,8168,47772,3,0,0,2043,220,0.00020461,81,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes invoice intake,2,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,budget locked: 30000 EUR,3,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,stack includes Spring Boot,4,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes audit log,5,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes OCR queue,6,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes finance roles,7,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,budget changed to 80000 EUR,8,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,50,1,deadline changed to twelve weeks,9,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,50,1,scope includes SAML SSO,10,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes Slack notifications,11,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes CSV export,12,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes invoice search,13,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes approval dashboard,14,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes escalation workflow,15,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes immutable event log,16,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes data retention,17,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes admin panel,18,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,scope includes integration tests,19,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,50,1,budget changed to 80000 EUR,20,fdc4067c-6055-4d38-8cd1-3fcbbccf193a,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,50,2,project name: Boreal Ledger,1,baf62e7d-f9cd-4f42-b1f0-76f55166442a,8168,47772,3,0,0,2043,220,0.00020461,64,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes invoice intake,2,baf62e7d-f9cd-4f42-b1f0-76f55166442a,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,budget locked: 30000 EUR,3,baf62e7d-f9cd-4f42-b1f0-76f55166442a,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,stack includes Spring Boot,4,baf62e7d-f9cd-4f42-b1f0-76f55166442a,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes audit log,5,baf62e7d-f9cd-4f42-b1f0-76f55166442a,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes OCR queue,6,baf62e7d-f9cd-4f42-b1f0-76f55166442a,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes finance roles,7,baf62e7d-f9cd-4f42-b1f0-76f55166442a,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,budget changed to 80000 EUR,8,baf62e7d-f9cd-4f42-b1f0-76f55166442a,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,50,2,deadline changed to twelve weeks,9,baf62e7d-f9cd-4f42-b1f0-76f55166442a,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,50,2,scope includes SAML SSO,10,baf62e7d-f9cd-4f42-b1f0-76f55166442a,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes Slack notifications,11,baf62e7d-f9cd-4f42-b1f0-76f55166442a,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes CSV export,12,baf62e7d-f9cd-4f42-b1f0-76f55166442a,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes invoice search,13,baf62e7d-f9cd-4f42-b1f0-76f55166442a,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes approval dashboard,14,baf62e7d-f9cd-4f42-b1f0-76f55166442a,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes escalation workflow,15,baf62e7d-f9cd-4f42-b1f0-76f55166442a,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes immutable event log,16,baf62e7d-f9cd-4f42-b1f0-76f55166442a,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes data retention,17,baf62e7d-f9cd-4f42-b1f0-76f55166442a,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes admin panel,18,baf62e7d-f9cd-4f42-b1f0-76f55166442a,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,scope includes integration tests,19,baf62e7d-f9cd-4f42-b1f0-76f55166442a,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,50,2,budget changed to 80000 EUR,20,baf62e7d-f9cd-4f42-b1f0-76f55166442a,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,50,3,project name: Boreal Ledger,1,b7edeeec-1f86-4323-8b76-956a6e946ffb,8168,47772,3,0,0,2043,220,0.00020461,59,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes invoice intake,2,b7edeeec-1f86-4323-8b76-956a6e946ffb,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,budget locked: 30000 EUR,3,b7edeeec-1f86-4323-8b76-956a6e946ffb,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,stack includes Spring Boot,4,b7edeeec-1f86-4323-8b76-956a6e946ffb,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes audit log,5,b7edeeec-1f86-4323-8b76-956a6e946ffb,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes OCR queue,6,b7edeeec-1f86-4323-8b76-956a6e946ffb,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes finance roles,7,b7edeeec-1f86-4323-8b76-956a6e946ffb,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,budget changed to 80000 EUR,8,b7edeeec-1f86-4323-8b76-956a6e946ffb,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,50,3,deadline changed to twelve weeks,9,b7edeeec-1f86-4323-8b76-956a6e946ffb,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,50,3,scope includes SAML SSO,10,b7edeeec-1f86-4323-8b76-956a6e946ffb,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes Slack notifications,11,b7edeeec-1f86-4323-8b76-956a6e946ffb,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes CSV export,12,b7edeeec-1f86-4323-8b76-956a6e946ffb,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes invoice search,13,b7edeeec-1f86-4323-8b76-956a6e946ffb,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes approval dashboard,14,b7edeeec-1f86-4323-8b76-956a6e946ffb,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes escalation workflow,15,b7edeeec-1f86-4323-8b76-956a6e946ffb,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes immutable event log,16,b7edeeec-1f86-4323-8b76-956a6e946ffb,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes data retention,17,b7edeeec-1f86-4323-8b76-956a6e946ffb,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes admin panel,18,b7edeeec-1f86-4323-8b76-956a6e946ffb,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,scope includes integration tests,19,b7edeeec-1f86-4323-8b76-956a6e946ffb,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,50,3,budget changed to 80000 EUR,20,b7edeeec-1f86-4323-8b76-956a6e946ffb,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,100,1,project name: Boreal Ledger,1,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,8170,95040,3,0,0,2043,220,0.00020461,125,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes invoice intake,2,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,budget locked: 30000 EUR,3,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,stack includes Spring Boot,4,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes audit log,5,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes OCR queue,6,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes finance roles,7,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,budget changed to 80000 EUR,8,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,100,1,deadline changed to twelve weeks,9,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,100,1,scope includes SAML SSO,10,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes Slack notifications,11,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes CSV export,12,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes invoice search,13,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes approval dashboard,14,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes escalation workflow,15,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes immutable event log,16,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes data retention,17,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes admin panel,18,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,scope includes integration tests,19,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,100,1,budget changed to 80000 EUR,20,1ec2d3b4-ed23-439e-964e-66b2710e0cdb,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,100,2,project name: Boreal Ledger,1,6ec63885-cf16-4870-a33d-3a63d7c5ea91,8170,95040,3,0,0,2043,220,0.00020461,100,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes invoice intake,2,6ec63885-cf16-4870-a33d-3a63d7c5ea91,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,budget locked: 30000 EUR,3,6ec63885-cf16-4870-a33d-3a63d7c5ea91,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,stack includes Spring Boot,4,6ec63885-cf16-4870-a33d-3a63d7c5ea91,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes audit log,5,6ec63885-cf16-4870-a33d-3a63d7c5ea91,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes OCR queue,6,6ec63885-cf16-4870-a33d-3a63d7c5ea91,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes finance roles,7,6ec63885-cf16-4870-a33d-3a63d7c5ea91,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,budget changed to 80000 EUR,8,6ec63885-cf16-4870-a33d-3a63d7c5ea91,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,100,2,deadline changed to twelve weeks,9,6ec63885-cf16-4870-a33d-3a63d7c5ea91,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,100,2,scope includes SAML SSO,10,6ec63885-cf16-4870-a33d-3a63d7c5ea91,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes Slack notifications,11,6ec63885-cf16-4870-a33d-3a63d7c5ea91,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes CSV export,12,6ec63885-cf16-4870-a33d-3a63d7c5ea91,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes invoice search,13,6ec63885-cf16-4870-a33d-3a63d7c5ea91,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes approval dashboard,14,6ec63885-cf16-4870-a33d-3a63d7c5ea91,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes escalation workflow,15,6ec63885-cf16-4870-a33d-3a63d7c5ea91,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes immutable event log,16,6ec63885-cf16-4870-a33d-3a63d7c5ea91,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes data retention,17,6ec63885-cf16-4870-a33d-3a63d7c5ea91,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes admin panel,18,6ec63885-cf16-4870-a33d-3a63d7c5ea91,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,scope includes integration tests,19,6ec63885-cf16-4870-a33d-3a63d7c5ea91,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,100,2,budget changed to 80000 EUR,20,6ec63885-cf16-4870-a33d-3a63d7c5ea91,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0
+contradiction,100,3,project name: Boreal Ledger,1,8d25c918-ec84-420f-ac08-d275f98a7629,8170,95040,3,0,0,2043,220,0.00020461,99,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes invoice intake,2,8d25c918-ec84-420f-ac08-d275f98a7629,74,0,5,0,0,408,220,9.016e-05,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,budget locked: 30000 EUR,3,8d25c918-ec84-420f-ac08-d275f98a7629,54,0,7,0,0,758,220,0.00011466,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,stack includes Spring Boot,4,8d25c918-ec84-420f-ac08-d275f98a7629,76,0,9,0,0,1108,220,0.00013916,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes audit log,5,8d25c918-ec84-420f-ac08-d275f98a7629,37,0,11,0,0,1454,220,0.00016338,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes OCR queue,6,8d25c918-ec84-420f-ac08-d275f98a7629,40,0,13,0,0,1791,220,0.00018697,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes finance roles,7,8d25c918-ec84-420f-ac08-d275f98a7629,64,0,13,0,0,2135,220,0.00021105,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,budget changed to 80000 EUR,8,8d25c918-ec84-420f-ac08-d275f98a7629,70,0,13,0,0,2097,220,0.00020839,0,none,stress_fake,True,True,True,1.0
+contradiction,100,3,deadline changed to twelve weeks,9,8d25c918-ec84-420f-ac08-d275f98a7629,70,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,True,1.0
+contradiction,100,3,scope includes SAML SSO,10,8d25c918-ec84-420f-ac08-d275f98a7629,40,0,13,0,0,2095,220,0.00020825,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes Slack notifications,11,8d25c918-ec84-420f-ac08-d275f98a7629,46,0,13,0,0,2079,220,0.00020713,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes CSV export,12,8d25c918-ec84-420f-ac08-d275f98a7629,42,0,13,0,0,2082,220,0.00020734,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes invoice search,13,8d25c918-ec84-420f-ac08-d275f98a7629,48,0,13,0,0,2085,220,0.00020755,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes approval dashboard,14,8d25c918-ec84-420f-ac08-d275f98a7629,41,0,13,0,0,2075,220,0.00020685,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes escalation workflow,15,8d25c918-ec84-420f-ac08-d275f98a7629,46,0,13,0,0,2062,220,0.00020594,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes immutable event log,16,8d25c918-ec84-420f-ac08-d275f98a7629,43,0,13,0,0,2049,220,0.00020503,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes data retention,17,8d25c918-ec84-420f-ac08-d275f98a7629,41,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes admin panel,18,8d25c918-ec84-420f-ac08-d275f98a7629,39,0,13,0,0,2047,220,0.00020489,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,scope includes integration tests,19,8d25c918-ec84-420f-ac08-d275f98a7629,49,0,13,0,0,2048,220,0.00020496,0,none,stress_fake,True,True,False,0.0
+contradiction,100,3,budget changed to 80000 EUR,20,8d25c918-ec84-420f-ac08-d275f98a7629,56,0,13,0,0,2050,220,0.0002051,0,none,stress_fake,True,True,True,1.0

@@ -1,0 +1,6 @@
+{
+    "cline.provider": "openai-compatible",
+    "cline.openAiBaseUrl": "https://api.moonshot.ai/v1",
+    "cline.openAiModelId": "kimi-k2.6",
+    "cline.openAiApiKey": "${env:KIMI_API_KEY}"
+}

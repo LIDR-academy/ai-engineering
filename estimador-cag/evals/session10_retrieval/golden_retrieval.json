@@ -1,0 +1,149 @@
+{
+  "annotation_criterion": "Relevant if the budget or component would serve as a direct effort reference for estimating the user query.",
+  "k": 5,
+  "queries": [
+    {
+      "query_id": "Q-AUTH-001",
+      "query": "OAuth JWT authentication token banking authorization flow",
+      "intent": "Find the authentication backend component in the fintech banking budget.",
+      "relevant_budget_ids": [
+        "BUD-2024-014"
+      ],
+      "expected_component_ids": [
+        "AUTH-001"
+      ]
+    },
+    {
+      "query_id": "Q-AUDIT-001",
+      "query": "immutable audit logging consent changes sensitive banking operations",
+      "intent": "Find the regulatory audit logging component.",
+      "relevant_budget_ids": [
+        "BUD-2024-014"
+      ],
+      "expected_component_ids": [
+        "AUDIT-001"
+      ]
+    },
+    {
+      "query_id": "Q-CHECKOUT-001",
+      "query": "checkout orchestration payment authorization discount rules order creation",
+      "intent": "Find the marketplace checkout orchestration API component.",
+      "relevant_budget_ids": [
+        "BUD-2024-021"
+      ],
+      "expected_component_ids": [
+        "CHECKOUT-001"
+      ]
+    },
+    {
+      "query_id": "Q-INVENTORY-001",
+      "query": "inventory synchronization worker merchant stock levels scheduled conflicts events",
+      "intent": "Find the inventory synchronization worker component.",
+      "relevant_budget_ids": [
+        "BUD-2024-021"
+      ],
+      "expected_component_ids": [
+        "INV-001"
+      ]
+    },
+    {
+      "query_id": "Q-DOCS-001",
+      "query": "clinical document upload referral lab results secure file validation metadata",
+      "intent": "Find the clinical document upload component.",
+      "relevant_budget_ids": [
+        "BUD-2025-003"
+      ],
+      "expected_component_ids": [
+        "DOCS-001"
+      ]
+    },
+    {
+      "query_id": "Q-TELEMETRY-001",
+      "query": "machine telemetry ingestion queue consumer equipment events industrial dashboard",
+      "intent": "Find the telemetry ingestion service component.",
+      "relevant_budget_ids": [
+        "BUD-2025-011"
+      ],
+      "expected_component_ids": [
+        "TELEM-001"
+      ]
+    },
+    {
+      "query_id": "Q-ALERTS-001",
+      "query": "maintenance alert rules threshold violations machine faults operations teams",
+      "intent": "Find the maintenance alert rules component.",
+      "relevant_budget_ids": [
+        "BUD-2025-011"
+      ],
+      "expected_component_ids": [
+        "ALERT-001"
+      ]
+    },
+    {
+      "query_id": "Q-AUTH-AUDIT-AMBIGUOUS",
+      "query": "banking access security consent traceability token sessions compliance evidence",
+      "intent": "Ambiguous finance query that should retrieve both authentication and audit logging references.",
+      "relevant_budget_ids": [
+        "BUD-2024-014"
+      ],
+      "expected_component_ids": [
+        "AUTH-001",
+        "AUDIT-001"
+      ],
+      "difficulty": "ambiguous"
+    },
+    {
+      "query_id": "Q-CHECKOUT-INVENTORY-AMBIGUOUS",
+      "query": "marketplace order flow stock reservation payment state merchant consistency",
+      "intent": "Ambiguous e-commerce query crossing checkout orchestration and inventory synchronization.",
+      "relevant_budget_ids": [
+        "BUD-2024-021"
+      ],
+      "expected_component_ids": [
+        "CHECKOUT-001",
+        "INV-001"
+      ],
+      "difficulty": "ambiguous"
+    },
+    {
+      "query_id": "Q-INTAKE-DOCS-AMBIGUOUS",
+      "query": "patient onboarding consent secure submission files validation clinician review",
+      "intent": "Healthcare query crossing patient intake and clinical document upload.",
+      "relevant_budget_ids": [
+        "BUD-2025-003"
+      ],
+      "expected_component_ids": [
+        "INTAKE-001",
+        "DOCS-001"
+      ],
+      "difficulty": "ambiguous"
+    },
+    {
+      "query_id": "Q-TELEMETRY-ALERTS-AMBIGUOUS",
+      "query": "industrial equipment events thresholds machine faults operations maintenance dashboard",
+      "intent": "Industrial query crossing telemetry ingestion and alert rules.",
+      "relevant_budget_ids": [
+        "BUD-2025-011"
+      ],
+      "expected_component_ids": [
+        "TELEM-001",
+        "ALERT-001"
+      ],
+      "difficulty": "ambiguous"
+    },
+    {
+      "query_id": "Q-LOW-SIGNAL-BACKEND-REFERENCE",
+      "query": "backend reference estimate for secure regulated workflow with operational tracking",
+      "intent": "Low-signal query that should still prefer a regulated workflow reference over unrelated commerce or industrial chunks.",
+      "relevant_budget_ids": [
+        "BUD-2024-014",
+        "BUD-2025-003"
+      ],
+      "expected_component_ids": [
+        "AUDIT-001",
+        "INTAKE-001"
+      ],
+      "difficulty": "low_signal"
+    }
+  ]
+}

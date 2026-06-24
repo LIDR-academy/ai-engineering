@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Session 08 pgvector search demo</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 1120px;
+      margin: 40px auto;
+      padding: 0 24px;
+      color: #111827;
+    }
+
+    h1 {
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button.primary {
+      background: #111827;
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 20px;
+      background: #ffffff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    pre {
+      white-space: pre-wrap;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 260px;
+      background: #fafafa;
+      font-family: ui-monospace, monospace;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+
+    .status {
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin: 12px 0;
+      background: #f3f4f6;
+      font-family: ui-monospace, monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Session 08 pgvector search demo</h1>
+  <p class="subtitle">
+    Ingest one historical budget into PostgreSQL plus pgvector, then query persisted chunks through POST /search.
+  </p>
+
+  <div class="controls">
+    <button class="primary" onclick="checkHealth()">Health</button>
+    <button class="primary" onclick="ingestExample()">Ingest example corpus</button>
+    <button class="primary" onclick="runSearchExamples()">Run search examples</button>
+    <button onclick="loadSearchMetrics()">Search metrics dashboard</button>
+    <button onclick="resetOutput()">Reset</button>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>API status</h2>
+      <div id="status" class="status">idle</div>
+      <pre id="status-output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Search results</h2>
+      <div id="search-status" class="status">idle</div>
+      <pre id="search-output"></pre>
+    </section>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+
+    const queries = [
+      "REST API development with JWT authentication for financial sector",
+      "secure backend service with token-based access control for banking applications",
+      "mobile application for restaurant reservations",
+      "integration with external system",
+      "migration from monolith to microservices architecture using Kubernetes"
+    ];
+
+    const exampleBudget = {
+      budget_id: "BUD-SESSION08-BROWSER-DEMO",
+      client_metadata: {
+        name: "FintechCorp",
+        sector: "finance",
+        country: "ES"
+      },
+      project_summary: "Fintech modernization project with REST APIs, JWT authentication, external integrations, Kubernetes migration, and an operations dashboard.",
+      main_technology: "python",
+      year: 2024,
+      total_estimated_hours: 520,
+      components: [
+        {
+          component_id: "AUTH-001",
+          name: "JWT authentication API",
+          description: "REST API development with JWT authentication, token refresh, role-based authorization, and financial-sector security controls.",
+          tech_stack: ["python", "fastapi", "postgresql", "redis"],
+          estimated_hours: 140,
+          complexity: "high",
+          dependencies: []
+        },
+        {
+          component_id: "INT-001",
+          name: "External payment provider integration",
+          description: "Integration with external banking and payment systems, including webhook handling, retry logic, and audit logging.",
+          tech_stack: ["python", "fastapi", "postgresql"],
+          estimated_hours: 120,
+          complexity: "medium",
+          dependencies: ["AUTH-001"]
+        },
+        {
+          component_id: "MIG-001",
+          name: "Kubernetes migration",
+          description: "Migration from monolith to microservices architecture using Kubernetes, containerized services, health checks, and deployment automation.",
+          tech_stack: ["docker", "kubernetes", "python"],
+          estimated_hours: 180,
+          complexity: "high",
+          dependencies: ["AUTH-001", "INT-001"]
+        },
+        {
+          component_id: "UI-001",
+          name: "Operations dashboard",
+          description: "Internal dashboard for operations teams to monitor audit events, integration status, and financial workflow health.",
+          tech_stack: ["typescript", "react"],
+          estimated_hours: 80,
+          complexity: "medium",
+          dependencies: ["INT-001"]
+        }
+      ]
+    };
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function appendText(id, value) {
+      document.getElementById(id).textContent += value;
+    }
+
+    function resetOutput() {
+      setText("status", "idle");
+      setText("search-status", "idle");
+      setText("status-output", "");
+      setText("search-output", "");
+    }
+
+    async function postJson(path, payload) {
+      const response = await fetch(API_BASE + path, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+      });
+
+      const raw = await response.text();
+      let parsed = {};
+      if (raw) {
+        parsed = JSON.parse(raw);
+      }
+
+      if (!response.ok) {
+        const error = new Error("HTTP " + response.status + ": " + raw);
+        error.status = response.status;
+        error.payload = parsed;
+        throw error;
+      }
+
+      return parsed;
+    }
+
+    async function checkHealth() {
+      setText("status", "checking health");
+      const response = await fetch(API_BASE + "/health");
+      const payload = await response.json();
+      setText("status", "health ok");
+      setText("status-output", JSON.stringify(payload, null, 2));
+    }
+
+    async function ingestExample() {
+      setText("status", "ingesting example corpus");
+      try {
+        const payload = await postJson("/embeddings/ingest", {
+          source_path: "examples/session08/browser_demo_budget.json",
+          document_type: "historical_budget",
+          content: {budgets: [exampleBudget]}
+        });
+
+        setText("status", "ingest complete");
+        setText("status-output", JSON.stringify(payload, null, 2));
+      } catch (error) {
+        if (error.status === 409 && JSON.stringify(error.payload).includes("Document already ingested")) {
+          setText("status", "already ingested");
+          setText("status-output", "Document already ingested. Continuing with search is safe.\n\n" + JSON.stringify(error.payload, null, 2));
+          return;
+        }
+
+        setText("status", "ingest error");
+        setText("status-output", String(error));
+      }
+    }
+
+    async function loadSearchMetrics() {
+      setText("status", "loading search metrics dashboard");
+      const response = await fetch(API_BASE + "/search/metrics");
+      const payload = await response.json();
+      setText("status", "search metrics dashboard loaded");
+      setText("status-output", JSON.stringify(payload, null, 2));
+    }
+
+    async function runSearchExamples() {
+      setText("search-status", "running search examples");
+      setText("search-output", "");
+
+      for (let index = 0; index < queries.length; index += 1) {
+        const query = queries[index];
+        appendText("search-output", "Query " + (index + 1) + ": " + query + "\n");
+
+        try {
+          const payload = await postJson("/search", {query: query, k: 5});
+          appendText("search-output", "Results returned: " + payload.results.length + "\n");
+
+          for (let rank = 0; rank < payload.results.length; rank += 1) {
+            const result = payload.results[rank];
+            appendText(
+              "search-output",
+              (rank + 1) + ". chunk_id=" + result.chunk_id +
+              " distance=" + Number(result.distance).toFixed(4) +
+              " chunk_type=" + result.chunk_type + "\n"
+            );
+            appendText("search-output", "   " + result.content.slice(0, 140) + "\n");
+          }
+        } catch (error) {
+          appendText("search-output", "ERROR: " + String(error) + "\n");
+        }
+
+        appendText("search-output", "\n");
+      }
+
+      setText("search-status", "complete");
+    }
+  </script>
+</body>
+</html>
