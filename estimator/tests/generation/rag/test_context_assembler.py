@@ -37,6 +37,20 @@ def test_build_context_block_wraps_each_chunk_in_source_xml():
     assert block.strip().endswith("</source>")
 
 
+def test_build_context_block_exposes_document_id_from_source_id():
+    chunk = RetrievedChunk(
+        id=7,
+        content="Budget line item",
+        sector="finance",
+        project_year=2024,
+        chunk_type="budget_component",
+        distance=0.2,
+        source_id="BUD-2024-001",
+    )
+    block = build_context_block([chunk])
+    assert 'document_id="BUD-2024-001"' in block
+
+
 def test_build_context_block_preserves_order():
     block = build_context_block([_chunk(1, "first"), _chunk(2, "second")])
     assert block.index('id="1"') < block.index('id="2"')

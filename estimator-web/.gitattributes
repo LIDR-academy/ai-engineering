@@ -1,5 +1,8 @@
 # See https://git-scm.com/docs/gitattributes for more about git attribute files.
 
+# Shell/ruby launchers must stay LF — CRLF breaks shebangs inside Linux containers.
+bin/** text eol=lf
+
 # Mark the database schema as having been generated.
 db/schema.rb linguist-generated
 
