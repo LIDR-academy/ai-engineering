@@ -77,30 +77,33 @@ en `evals/ragas_baseline_s11.json` (campo `citation_report` por query).
   `faithfulness`, `answer_relevancy`, `context_precision`, `context_recall`.
 
 > **Nota operativa**: `ragas 0.4.x` importa en carga `langchain_community.chat_models.vertexai`,
-> que el `langchain-community` actual del proyecto ya no expone. Por eso el scoring corre en un venv
-> aislado (`score_ragas_s11.py` registra un stub de Vertex, que nunca se instancia con juez OpenAI).
-> Flujo de dos pasos:
+> que el `langchain-community` actual del proyecto ya no expone. El scoring en el venv del
+> contenedor `estimator` **no es viable** (sin `pip` en el venv de producción). Flujo de dos pasos:
 > ```bash
-> # 1) recoger muestras con el pipeline real (venv del proyecto, stack arriba + corpus ingerido)
-> DATABASE_URL='postgresql+psycopg://estimator:estimator@localhost:5433/estimator' \
->   uv run python scripts/eval_ragas_s11.py --collect-only samples.json
-> # 2) puntuar en venv aislado con ragas
-> /ruta/ragas-venv/bin/python scripts/score_ragas_s11.py samples.json --out evals/ragas_baseline_s11.json
+> # 1) recoger muestras (montar evals/ ad-hoc; no está en el bind-mount por defecto)
+> docker compose run --rm -v ./estimator/evals:/app/evals estimator \
+>   python scripts/eval_ragas_s11.py --collect-only evals/ragas_samples_s11.json
+> # 2) puntuar en contenedor Python aislado (Opción A; fallback tras fallar Opción B)
+> docker run --rm --env-file estimator/.env \
+>   -v ./estimator/evals:/evals -v ./estimator/scripts:/scripts \
+>   python:3.11-slim bash -c \
+>   "pip install -q ragas langchain-openai datasets openai && \
+>    python /scripts/score_ragas_s11.py /evals/ragas_samples_s11.json --out /evals/ragas_baseline_s11.json"
 > ```
 
 ### Tabla de métricas (4 métricas × 5 consultas + promedio)
 
-Run real (juez `gpt-4o-mini`, embeddings `text-embedding-3-small`). Datos completos en
-`evals/ragas_baseline_s11.json`.
+Run real del **2026-06-29** (juez `gpt-4o-mini`, embeddings `text-embedding-3-small`). Datos completos en
+`evals/ragas_baseline_s11.json` (muestras en `evals/ragas_samples_s11.json`).
 
 | query | faithfulness | answer_relevancy | context_precision | context_recall |
 |---|---|---|---|---|
-| Q1 | 0.418 | 0.000 | 1.000 | 0.000 |
-| Q2 | 0.426 | 0.061 | 1.000 | 0.000 |
-| Q3 | 0.564 | 0.000 | 1.000 | 0.571 |
-| Q4 | 0.877 | 0.000 | 1.000 | 0.000 |
-| Q5 | 0.476 | 0.104 | 1.000 | 0.000 |
-| **average** | 0.552 | 0.033 | 1.000 | 0.114 |
+| Q1 | 0.531 | 0.187 | 1.000 | 0.000 |
+| Q2 | 0.364 | 0.000 | 1.000 | 0.000 |
+| Q3 | 0.629 | 0.170 | 1.000 | 0.714 |
+| Q4 | 0.462 | 0.240 | 1.000 | 0.667 |
+| Q5 | 0.290 | 0.076 | 1.000 | 0.714 |
+| **average** | 0.455 | 0.134 | 1.000 | 0.419 |
 
 ### Verificación de citaciones sobre las estimaciones reales (las 5)
 
@@ -108,36 +111,27 @@ Salida real del verificador (`verify_citations`) sobre cada estimación generada
 
 | query | líneas | grounded | dangling | insufficient | citas verificadas |
 |---|---|---|---|---|---|
-| Q1 | 33 | 27 | 0 | 6 | 32 |
-| Q2 | 35 | 35 | 0 | 0 | 41 |
-| Q3 | 30 | 17 | 0 | 13 | 24 |
-| Q4 | 31 | 6 | 0 | 25 | 11 |
-| Q5 | 40 | 31 | 0 | 9 | 36 |
-| **total** | **169** | **116** | **0** | **53** | **144** |
+| Q1 | 44 | 28 | 0 | 16 | 32 |
+| Q2 | 40 | 27 | 0 | 13 | 33 |
+| Q3 | 37 | 22 | 0 | 15 | 27 |
+| Q4 | 28 | 28 | 0 | 0 | 32 |
+| Q5 | 41 | 41 | 0 | 0 | 88 |
+| **total** | **190** | **146** | **0** | **44** | **212** |
 
-**Citaciones colgantes: 0/169 líneas.** Cada línea `grounded=True` cita un chunk real del contexto;
-las 53 líneas sin soporte se marcan `insufficient` (no inventan horas), no se rellenan.
+**Citaciones colgantes: 0/190 líneas.** Cada línea `grounded=True` cita un chunk real del contexto;
+las 44 líneas sin soporte se marcan `insufficient` (no inventan horas), no se rellenan.
 
 ### Nota de hallazgos (lo que más chirría)
 
-- **`context_precision` perfecto (1.0) pero `context_recall` casi nulo (0.11, solo Q3 > 0).** La
-  recuperación trae exactamente los presupuestos relevantes (precision alta), pero el juez no
-  consigue atribuir el `ground_truth` al contexto: el `ground_truth` está en **engineer-days** y el
-  corpus en **horas**, así que las cifras no casan línea a línea. Q4 (IoT) es el peor caso —
-  `confidence=low`, 25/31 líneas sin datos — la recuperación más floja del set.
-- **`answer_relevancy` ≈ 0 en casi todas.** La "pregunta" es un *brief* declarativo y la "respuesta"
-  una tabla estructurada de módulos→tareas; la métrica (que regenera preguntas desde la respuesta y
-  las compara con la pregunta) está mal planteada para este formato. Es un artefacto de medición,
-  no señal de calidad — lo atacamos en el directo reformulando pregunta/respuesta.
-- **`faithfulness` media (0.55) pese a citación correcta.** El generador descompone cada componente
-  histórico en 4–8 subtareas y reparte horas entre ellas; el juez no puede atribuir 1:1 cada cifra
-  derivada a la cifra del `<source>`, así que la fidelidad baja aunque la citación por línea sea
-  real. Aquí está el valor de la citación verificable: separa "la cita existe" de "la cifra se
-  deduce de la cita".
-- **Anomalía de unidades (sale gratis del baseline):** en 4/5 consultas el modelo copia las **horas**
-  históricas como **engineer-days** (Q1 total 528, Q2 460, Q5 639 ≈ suma de horas del presupuesto),
-  mientras que Q4 sí estima en días (63). Inconsistencia de unidades a corregir en el prompt.
+- **`context_precision` perfecto (1.0); `context_recall` mejora a 0.42 de media** (Q3/Q4/Q5 > 0).
+  Sigue lastrado por el desajuste engineer-days (ground_truth) vs horas (corpus), pero el juez
+  atribuye más contexto que en el run anterior. Q1/Q2 siguen en 0.
+- **`answer_relevancy` sigue baja (0.13 de media)** pero ya no es ≈0 en todas: artefacto de formato
+  pregunta (brief) vs respuesta (tabla estructurada), no señal de calidad pura.
+- **`faithfulness` media 0.45** (antes 0.55): el generador descompone en subtareas; el juez no
+  atribuye 1:1 cada cifra derivada a la del `<source>`. La citación verificable separa "la cita
+  existe" de "la cifra se deduce de la cita" — **0 citaciones colgantes en 190 líneas**.
+- **Q4 ya no es el peor caso de grounding:** 28/28 líneas grounded (run anterior: 6/31).
 
-**Resumen para el directo:** citaciones colgantes 0/169; `context_recall` 0.11 (lastrado por el
-desajuste days/horas y por Q4); `answer_relevancy` ≈ 0 por mismatch de formato pregunta/respuesta;
-`faithfulness` 0.55 con `context_precision` 1.0.
+**Resumen para el directo:** citaciones colgantes 0/190; `context_recall` 0.42 (mejor que baseline
+previo 0.11); `answer_relevancy` 0.13; `faithfulness` 0.45 con `context_precision` 1.0.

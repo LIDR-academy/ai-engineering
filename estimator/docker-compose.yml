@@ -33,6 +33,7 @@ services:
       - ./tests:/app/tests
       - ./data:/app/data
       - ./scripts:/app/scripts
+      - ./evals:/app/evals
       - ./alembic:/app/alembic
       - ./alembic.ini:/app/alembic.ini
 

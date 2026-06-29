@@ -194,3 +194,59 @@ async def test_idempotency_hit_short_circuits_pipeline(wire):
     assert second == first
     # No stage re-ran on the cached call.
     assert calls == {"reformulate": 1, "search": 1, "generate": 1, "embed": 1}
+
+
+def _dangling_estimate() -> Estimate:
+    """Estimate with a fabricated chunk_id not present in the retrieved context."""
+    return Estimate(
+        total_engineer_days=18,
+        duration_weeks=4,
+        modules=[
+            WorkModule(
+                name="Checkout",
+                tasks=[
+                    TaskItem(
+                        name="Cart & payment flow",
+                        engineer_days=18,
+                        grounded=True,
+                        sources=[
+                            SourceReference(
+                                chunk_id="999",
+                                document_id="BUD-GHOST",
+                                evidence="ghost hours",
+                            )
+                        ],
+                    )
+                ],
+            )
+        ],
+        sources=[],
+        assumptions=[],
+        confidence="high",
+        reasoning="First attempt with a dangling citation.",
+    )
+
+
+@pytest.mark.asyncio
+async def test_citation_retry_repairs_dangling_ids(wire, monkeypatch):
+    """One corrective retry when verify_citations finds fabricated chunk_ids."""
+    retrieval = RetrievalResult(chunks=[_chunk(1)], low_confidence=False, candidates_evaluated=5)
+    _calls, _store = wire(retrieval=retrieval, estimate=_good_estimate())
+
+    async def fake_first_generate(context_block, structured_query, *, include_hours=True):
+        return _dangling_estimate()
+
+    async def fake_retry_generate(
+        context_block, structured_query, *, feedback=None, include_hours=True
+    ):
+        assert feedback is not None
+        assert "999" in feedback
+        return _good_estimate()
+
+    monkeypatch.setattr(orch, "generate_estimate", fake_first_generate)
+    monkeypatch.setattr(orch, "_generate", fake_retry_generate)
+
+    result = await orch.estimate_from_transcript("x" * 200)
+
+    assert result.confidence == "high"
+    assert result.modules[0].tasks[0].sources[0].chunk_id == "1"

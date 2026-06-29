@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.generation.rag.schemas import (
+    Assumption,
     Estimate,
     RetrievedChunk,
     SourceCitation,
@@ -162,3 +163,119 @@ def test_ungrounded_line_cannot_carry_sources():
 
     with pytest.raises(ValidationError):
         TaskItem(name="Auth", grounded=False, sources=[_ref("1")])
+
+
+def test_grounded_structure_line_allows_null_hours():
+    """Session 10 structure mode: grounded line with sources but no hours yet."""
+    task = TaskItem(
+        name="OAuth",
+        engineer_days=None,
+        grounded=True,
+        sources=[_ref("101")],
+    )
+    assert task.grounded is True
+    assert task.engineer_days is None
+    assert len(task.sources) == 1
+
+
+# --- Session 11 acceptance scenario (mirrors demo_verify_citations_s11.py) ---
+
+
+def _demo_acceptance_estimate() -> Estimate:
+    """Realistic estimate: 2 grounded lines, 1 planted dangling (999), 1 insufficient."""
+    return Estimate(
+        total_engineer_days=53,
+        duration_weeks=11,
+        modules=[
+            WorkModule(
+                name="Authentication & SCA",
+                tasks=[
+                    TaskItem(
+                        name="OAuth 2.0 backend",
+                        engineer_days=15,
+                        grounded=True,
+                        sources=[
+                            SourceReference(
+                                chunk_id="101",
+                                document_id="BUD-2024-001",
+                                evidence="AUTH-001 OAuth 2.0 authentication backend — 120 h",
+                            )
+                        ],
+                    ),
+                ],
+            ),
+            WorkModule(
+                name="PSD2 & Open Banking",
+                tasks=[
+                    TaskItem(
+                        name="Open banking connectors",
+                        engineer_days=20,
+                        grounded=True,
+                        sources=[
+                            SourceReference(
+                                chunk_id="102",
+                                document_id="BUD-2024-001",
+                                evidence="PSD2-002 PSD2 open banking connectors — 160 h",
+                            )
+                        ],
+                    ),
+                ],
+            ),
+            WorkModule(
+                name="Ledger",
+                tasks=[
+                    TaskItem(
+                        name="Transaction ledger",
+                        engineer_days=18,
+                        grounded=True,
+                        sources=[
+                            SourceReference(
+                                chunk_id="999",
+                                document_id="BUD-2024-001",
+                                evidence="TXN-003 Transaction ledger service — 140 h",
+                            )
+                        ],
+                    ),
+                ],
+            ),
+            WorkModule(
+                name="Reporting",
+                tasks=[
+                    TaskItem(
+                        name="Regulatory reporting",
+                        grounded=False
+                    )
+                ],
+            ),
+        ],
+        sources=[],
+        assumptions=[
+            Assumption(
+                description="Regulatory reporting has no historical analog in the context.",
+                impact="medium",
+                rationale="No retrieved budget covers regulatory reporting.",
+            )
+        ],
+        confidence="high",
+        reasoning="Derived from the retrieved BUD-2024-001 components.",
+    )
+
+
+def test_verify_citations_demo_acceptance_scenario():
+    """Session 11 acceptance: 2 grounded, 1 planted dangling (999), 1 insufficient."""
+    estimate = _demo_acceptance_estimate()
+    report = verify_citations(estimate, {"101", "102", "103"})
+
+    assert report.total_lines == 4
+    assert report.grounded_lines == 2
+    assert report.dangling_lines == 1
+    assert report.insufficient_lines == 1
+    assert report.dangling_citations == ["999"]
+    assert report.has_dangling is True
+    assert report.lines[0].status == "grounded"
+    assert report.lines[1].status == "grounded"
+    assert report.lines[2].status == "dangling"
+    assert report.lines[2].component == "Transaction ledger"
+    assert report.lines[2].dangling_chunk_ids == ["999"]
+    assert report.lines[3].status == "insufficient"
+    assert report.lines[3].component == "Regulatory reporting"
