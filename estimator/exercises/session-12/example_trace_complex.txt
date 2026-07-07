@@ -1,0 +1,57 @@
+STEP 1
+  reasoning:   The transcript names four independent scopes: core business backend, SAP ERP integration, offline mobile app, and an analytics dashboard. I will search historical budgets for each one separately.
+  action:      search_budgets(query="business backend API orders routes tariffs tracking", filters={"component_type": "backend", "sectors": ["logistics"]})
+  observation: 2 matches; hours=[1150.0, 940.0]; median=1045.0h; best_distance=0.3
+
+STEP 2
+  reasoning:   The transcript names four independent scopes: core business backend, SAP ERP integration, offline mobile app, and an analytics dashboard. I will search historical budgets for each one separately.
+  action:      search_budgets(query="SAP ERP integration billing customers articles IDocs middleware", filters={"component_type": "integration", "sectors": ["industrial"]})
+  observation: 2 matches; hours=[860.0, 720.0]; median=790.0h; best_distance=0.1
+
+STEP 3
+  reasoning:   The transcript names four independent scopes: core business backend, SAP ERP integration, offline mobile app, and an analytics dashboard. I will search historical budgets for each one separately.
+  action:      search_budgets(query="mobile delivery app Android iOS offline sync signature photo", filters={"component_type": "mobile", "sectors": ["logistics"]})
+  observation: 1 matches; hours=[780.0]; median=780.0h; best_distance=0.1
+
+STEP 4
+  reasoning:   The transcript names four independent scopes: core business backend, SAP ERP integration, offline mobile app, and an analytics dashboard. I will search historical budgets for each one separately.
+  action:      search_budgets(query="analytics KPI dashboard on-time delivery route costs alerts", filters={"component_type": "analytics", "sectors": ["logistics"]})
+  observation: 1 matches; hours=[560.0]; median=560.0h; best_distance=0.3
+
+STEP 5
+  reasoning:   Each component has comparable historical references. I will consolidate them deterministically with calculate_estimate.
+  action:      calculate_estimate(components=['Core business backend', 'SAP ERP integration', 'Mobile delivery app', 'Analytics dashboard'])
+  observation: total=3496.0h across 4 components
+
+--- RESULT ---
+status: done
+{
+  "components": [
+    {
+      "name": "Core business backend",
+      "estimated_hours": 1201.8,
+      "reference_budget_ids": [],
+      "unbudgeted": false
+    },
+    {
+      "name": "SAP ERP integration",
+      "estimated_hours": 908.5,
+      "reference_budget_ids": [],
+      "unbudgeted": false
+    },
+    {
+      "name": "Mobile delivery app",
+      "estimated_hours": 816.5,
+      "reference_budget_ids": [],
+      "unbudgeted": false
+    },
+    {
+      "name": "Analytics dashboard",
+      "estimated_hours": 569.2,
+      "reference_budget_ids": [],
+      "unbudgeted": false
+    }
+  ],
+  "total_hours": 3496.0,
+  "notes": "total=3496.0h across 4 components"
+}
