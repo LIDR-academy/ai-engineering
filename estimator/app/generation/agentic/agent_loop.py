@@ -165,7 +165,7 @@ async def run_agent(
     try:
         response = await client.responses.create(
             model=model,
-            reasoning={"effort": effort},
+            reasoning={"effort": effort, "summary": "auto"},
             instructions=SYSTEM_PROMPT,
             input=[{"role": "user", "content": transcript}],
             tools=AGENT_TOOLS,
@@ -219,7 +219,7 @@ async def run_agent(
         try:
             response = await client.responses.create(
                 model=model,
-                reasoning={"effort": effort},
+                reasoning={"effort": effort, "summary": "auto"},
                 previous_response_id=response.id,
                 instructions=SYSTEM_PROMPT,
                 input=tool_outputs,

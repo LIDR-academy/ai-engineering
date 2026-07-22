@@ -1,7 +1,7 @@
 """Tool schemas and deterministic implementations for the Session 12 agent.
 
-``search_budgets`` is wired at runtime via the composition root
-(``dependencies.build_agent_tool_registry``) so this module never imports RAG.
+``search_budgets`` is wired at runtime via
+``tool_registry.build_agent_tool_registry`` so this module never imports RAG.
 """
 
 from __future__ import annotations
@@ -40,12 +40,14 @@ AGENT_TOOLS: list[dict[str, Any]] = [
                         "to price (e.g. 'SAP ERP integration for billing sync')."
                     ),
                 },
+                # Strict mode: every property key must be listed in ``required``;
+                # optional values use nullable types (OpenAI function-calling guide).
                 "filters": {
-                    "type": "object",
+                    "type": ["object", "null"],
                     "description": "Optional metadata filters to narrow results.",
                     "properties": {
                         "component_type": {
-                            "type": "string",
+                            "type": ["string", "null"],
                             "enum": [
                                 "backend",
                                 "integration",
@@ -53,13 +55,14 @@ AGENT_TOOLS: list[dict[str, Any]] = [
                                 "analytics",
                                 "frontend",
                                 "migration",
+                                None,
                             ],
                             "description": (
                                 "High-level category of the component being priced."
                             ),
                         },
                         "sectors": {
-                            "type": "array",
+                            "type": ["array", "null"],
                             "items": {"type": "string"},
                             "description": (
                                 "Restrict matches to these client sectors "
@@ -67,26 +70,26 @@ AGENT_TOOLS: list[dict[str, Any]] = [
                             ),
                         },
                         "date_range": {
-                            "type": "object",
+                            "type": ["object", "null"],
                             "properties": {
                                 "year_min": {
-                                    "type": "integer",
+                                    "type": ["integer", "null"],
                                     "description": "Minimum project year (inclusive).",
                                 },
                                 "year_max": {
-                                    "type": "integer",
+                                    "type": ["integer", "null"],
                                     "description": "Maximum project year (inclusive).",
                                 },
                             },
-                            "required": [],
+                            "required": ["year_min", "year_max"],
                             "additionalProperties": False,
                         },
                     },
-                    "required": [],
+                    "required": ["component_type", "sectors", "date_range"],
                     "additionalProperties": False,
                 },
             },
-            "required": ["query"],
+            "required": ["query", "filters"],
             "additionalProperties": False,
         },
         "strict": True,
@@ -187,8 +190,11 @@ def format_action(name: str, args: dict[str, Any]) -> str:
         return f'search_budgets(query="{query}", filters={json.dumps(filters)})'
     if name == "calculate_estimate":
         components = args.get("components", [])
-        names = [c.get("name", "?") for c in components]
-        return f"calculate_estimate(components={names})"
+        parts = [
+            f"{c.get('name', '?')}{c.get('reference_amounts', [])}"
+            for c in components
+        ]
+        return f"calculate_estimate(components=[{', '.join(parts)}])"
     return f"{name}({json.dumps(args)})"
 
 
