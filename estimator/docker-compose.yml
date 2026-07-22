@@ -4,6 +4,14 @@
 services:
   estimator:
     build: .
+    # Pin a stable image tag. Without this, Compose derives the tag from the
+    # project name (which defaults to the directory name — identical for every
+    # worktree, all called "estimator/"), so builds are neither reliably shared
+    # nor reused. With a fixed tag, a build produced in one worktree is reused by
+    # another via `docker compose up` (no --build) instead of rebuilt from scratch;
+    # combined with the BuildKit uv cache mount, an unchanged uv.lock means the
+    # deps layer is a cache hit and the image is effectively free to re-materialize.
+    image: estimator:local
     container_name: estimator
     ports:
       - "8000:8000"
