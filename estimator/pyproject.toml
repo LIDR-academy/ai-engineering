@@ -41,12 +41,6 @@ dependencies = [
     "slowapi>=0.1.9",
     # Session 10 — cross-encoder reranking (recall-then-rerank). Pulls torch.
     "sentence-transformers>=3.0",
-    # torch/torchvision declared explicitly (they are otherwise only transitive
-    # via sentence-transformers / unstructured-inference) so the CPU-only index
-    # pin in [tool.uv.sources] below actually binds. Inference runs on CPU, so
-    # the multi-GB CUDA wheels are never needed.
-    "torch>=2.2",
-    "torchvision>=0.17",
     # Session 6 — data-driven AI
     "pandas>=2.2",
     "pandera>=0.20",
@@ -77,25 +71,6 @@ dev = [
     "ragas>=0.2",
     "datasets>=2.19",
 ]
-
-# -----------------------------------------------------------------------------
-# torch CPU-only build.
-#
-# `sentence-transformers` (Session 10 cross-encoder reranker, CPU inference only)
-# pulls `torch`. On Linux, PyPI's default `torch` wheel is the CUDA build, which
-# drags in ~16 `nvidia-*` wheels (~5-6 GB) that are dead weight in a CPU-only
-# container (there is no GPU in dev or in any worktree). Pinning torch/torchvision
-# to PyTorch's CPU index keeps the exact same API and results at a fraction of the
-# size. `explicit = true` means ONLY the packages listed in [tool.uv.sources]
-# resolve against this index — everything else stays on PyPI.
-[[tool.uv.index]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-explicit = true
-
-[tool.uv.sources]
-torch = [{ index = "pytorch-cpu" }]
-torchvision = [{ index = "pytorch-cpu" }]
 
 [tool.ruff]
 line-length = 100
