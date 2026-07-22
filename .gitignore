@@ -5,8 +5,13 @@ guides/
 # Entorno local sensible
 .env
 
-# Entornos virtuales
+# Entornos virtuales (cualquier profundidad: p. ej. estimator/.venv)
 .venv/
+venv/
+ENV/
+env/
+.virtualenv/
+virtualenv/
 
 # Cachés y artefactos temporales de Python/herramientas
 __pycache__/
