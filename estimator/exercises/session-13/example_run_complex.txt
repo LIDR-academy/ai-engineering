@@ -5,32 +5,43 @@ estimation_id : s13-sample_transcript_complex
 status        : validated
 
 REQUIREMENTS
-  - Develop a backend for order management, route assignment, shipment tracking, and rate calculation with an exposed API.
-  - Integrate with SAP ERP for synchronizing billing, customers, and master data, including IDoc mapping and middleware layer.
-  - Create a mobile app for delivery drivers on Android and iOS that shows daily routes, confirms deliveries with signature and photo, and operates offline with synchronization capabilities.
-  - Develop an analytics dashboard with KPIs for on-time deliveries, route costs, and incidents, including filtering by zone and customer, and alerts for abnormalities.
+  - Develop a backend for order management, route assignment, shipment tracking, and tariff calculation with an exposed API.
+  - Integrate the backend with SAP ERP for syncing invoicing, customers, and item master data, including mapping IDocs, middleware layer setup, and retry management.
+  - Create a mobile app for couriers on Android and iOS that includes daily route visibility, delivery confirmation with signatures and photos, and offline functionality with synchronization.
+  - Build an analytics dashboard with KPIs for on-time deliveries, route costs, incidents, and the ability to filter by area and client, including alerts for abnormal situations.
 
 COMPONENTS
-  - Order Management Backend API [backend]
+  - Order Management Backend [backend]
   - SAP ERP Integration [integration]
-  - Mobile Driver App [mobile]
-  - Delivery Analytics Dashboard [analytics]
+  - Courier Mobile App [mobile]
+  - Analytics Dashboard [analytics]
 
 BUDGET MATCHES (accumulator field)
-  - Order Management Backend API: 1150h (ref BUD-CORE-2023-02, distance 0.4)
-  - Order Management Backend API: 940h (ref BUD-CORE-2022-09, distance 0.4)
-  - SAP ERP Integration: 860h (ref BUD-SAP-2023-05, distance 0.3)
-  - SAP ERP Integration: 720h (ref BUD-SAP-2021-12, distance 0.4)
-  - Mobile Driver App: 780h (ref BUD-APP-2023-03, distance 0.4)
-  - Mobile Driver App: 640h (ref BUD-APP-2022-06, distance 0.4)
-  - Mobile Driver App: 430h (ref BUD-BI-2022-04, distance 0.5)
-  - Delivery Analytics Dashboard: 560h (ref BUD-BI-2023-01, distance 0.4)
-  - Delivery Analytics Dashboard: 430h (ref BUD-BI-2022-04, distance 0.5)
-  (9 matches total)
+  - Order Management Backend: 24h (ref TASK-2024-0060, distance 0.5143)
+  - Order Management Backend: 48h (ref TASK-2025-0017, distance 0.521)
+  - Order Management Backend: 26h (ref TASK-2024-0012, distance 0.5266)
+  - Order Management Backend: 34h (ref TASK-2025-0017, distance 0.5285)
+  - Order Management Backend: 31h (ref TASK-2023-0057, distance 0.5304)
+  - SAP ERP Integration: 24h (ref TASK-2023-0046, distance 0.5545)
+  - SAP ERP Integration: 37h (ref TASK-2023-0050, distance 0.561)
+  - SAP ERP Integration: 52h (ref TASK-2023-0057, distance 0.562)
+  - SAP ERP Integration: 48h (ref TASK-2025-0025, distance 0.5697)
+  - SAP ERP Integration: 32h (ref TASK-2024-0009, distance 0.5703)
+  - Courier Mobile App: 29h (ref TASK-2024-0018, distance 0.5445)
+  - Courier Mobile App: 33h (ref TASK-2025-0045, distance 0.5454)
+  - Courier Mobile App: 24h (ref TASK-2023-0057, distance 0.5561)
+  - Courier Mobile App: 28h (ref TASK-2023-0050, distance 0.5606)
+  - Courier Mobile App: 17h (ref TASK-2022-0032, distance 0.5731)
+  - Analytics Dashboard: 41h (ref TASK-2022-0004, distance 0.4127)
+  - Analytics Dashboard: 36h (ref TASK-2022-0034, distance 0.4152)
+  - Analytics Dashboard: 44h (ref TASK-2023-0020, distance 0.4213)
+  - Analytics Dashboard: 36h (ref TASK-2022-0033, distance 0.4227)
+  - Analytics Dashboard: 36h (ref TASK-2022-0035, distance 0.4227)
+  (20 matches total)
 
 ESTIMATE
-  - Order Management Backend API [backend]: 130d — Converted reference hours to days: 1150h = 143.75d, 940h = 117.5d. Rounded median of days = 130.
-  - SAP ERP Integration [integration]: 101d — Converted reference hours to days: 860h = 107.5d, 720h = 90d. Rounded median of days = 101.
-  - Mobile Driver App [mobile]: 86d — Converted reference hours to days: 780h = 97.5d, 640h = 80d, 430h = 53.75d. Rounded median of days = 86.
-  - Delivery Analytics Dashboard [analytics]: 62d — Converted reference hours to days: 560h = 70d, 430h = 53.75d. Rounded median of days = 62.
-  TOTAL: 379d (confidence medium)
+  - Order Management Backend: 4d — Rounded median of references converted from hours to days: [3, 6, 3, 4, 4]
+  - SAP ERP Integration: 5d — Rounded median of references converted from hours to days: [3, 5, 7, 6, 4]
+  - Courier Mobile App: 3d — Rounded median of references converted from hours to days: [4, 4, 3, 4, 2]
+  - Analytics Dashboard: 5d — Rounded median of references converted from hours to days: [5, 5, 6, 5, 5]
+  TOTAL: 17d (confidence medium)
