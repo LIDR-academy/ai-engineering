@@ -6,10 +6,12 @@ Transcripción de aceptación: `sample_transcript_complex.txt`
 
 ## Veredicto
 
-El plan está **implementado y operativo**. Tras corregir dos defectos que impedían una traza válida contra la API actual (`strict` schema inválido + ausencia de `reasoning.summary`), una ejecución fresca con `sample_transcript_complex.txt` **cumple los 5 criterios de aceptación**.
+El plan está **implementado y operativo**. Tras corregir defectos de schema/reasoning y del backend de retrieval real, una ejecución fresca con `sample_transcript_complex.txt` **cumple los 5 criterios de aceptación** tanto con stub como con **pgvector real**.
 
-Evidencia principal: [`verification_trace_complex.txt`](./verification_trace_complex.txt)  
-(`gpt-5`, `effort=medium`, `--stub`, 2026-07-22)
+| Evidencia | Modo | Resultado |
+|---|---|---|
+| [`verification_trace_complex_real.txt`](./verification_trace_complex_real.txt) | **retrieval real** (`gpt-5` / `medium`, sin `--stub`) | **ACCEPTANCE: True** (primaria) |
+| [`verification_trace_complex.txt`](./verification_trace_complex.txt) | stub | ACCEPTANCE: True (control) |
 
 ---
 
@@ -36,14 +38,19 @@ No exigida por el ejercicio: endpoint FastAPI, `validate_estimate`, tests unitar
 2. **Schema `strict: true` roto** (bloqueante): OpenAI exige que, en modo estricto, todo key de `properties` figure en `required` (opcionales vía `null`). El schema original fallaba con:
    > `Invalid schema for function 'search_budgets'... Missing 'year_min'`
 3. **Razonamiento vacío en traza**: sin `reasoning.summary="auto"` la API no devuelve summaries → la traza mostraba `reasoning: —`. Corregido en `agent_loop.py`.
-4. **Corpus real vacío** en este entorno: `budget_chunks` tiene **0 filas**. El path de retrieval real no se pudo validar end-to-end sin `--ingest`. La aceptación se verificó con `--stub` (red de seguridad del ejercicio).
-5. **`exercises/` no está montado** en el `docker-compose` del servicio `estimator` (solo `app/`, `tests/`, `data/`, `scripts/`, alembic). Para ejecutar hay que `docker cp` de `exercises/` o montar el volumen.
-6. **`example_trace_complex.txt` legado**: coherente en totales, pero la acción de `calculate_estimate` no muestra `reference_amounts` (formato antiguo) y las observaciones de móvil/analítica (1 hit) no cuadran con la matemática de 2 referencias (`total=3496.0` = mediana con 2 refs en móvil/BI). No debe usarse como evidencia primaria frente a `verification_trace_complex.txt`.
+4. **Corpus de tareas**: ingerido en esta verificación — `1543` filas `chunk_type=historical_task` (60 proyectos).
+5. **`exercises/` montado** en `estimator/docker-compose.yml` (`./exercises:/app/exercises`) y el servicio recreado.
+6. **`example_trace_complex.txt` legado**: coherente en totales, pero la acción de `calculate_estimate` no muestra `reference_amounts` (formato antiguo) y las observaciones de móvil/analítica (1 hit) no cuadran con la matemática de 2 referencias (`total=3496.0`). Preferir las trazas `verification_trace_complex*.txt`.
+7. **Bug retrieval real**: `search_budgets_impl` llamaba `runtime_retrieval.effective(...)` (API de modelos LLM); el correcto es `effective_search_mode()` / `effective_rerank()`.
+8. **Umbral de distancia**: `TASK_HOURS_DISTANCE_THRESHOLD=0.45` es demasiado estricto para queries de componente sobre chunks de tarea (vecinos ~0.60–0.65 con filtro de sector). `search_budgets` usa `max(RETRIEVAL_DISTANCE_THRESHOLD, 0.75)`.
+9. **Escala de horas con corpus real**: los hits son tareas históricas (~12–53 h), no presupuestos de componente completo; el total real (~136 h) es coherente aritméticamente pero subestima un proyecto de plataforma. El stub sigue siendo la comparación de “componente entero”.
 
 ### Fixes aplicados durante esta verificación
 
 - `agent_tools.py`: schema `filters` / `date_range` compatible con strict mode; `format_action` de `calculate_estimate` incluye `reference_amounts`.
 - `agent_loop.py`: `reasoning={"effort": ..., "summary": "auto"}`.
+- `tool_registry.py`: API correcta de `RuntimeRetrievalConfig` + umbral de distancia para búsquedas de componente.
+- `estimator/docker-compose.yml`: volumen `./exercises:/app/exercises`.
 
 ---
 
@@ -82,72 +89,99 @@ calc 2-refs-each total: 3496.0
 
 ---
 
-## Ejecución de aceptación (evidencia viva)
+## Preparación del entorno (retrieval real)
 
 ```bash
-docker cp exercises/. estimator:/app/exercises/
+# 1) Montar exercises/ (ya en estimator/docker-compose.yml) y recrear
+docker compose up -d estimator --force-recreate
+
+# 2) Ingerir corpus de tareas (JSON existente → pgvector)
+docker compose exec estimator python scripts/build_task_corpus.py \
+  --ingest-only --base-url http://localhost:8000
+# → Task corpus: 60 projects / 1543 tasks — 60 ingested
+```
+
+Comprobación DB: `historical_task | 1543`.
+
+---
+
+## Ejecución de aceptación — retrieval real (evidencia primaria)
+
+```bash
 docker compose exec estimator python scripts/run_agent_s12.py \
   exercises/session-12/sample_transcript_complex.txt \
-  --model gpt-5 --effort medium --stub \
-  --out /tmp/verification_trace_complex.txt
-# copia local: exercises/session-12/verification_trace_complex.txt
+  --model gpt-5 --effort medium \
+  --out exercises/session-12/verification_trace_complex_real.txt
 ```
 
-Scoring automático:
-
-```bash
-docker compose exec estimator python scripts/_score_s12_trace.py \
-  /tmp/verification_trace_complex.txt
-```
+Scoring:
 
 ```
-steps: 7
-search_budgets: 6  PASS=True
+file: verification_trace_complex_real.txt
+steps: 5
+search_budgets: 4  PASS=True
 calculate_estimate: 1  PASS=True
 calc includes reference_amounts: True
 status done: True
 incomplete steps: none
 empty reasoning steps: 0
-components: 4 total=3651.3 sum=3651.3 coherent=True
+components: 4 total=135.7 sum=135.7 coherent=True
+ACCEPTANCE: True
+```
+
+Logs del retrieval (ej.): `rag_retrieve_done ... results=10 search_mode=vector vector_hits=10` en las 4 búsquedas paralelas.
+
+---
+
+## Ejecución de control — stub (evidencia secundaria)
+
+```bash
+docker compose exec estimator python scripts/run_agent_s12.py \
+  exercises/session-12/sample_transcript_complex.txt \
+  --model gpt-5 --effort medium --stub \
+  --out exercises/session-12/verification_trace_complex.txt
+```
+
+```
+steps: 7
+search_budgets: 6
+calculate_estimate: 1
+components: 4 total=3651.3 sum=3651.3
 ACCEPTANCE: True
 ```
 
 ---
 
-## Criterios de aceptación (detalle)
+## Criterios de aceptación (detalle — traza real)
 
 ### 1. Identifica más de un componente y hace más de una llamada a `search_budgets`
 
-**PASS** — 4 componentes reconocibles; **6** llamadas a `search_budgets` con queries distintas (backend, SAP×2 con reformulación, móvil×2, analítica).
-
-Extracto:
+**PASS** — 4 componentes; **4** llamadas a `search_budgets` en paralelo (backend, SAP, móvil, analítica), cada una con hits reales del corpus.
 
 ```
-STEP 1  search_budgets(... backend ...)
-STEP 2  search_budgets(... SAP ...)          → 0 matches → reformula
-STEP 3  search_budgets(... SAP / industrial ...)
-STEP 4  search_budgets(... mobile ...)
-STEP 5  search_budgets(... mobile variant ...)
-STEP 6  search_budgets(... analytics ...)
+STEP 1  search_budgets(... backend ...)     → 10 matches; median=28.5h
+STEP 2  search_budgets(... SAP ...)         → 10 matches; median=28.0h
+STEP 3  search_budgets(... mobile ...)      → 10 matches; median=26.0h
+STEP 4  search_budgets(... analytics ...)   → 10 matches; median=35.5h
 ```
 
 ### 2. Llama a `calculate_estimate` con los componentes y sus referencias
 
-**PASS** — STEP 7:
+**PASS** — STEP 5 con `reference_amounts` tomados de las observaciones (10 refs por componente).
 
 ```
 calculate_estimate(components=[
-  Backend ...[940, 1150],
-  Integración con SAP ...[860, 720],
-  App móvil ...[780],
-  Panel de analítica ...[560]
+  Backend ...[31, 24, 29, 42, 17, 17, 29, 33, 28, 24],
+  Integración ERP SAP ...[41, 37, 52, 25, 33, 25, 23, 24, 17, 31],
+  App móvil ...[29, 33, 28, 24, 12, 20, 53, 34, 20, 17],
+  Panel de analítica ...[47, 42, 25, 36, 44, 26, 28, 35, 30, 46]
 ])
-observation: total=3651.3h across 4 components
+observation: total=135.7h across 4 components
 ```
 
 ### 3. Termina por sí solo (sin bucle infinito ni corte a mitad)
 
-**PASS** — `status: done` tras mensaje final del modelo; 7 steps << `max_steps=10`; no `max_steps_exceeded`.
+**PASS** — `status: done`; 5 steps << `max_steps=10`.
 
 ### 4. Produce una estimación estructurada coherente
 
@@ -155,31 +189,31 @@ observation: total=3651.3h across 4 components
 
 | Componente | Horas | Unbudgeted |
 |---|---:|:---:|
-| Backend de negocio con API | 1201.8 | no |
-| Integración con SAP | 908.5 | no |
-| App móvil repartidores | 897.0 | no |
-| Panel de analítica | 644.0 | no |
-| **Total** | **3651.3** | = suma exacta |
+| Backend de negocio con API | 32.8 | no |
+| Integración ERP SAP | 32.2 | no |
+| App móvil repartidores | 29.9 | no |
+| Panel de analítica | 40.8 | no |
+| **Total** | **135.7** | = suma exacta |
 
-Coherencia aritmética: `1201.8 + 908.5 + 897.0 + 644.0 = 3651.3`.
+Nota: horas a escala de **tarea** histórica (corpus `historical_task`), no de componente completo.
 
 ### 5. La traza muestra, para cada paso, razonamiento + acción + observación
 
-**PASS** — 7/7 steps con los tres campos; reasoning no vacío (p. ej. STEP 2 explica la reformulación SAP; STEP 3 documenta el cambio de sector a `industrial`).
+**PASS** — 5/5 steps con los tres campos y reasoning no vacío (incl. reflexión del modelo sobre que los hits parecen tareas, no presupuestos enteros).
 
 ---
 
 ## Resumen de criterios
 
-| Criterio | Resultado |
-|---|---|
-| >1 componente y >1 `search_budgets` | PASS (4 comps, 6 searches) |
-| `calculate_estimate` con referencias | PASS |
-| Termina solo (`done`) | PASS |
-| Estimación estructurada coherente | PASS |
-| Traza reason + action + observation | PASS |
+| Criterio | Stub | Retrieval real |
+|---|---|---|
+| >1 componente y >1 `search_budgets` | PASS (6) | PASS (4) |
+| `calculate_estimate` con referencias | PASS | PASS |
+| Termina solo (`done`) | PASS | PASS |
+| Estimación estructurada coherente | PASS | PASS |
+| Traza reason + action + observation | PASS | PASS |
 
-**Agente listo para el entregable del ejercicio**, con la salvedad de que esta evidencia usa `--stub`. Para el path con retrieval real hace falta ingerir el corpus de tareas (`scripts/build_task_corpus.py --ingest`) y montar/copiar `exercises/`.
+**Agente listo** con evidencia de retrieval real en `verification_trace_complex_real.txt`.
 
 ---
 
@@ -187,6 +221,7 @@ Coherencia aritmética: `1201.8 + 908.5 + 897.0 + 644.0 = 3651.3`.
 
 | Fichero | Rol |
 |---|---|
-| `exercises/session-12/verification_trace_complex.txt` | Traza fresca que cumple aceptación |
+| `exercises/session-12/verification_trace_complex_real.txt` | Traza con pgvector (evidencia primaria) |
+| `exercises/session-12/verification_trace_complex.txt` | Traza con stub (control) |
 | `exercises/session-12/S12_verification.md` | Este informe |
-| `scripts/_verify_s12_static.py` / `scripts/_score_s12_trace.py` | Helpers de comprobación usados aquí (no son parte del entregable del ejercicio) |
+| `scripts/_verify_s12_static.py` / `scripts/_score_s12_trace.py` | Helpers de comprobación |

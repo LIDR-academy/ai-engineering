@@ -45,10 +45,15 @@ async def search_budgets_impl(args: dict[str, Any]) -> dict[str, Any]:
 
     settings = get_settings()
     runtime_retrieval = get_runtime_retrieval_config()
-    search_mode = runtime_retrieval.effective("RETRIEVAL_SEARCH_MODE")
-    rerank = runtime_retrieval.effective("RERANKER_ENABLED")
-    top_k = settings.TASK_HOURS_TOP_K
-    distance_threshold = settings.TASK_HOURS_DISTANCE_THRESHOLD
+    search_mode = runtime_retrieval.effective_search_mode()
+    rerank = runtime_retrieval.effective_rerank()
+    # Component-level queries against task-granular chunks sit farther apart than
+    # the Session 10 per-task hours search (threshold 0.45). With sector filters
+    # the nearest neighbours land around 0.63–0.65, so keep a wider gate.
+    top_k = settings.RETRIEVAL_TOP_K
+    distance_threshold = max(settings.RETRIEVAL_DISTANCE_THRESHOLD, 0.75)
+    recall_k = settings.RETRIEVAL_RECALL_TOP_K
+    rerank_top_n = settings.RERANK_TOP_N
 
     embedding = await asyncio.to_thread(embedder.embed_one, query_text)
     sectors = filters.sectors if filters else None
@@ -61,8 +66,8 @@ async def search_budgets_impl(args: dict[str, Any]) -> dict[str, Any]:
         search_mode=search_mode,
         rerank=rerank,
         top_k=top_k,
-        recall_k=settings.RETRIEVAL_RECALL_TOP_K,
-        rerank_top_n=top_k,
+        recall_k=recall_k,
+        rerank_top_n=rerank_top_n if rerank else top_k,
         distance_threshold=distance_threshold,
         rrf_k=settings.RRF_K,
         collection=Collection.BUDGET,
