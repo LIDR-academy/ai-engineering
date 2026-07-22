@@ -33,8 +33,9 @@ wheels/
 .idea/
 .vscode/
 
-# Session guides / docs
-docs/
+# Session guides / docs (track only the shared Docker guide)
+docs/*
+!docs/docker-desarrollo.md
 
 # Claude
 .claude/
