@@ -2,10 +2,34 @@
 # never committed.
 guides/
 
-# Local environment / editor cruft (the project also has its own .gitignore
-# inside estimator/, this catches files at the repo root).
+# Entorno local sensible
+.env
+
+# Entornos virtuales
+.venv/
+
+# Cachés y artefactos temporales de Python/herramientas
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.py[oc]
+
+# Artefactos de empaquetado/distribución
+build/
+dist/
+wheels/
+*.egg-info
+
+# OS files
 .DS_Store
+
+# IDEs
 .idea/
 .vscode/
-__pycache__/
+
+# Session guides / docs
+docs/
+
+# Claude
 .claude/
