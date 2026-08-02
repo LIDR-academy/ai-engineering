@@ -7,6 +7,11 @@
 # (and therefore the same named volumes). Without this, Compose derives the
 # name from the directory (`Estimator_S14` → `estimator_s14`) and you get
 # empty volumes + a forced reseed.
+#
+# Auth keys for Rails are interpolated from estimator/.env (single source).
+# Always pass that file for Compose interpolation, e.g.:
+#   docker compose --env-file estimator/.env up
+# or set COMPOSE_ENV_FILES=estimator/.env (see docs/deployment-local.md).
 name: estimator
 
 # IMPORTANT: each subproject can also be launched in isolation by running

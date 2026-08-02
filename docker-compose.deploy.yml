@@ -1,0 +1,30 @@
+# Overlay for local-deploy topology (Session 15 exercise).
+#
+# Merged on top of docker-compose.yml — does NOT start a second stack:
+#   docker compose --env-file estimator/.env \
+#     -f docker-compose.yml -f docker-compose.deploy.yml up --build
+#
+# Effect: only estimator-web publishes a host port (3000). The AI service,
+# Redis, and both Postgres instances stay on the internal Compose network.
+# Development with published ports remains:
+#   docker compose --env-file estimator/.env up
+# (--env-file is required so Rails interpolates ESTIMATE/RETRIEVAL API keys
+# from the same file the AI service loads.)
+
+services:
+  estimator:
+    ports: !reset []
+
+  redis:
+    ports: !reset []
+
+  estimator-postgres:
+    ports: !reset []
+
+  postgres:
+    ports: !reset []
+
+  estimator-web:
+    depends_on:
+      estimator:
+        condition: service_healthy

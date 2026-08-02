@@ -26,6 +26,14 @@ services:
       ESTIMATOR_API_BASE_URL: http://estimator:8000
       # LLM calls over long transcriptions can take 1-2 min; leave plenty of head room.
       ESTIMATOR_AI_TIMEOUT: "180"
+      # Service-to-service auth: ONLY these two keys are passed into Rails.
+      # Values are interpolated from estimator/.env (single source of truth — same
+      # file the AI service loads via env_file). Always start Compose with:
+      #   docker compose --env-file estimator/.env ...
+      # (or set COMPOSE_ENV_FILES=estimator/.env). Do NOT put a second copy of
+      # these secrets in a root/.env or estimator-web/.env.
+      ESTIMATE_API_KEY: ${ESTIMATE_API_KEY:?ESTIMATE_API_KEY missing — run with --env-file estimator/.env}
+      RETRIEVAL_API_KEY: ${RETRIEVAL_API_KEY:?RETRIEVAL_API_KEY missing — run with --env-file estimator/.env}
 
     depends_on:
       postgres:

@@ -37,18 +37,20 @@ cp estimator/.env.example estimator/.env
 # Editar estimator/.env: OPENAI_API_KEY y/o ANTHROPIC_API_KEY
 ```
 
+`ESTIMATE_API_KEY` / `RETRIEVAL_API_KEY` viven solo en ese fichero. Rails las recibe por interpolación de Compose: pasa siempre `--env-file estimator/.env` (o `COMPOSE_ENV_FILES=estimator/.env`). Detalle en [`deployment-local.md`](deployment-local.md).
+
 ## Arrancar sin reconstruir (caso habitual)
 
 Si las imágenes ya existen (p. ej. construidas en otro worktree):
 
 ```bash
 # Desde la raíz del monorepo
-docker compose up -d
+docker compose --env-file estimator/.env up -d
 # o explícito:
-docker compose up -d --no-build
+docker compose --env-file estimator/.env up -d --no-build
 
 # Solo backend IA
-docker compose up -d estimator redis estimator-postgres
+docker compose --env-file estimator/.env up -d estimator redis estimator-postgres
 ```
 
 Compose reutiliza `estimator:local` y `estimator-web:local`; solo crea/arranca contenedores. Si faltan imágenes base (redis-stack, postgres, pgvector), las descarga.
@@ -64,17 +66,17 @@ docker compose logs -f estimator estimator-web
 
 ```bash
 # Primera vez en la máquina, o tras cambiar deps/Dockerfile
-docker compose up --build -d
+docker compose --env-file estimator/.env up --build -d
 
 # Solo backend IA (con build)
-docker compose up --build -d estimator redis estimator-postgres
+docker compose --env-file estimator/.env up --build -d estimator redis estimator-postgres
 ```
 
 ## Cuándo reconstruir imágenes (y cuándo no)
 
 ### No hace falta rebuild
 
-`docker compose up -d` basta cuando:
+`docker compose --env-file estimator/.env up -d` basta cuando:
 
 - Solo cambia código bajo bind mounts (`estimator/app`, `tests`, `data`, `scripts`, `exercises`, `alembic`; o el árbol de `estimator-web` vía `.:/rails`).
 - Se cambia de rama o de worktree con las mismas deps.
@@ -87,7 +89,7 @@ Los bind mounts + `--reload` (uvicorn) / autoloader Rails cubren cambios de cód
 
 ```bash
 docker compose build estimator
-docker compose up -d estimator
+docker compose --env-file estimator/.env up -d estimator
 ```
 
 Cuando cambian `pyproject.toml` / `uv.lock`, el `Dockerfile` o `.dockerignore` del estimator, o tras un fallo de cache de capas. El Dockerfile usa BuildKit (`RUN --mount=type=cache` para uv) y pin CPU-only de torch: un `uv.lock` sin cambiar es casi gratis de re-materializar.
@@ -96,7 +98,7 @@ Cuando cambian `pyproject.toml` / `uv.lock`, el `Dockerfile` o `.dockerignore` d
 
 ```bash
 docker compose build estimator-web
-docker compose up -d estimator-web
+docker compose --env-file estimator/.env up -d estimator-web
 ```
 
 Cuando cambian `Gemfile` / `Gemfile.lock` o el `Dockerfile` de Rails. El build usa cache mount de bundler; el volumen `estimator_web_bundle_cache` ya persiste gems entre reinicios.
@@ -104,7 +106,7 @@ Cuando cambian `Gemfile` / `Gemfile.lock` o el `Dockerfile` de Rails. El build u
 ### Recreate sin rebuild
 
 ```bash
-docker compose up -d --force-recreate estimator
+docker compose --env-file estimator/.env up -d --force-recreate estimator
 ```
 
 Cuando cambia `estimator/.env`: Settings está cacheado con `@lru_cache`; un `--reload` no basta.
@@ -149,7 +151,7 @@ docker run --rm -v estimator_s13_node_modules:/from -v estimator_web_node_module
 docker tag estimator_s13-estimator-web:latest estimator-web:local
 
 # 4. Arrancar SIN rebuild
-docker compose up -d --no-build
+docker compose --env-file estimator/.env up -d --no-build
 ```
 
 Tras verificar pgvector, Rails DB y Redis, se pueden borrar los volúmenes/imágenes `estimator_s13_*` huérfanos.
