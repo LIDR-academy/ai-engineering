@@ -39,8 +39,12 @@ ENV BUNDLE_PATH=/usr/local/bundle \
 # Source code is NOT copied — it enters via bind mount from compose. The image
 # only carries gems + foreman + toolchain (mirrors the estimator/ pattern that
 # only ships .venv).
+#
+# BuildKit cache mount keeps downloaded gem archives across rebuilds so an
+# unchanged Gemfile.lock is near-instant even from another worktree.
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
+RUN --mount=type=cache,target=/usr/local/bundle/cache \
+    bundle install
 
 # foreman is intentionally outside bundle (bin/dev convention).
 RUN gem install foreman

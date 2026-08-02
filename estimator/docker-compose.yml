@@ -4,6 +4,13 @@
 services:
   estimator:
     build: .
+    # Pin a stable image tag. Without this, Compose derives the tag from the
+    # project name (which defaults to the directory name — different per
+    # worktree), so builds are neither reliably shared nor reused. With a fixed
+    # tag, a build produced in one worktree is reused by another via
+    # `docker compose up` (no --build); combined with the BuildKit uv cache
+    # mount, an unchanged uv.lock means the deps layer is a cache hit.
+    image: estimator:local
     container_name: estimator
     ports:
       - "8000:8000"
@@ -33,6 +40,7 @@ services:
       - ./tests:/app/tests
       - ./data:/app/data
       - ./scripts:/app/scripts
+      - ./exercises:/app/exercises
       - ./alembic:/app/alembic
       - ./alembic.ini:/app/alembic.ini
 
@@ -111,5 +119,9 @@ services:
     restart: unless-stopped
 
 volumes:
+  # Explicit names (not project-prefixed) so every worktree mounts the same
+  # seeded data regardless of the Compose project directory name.
   redis_data:
+    name: estimator_redis_data
   estimator_postgres_data:
+    name: estimator_postgres_data
