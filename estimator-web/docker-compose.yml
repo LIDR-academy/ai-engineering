@@ -5,6 +5,8 @@
 services:
   estimator-web:
     build: .
+    # Stable tag across worktrees/branches (same rationale as estimator:local).
+    image: estimator-web:local
     container_name: estimator-web
     ports:
       - "3000:3000"
@@ -76,6 +78,10 @@ services:
     restart: unless-stopped
 
 volumes:
+  # Explicit names so Rails DB + gem cache survive worktree/branch switches.
   postgres_data:
+    name: estimator_web_postgres_data
   bundle_cache:
+    name: estimator_web_bundle_cache
   node_modules:
+    name: estimator_web_node_modules

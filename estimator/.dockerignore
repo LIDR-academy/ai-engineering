@@ -15,3 +15,13 @@ build
 .vscode
 README.md
 tests
+
+# These enter the running container via bind mounts (see docker-compose.yml),
+# never via COPY, so keeping them out of the build context speeds up the context
+# transfer to the daemon without affecting the image contents.
+data
+scripts
+alembic
+alembic.ini
+guides
+*.md

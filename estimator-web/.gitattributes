@@ -7,3 +7,9 @@ db/schema.rb linguist-generated
 vendor/* linguist-vendored
 config/credentials/*.yml.enc diff=rails_credentials
 config/credentials.yml.enc diff=rails_credentials
+
+# Shebang scripts must stay LF: the bind mount mounts them into a Linux
+# container. CRLF makes /usr/bin/env look for "ruby\r" and the web service
+# crash-loops with exit 127.
+bin/* text eol=lf
+Procfile.dev text eol=lf

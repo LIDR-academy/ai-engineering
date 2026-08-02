@@ -3,11 +3,17 @@
 # directory launches all services on a single shared network, so cross-service
 # calls (e.g. Rails -> FastAPI via http://estimator:8000) just work.
 #
+# Fixed project name so every worktree/branch shares the same Compose project
+# (and therefore the same named volumes). Without this, Compose derives the
+# name from the directory (`Estimator_S14` → `estimator_s14`) and you get
+# empty volumes + a forced reseed.
+name: estimator
+
 # IMPORTANT: each subproject can also be launched in isolation by running
 # `docker compose up` from its own directory. Doing so creates a SEPARATE
 # Compose project (and therefore separate named volumes), so the database from
 # one mode is not visible from the other. Pick one mode per workflow and stick
-# with it.
+# with it — prefer this root file.
 
 include:
   - estimator/docker-compose.yml
