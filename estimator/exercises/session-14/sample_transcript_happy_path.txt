@@ -1,0 +1,47 @@
+Reuni├│n de descubrimiento ÔÇö Proyecto "Portal de Proveedores"
+Cliente: Marta Iribarne (Directora de Compras) y Sergio Cuadrado (IT), Distribuciones Almenar
+Consultor: equipo de estimaci├│n
+Fecha: reuni├│n inicial
+
+[00:00:05] Consultor: Buenos d├¡as. Contadnos qu├® necesit├íis.
+
+[00:00:14] Marta: Es un proyecto acotado, no os asust├®is. Queremos un portal donde nuestros
+proveedores puedan consultar sus pedidos y subir facturas. Hoy va todo por correo electr├│nico y se
+nos pierden cosas.
+
+[00:00:48] Consultor: ┬┐Cu├íntos proveedores?
+
+[00:00:52] Marta: Unos ciento cincuenta activos. Entran dos o tres veces por semana cada uno. No es
+un volumen alto.
+
+[00:01:20] Sergio: La primera pieza es un backend de negocio est├índar: alta de proveedores, listado
+de pedidos, estados, y el flujo de subida y validaci├│n de facturas. Una API REST y una base de
+datos relacional. Nada ex├│tico.
+
+[00:02:05] Consultor: ┬┐Y la parte visual?
+
+[00:02:10] Sergio: Un frontend web sencillo. Listados, filtros, formularios y la subida de ficheros.
+Responsive, porque algunos proveedores entran desde el m├│vil, pero no necesitamos app nativa.
+
+[00:02:50] Marta: Y necesitamos que se integre con nuestro ERP para volcar las facturas validadas.
+Usamos SAP, y para esto ya tenemos el conector montado de otro proyecto: es sincronizar el maestro
+de proveedores y empujar las facturas. Nuestro equipo nos ha dicho que es una integraci├│n de las
+habituales.
+
+[00:03:35] Consultor: ┬┐Autenticaci├│n?
+
+[00:03:40] Sergio: Login con usuario y contrase├▒a, recuperaci├│n por correo, y roles: proveedor,
+gestor de compras y administrador. Lo est├índar. Sin SSO por ahora.
+
+[00:04:15] Consultor: ┬┐Informes?
+
+[00:04:20] Marta: Un m├│dulo de informes b├ísico: facturas por proveedor y por periodo, y estado de
+pedidos. Exportable a Excel. Con eso vamos servidos.
+
+[00:05:00] Consultor: ┬┐El alcance est├í cerrado?
+
+[00:05:05] Marta: S├¡. Lo hemos discutido internamente y esto es lo que necesitamos para este a├▒o.
+Si m├ís adelante queremos m├ís, ser├í otro proyecto.
+
+[00:05:35] Sergio: Y no hay requisitos de certificaci├│n ni de rendimiento especiales. Es un portal
+interno para proveedores conocidos.

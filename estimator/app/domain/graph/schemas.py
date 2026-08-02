@@ -146,3 +146,33 @@ class CommercialProposal(BaseModel):
     body_markdown: str = Field(
         description="The full proposal as Markdown, grounded ONLY in the validated estimate."
     )
+
+
+# --------------------------------------------------------------------------- #
+# Session 14 — supervisor routing decision                                    #
+# --------------------------------------------------------------------------- #
+SupervisorNextAgent = Literal[
+    "requirements_extractor",
+    "budget_searcher",
+    "estimate_generator",
+    "coherence_validator",
+    "finish",
+]
+
+
+class SupervisorDecision(BaseModel):
+    """Structured output of the Session 14 supervisor router.
+
+    ``next_agent`` is constrained to a closed ``Literal`` so an illegal destination
+    is a schema failure (and then the legality guard / fallback), not a free-text
+    hallucination that the graph cannot resolve.
+    """
+
+    next_agent: SupervisorNextAgent = Field(
+        description="The specialist that must act next, or 'finish' when done."
+    )
+    reason: str = Field(description="Why this specialist, in one sentence.")
+    confidence: Literal["low", "medium", "high"] | None = Field(
+        default=None,
+        description="How sure the router is about this choice (optional).",
+    )

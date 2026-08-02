@@ -269,6 +269,29 @@ class Settings(BaseSettings):
         "high": "high",
     }
 
+    # --- Session 14: the supervisor multi-agent flow ------------------------ #
+    # The supervisor is LLM-DRIVEN (the model owns the control flow) but the decision
+    # space is five Literal options over a short factual digest, so a cheap
+    # non-reasoning model is the right tool. Already in AVAILABLE_MODELS.
+    SUPERVISOR_ROUTER_MODEL: str = "gpt-4o-mini"
+    # Hard ceiling on routing steps — the bound that makes an LLM router safe in a
+    # graph with cyclic return edges. 8 = the four agents plus room for one legitimate
+    # re-route and a finish.
+    SUPERVISOR_MAX_STEPS: int = 8
+    # Human-review trigger 1: pause below this 0..1 confidence. THE knob of the
+    # exercise; raise it to send more estimates to a person.
+    SUPERVISOR_CONFIDENCE_THRESHOLD: float = 0.6
+    # Human-review trigger 3: pause when fewer than this fraction of components have
+    # any precedent at all in the historical budgets.
+    SUPERVISOR_MIN_GROUNDED_RATIO: float = 0.5
+    # Level 3: false = a denied tool call returns a denial envelope the agent survives;
+    # true = it raises PrivilegeViolation and fails the run loudly. False is the
+    # teaching default.
+    SUPERVISOR_PRIVILEGE_STRICT: bool = False
+    # How much of a tool's arguments the audit log echoes. The SHA-256 digest is always
+    # logged in full, so a call's identity is provable without dumping a transcript.
+    SUPERVISOR_AUDIT_ARGS_PREVIEW_CHARS: int = 200
+
     # Logfire service name for the traces. The token itself is read by Logfire from
     # the environment (LOGFIRE_TOKEN) — a run with no token executes every span
     # locally but exports nothing, so observability never breaks startup.

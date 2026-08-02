@@ -1,0 +1,65 @@
+==============================================================================
+SESSION 14 — SUPERVISOR MULTI-AGENT RUN
+==============================================================================
+
+ROUTING (supervisor decisions)
+------------------------------------------------------------------------------
+  1. supervisor -> requirements_extractor   [llm]  The state has the transcript but no requirements or components extracted yet, so the requi
+  2. supervisor -> budget_searcher          [llm]  The state has components classified, but no budget matches found yet, so the budget_search
+  3. supervisor -> estimate_generator       [llm]  The state has budget_matches available, which allows the estimate_generator to produce the
+  4. supervisor -> coherence_validator      [llm]  The estimate has been produced, but validation has not been run yet; therefore, the cohere
+  5. supervisor -> finish                   [llm]  The estimate has been produced and validated, so the process is complete.
+
+TOOL PRIVILEGE (declared allowlists)
+------------------------------------------------------------------------------
+  supervisor               : (no tools)
+  requirements_extractor   : (no tools)
+  budget_searcher          : search_budgets
+  estimate_generator       : derive_task_hours
+  coherence_validator      : validate_estimate
+
+AUDIT TRAIL (agent_contributions)
+------------------------------------------------------------------------------
+  [  ok  ] requirements_extractor   extract_requirements         11 requirements extracted from the transcript                (-, 2477ms)
+  [  ok  ] requirements_extractor   classify_components          8 components: Telemetry Collection Platform, Quantum Key Dis (-, 1565ms)
+  [  ok  ] budget_searcher          tool:search_budgets          2 historical items for 'Telemetry Collection Platform (backe (e51995f768d5, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          2 historical items for 'Quantum Key Distribution Implementat (23bebdf37f94, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          1 historical items for 'Customs Data Integration (integratio (e2463fa06b4a, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          1 historical items for 'Antenna Status Dashboard (frontend)' (1edd7beaad68, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          no historical items for 'Multilingual Support (frontend)'    (9218e92f54e0, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          4 historical items for 'Biometric Authentication System (int (5bef69ef18d4, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          2 historical items for 'User and Role Management System (bac (524f52cb0b9f, 0ms)
+  [  ok  ] budget_searcher          tool:search_budgets          no historical items for 'Compliance Certification Process (i (e6b4c1628abd, 0ms)
+  [  ok  ] estimate_generator       tool:derive_task_hours       'Telemetry Collection Platform': 1045h (reliability 0.45) fr (fd024263d63d, 2ms)
+  [  ok  ] estimate_generator       tool:derive_task_hours       'Quantum Key Distribution Implementation': 1045h (reliabilit (92d3a6c1d66e, 1ms)
+  [  ok  ] estimate_generator       tool:derive_task_hours       'Customs Data Integration': 860h (reliability 0.5) from 1 an (90d5cfec4293, 0ms)
+  [  ok  ] estimate_generator       tool:derive_task_hours       'Antenna Status Dashboard': 560h (reliability 0.5) from 1 an (4f37a3aa9805, 0ms)
+  [  ok  ] estimate_generator       tool:derive_task_hours       'Biometric Authentication System': 522h (reliability 0.313)  (ec994feb6a27, 0ms)
+  [  ok  ] estimate_generator       tool:derive_task_hours       'User and Role Management System': 1045h (reliability 0.45)  (5c364fcd1f0a, 0ms)
+  [  ok  ] estimate_generator       consolidate_estimate         total 655d over 8 components (confidence medium)             (-, 3299ms)
+  [  ok  ] coherence_validator      tool:validate_estimate       2 issue(s) found                                             (d7e12487df05, 0ms)
+  [  ok  ] human                    review_decision              human approve: auto-approved by the S14 runner               (-, -)
+
+HUMAN REVIEW
+------------------------------------------------------------------------------
+  triggered: YES
+    - confidence 0.25 is below the 0.60 threshold
+  decision : approve
+
+ESTIMATE
+------------------------------------------------------------------------------
+  Telemetry Collection Platform [backend]              141d
+  Quantum Key Distribution Implementation [backend]             141d
+  Customs Data Integration [integration]               108d
+  Antenna Status Dashboard [frontend]                   70d
+  Multilingual Support [frontend]           -- (unbudgeted)
+  Biometric Authentication System [integration]              54d
+  User and Role Management System [backend]             141d
+  Compliance Certification Process [infrastructure]  -- (unbudgeted)
+  TOTAL                                                655d
+  status = validated | model confidence = medium
+
+ISSUES
+------------------------------------------------------------------------------
+  - 'Multilingual Support [frontend]' has no historical reference (unbudgeted).
+  - 'Compliance Certification Process [infrastructure]' has no historical reference (unbudgeted).

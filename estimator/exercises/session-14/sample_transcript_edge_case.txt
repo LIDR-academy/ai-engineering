@@ -1,0 +1,66 @@
+Reuni├│n de descubrimiento ÔÇö Proyecto "ORBITA"
+Cliente: Ignacio Vilaseca (Director T├®cnico) y Rebeca Oyarzun (Responsable de Cumplimiento),
+        Consorcio de Estaciones Terrenas del Noroeste
+Consultor: equipo de estimaci├│n
+Fecha: primera reuni├│n, sin documentaci├│n previa
+
+[00:00:06] Consultor: Gracias por el hueco. Contadnos qu├® ten├®is en la cabeza.
+
+[00:00:18] Ignacio: A ver, es dif├¡cil de explicar porque nosotros mismos no lo tenemos cerrado.
+Operamos estaciones terrenas de sat├®lite. Lo que queremos es una plataforma que recoja la telemetr├¡a
+de las antenas y la distribuya. Pero con una particularidad: el enlace de distribuci├│n tiene que ir
+cifrado con distribuci├│n cu├íntica de claves. QKD. Tenemos ya el hardware de un fabricante suizo.
+
+[00:01:02] Consultor: ┬┐Hab├®is hecho algo parecido antes, vosotros o alg├║n proveedor vuestro?
+
+[00:01:10] Ignacio: No. Que sepamos no lo ha hecho nadie en Espa├▒a con este hardware. El fabricante
+nos da un SDK en C y poco m├ís. La documentaci├│n es... escasa.
+
+[00:01:35] Rebeca: Y hay una segunda pieza que es la que a m├¡ me quita el sue├▒o. Tenemos que
+enviar los partes de tr├ífico de las antenas a Aduanas. Y Aduanas tiene un mainframe COBOL de los
+a├▒os ochenta. La interfaz es un fichero de longitud fija por un canal que ellos llaman "el canal",
+que en realidad es un FTP con un formato propietario que nadie ha documentado nunca.
+
+[00:02:20] Consultor: ┬┐Ten├®is las especificaciones de ese formato?
+
+[00:02:26] Rebeca: Tenemos un PDF escaneado de 1994. Y un contacto que se jubila en marzo.
+
+[00:03:05] Consultor: Entendido. Vamos con el tama├▒o. ┬┐C├│mo de grande veis esto?
+
+[00:03:12] Ignacio: Hombre, esto es b├ísicamente un formulario y cuatro pantallas. No nos
+compliquemos. Yo lo veo en un par de meses con dos personas.
+
+[00:03:40] Rebeca: Ignacio, no es un formulario.
+
+[00:03:44] Ignacio: Bueno, la parte visual s├¡. Un panel que muestre el estado de las antenas.
+
+[00:04:10] Rebeca: Ya, pero el panel tiene que aguantar cuatrocientos mil eventos por segundo en
+los picos de paso de sat├®lite. Y tiene que estar certificado SOC2 porque nos lo exige el consorcio.
+Y en seis idiomas, porque hay socios en Portugal, Francia y Marruecos.
+
+[00:04:48] Consultor: Cuatrocientos mil eventos por segundo cambia bastante la conversaci├│n.
+
+[00:04:55] Ignacio: Bueno, en pico. De media ser├ín... no s├®. Menos. No lo hemos medido.
+
+[00:05:30] Consultor: ┬┐Y el alcance est├í cerrado?
+
+[00:05:35] Ignacio: Cerrado, cerrado... Es que seg├║n avancemos seguro que salen cosas. El consorcio
+tiene once miembros y cada uno querr├í lo suyo. Yo contar├¡a con que crezca.
+
+[00:06:12] Consultor: Hablemos de la autenticaci├│n, que suele ser lo m├ís previsible.
+
+[00:06:20] Rebeca: Ah├¡ tambi├®n tenemos una peculiaridad. Queremos una pantalla de login normal, s├¡,
+pero con nuestro propio driver biom├®trico. Lectura de iris con unos lectores que ya tenemos
+instalados en las salas de control, y las claves custodiadas en un HSM certificado FIPS 140-2
+nivel 3. El driver hay que escribirlo nosotros porque el fabricante cerr├│ en 2019.
+
+[00:07:05] Consultor: O sea, una pantalla de login, pero con un driver biom├®trico propio y un HSM.
+
+[00:07:12] Rebeca: Exacto. Pero es solo el login, eso ser├í rapid├¡simo, ┬┐no?
+
+[00:07:40] Ignacio: Y luego lo t├¡pico: gesti├│n de usuarios, roles, un informe mensual. Eso ya lo
+habr├®is hecho mil veces.
+
+[00:08:15] Consultor: Vale. Necesitamos revisar esto internamente antes de daros un n├║mero.
+
+[00:08:22] Ignacio: Pero una horquilla nos pod├®is dar hoy, ┬┐no? Para llevarla al comit├® del jueves.

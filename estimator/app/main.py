@@ -18,6 +18,7 @@ from app.api.routers.estimate_stages import router as estimate_stages_router
 from app.api.routers.estimate_tasks import router as estimate_tasks_router
 from app.api.routers.corpus_index import router as corpus_index_router
 from app.api.routers.estimate_graph import router as estimate_graph_router
+from app.api.routers.estimate_supervisor import router as estimate_supervisor_router
 from app.api.routers.retrieval import router as retrieval_router
 from app.api.routers.retrieval_advanced import router as retrieval_advanced_router
 
@@ -75,7 +76,9 @@ async def lifespan(app: FastAPI):
     # leaves app.state.graph = None so the graph endpoint 503s WITHOUT taking down
     # the unrelated routers.
     app.state.graph = None
+    app.state.supervisor_graph = None
     app.state._graph_stack = AsyncExitStack()
+    checkpointer = None
     try:
         from app.domain.graph.build import build_graph
         from app.domain.graph.checkpointer import open_checkpointer
@@ -85,6 +88,18 @@ async def lifespan(app: FastAPI):
         log.info("graph_ready")
     except Exception as exc:  # noqa: BLE001 — the graph is optional infrastructure.
         log.error("graph_init_failed", error=str(exc)[:400])
+
+    # Session 14: the SUPERVISOR graph — a hand-built router over four
+    # least-privilege agents, with a confidence-triggered human gate. Shares the
+    # Session 13 checkpointer; thread ids are namespaced as ``s14:<id>``.
+    if checkpointer is not None:
+        try:
+            from app.domain.graph.supervisor.build import build_supervisor_graph
+
+            app.state.supervisor_graph = build_supervisor_graph(checkpointer)
+            log.info("supervisor_graph_ready")
+        except Exception as exc:  # noqa: BLE001
+            log.error("supervisor_graph_init_failed", error=str(exc)[:400])
 
     log.info("application_started", environment=settings.APP_ENV)
     yield
@@ -158,6 +173,8 @@ app.include_router(estimate_tasks_router)
 app.include_router(estimate_agent_router)
 # Session 13 — the estimation flow as an explicit LangGraph StateGraph.
 app.include_router(estimate_graph_router)
+# Session 14: the estimation flow as a supervisor + four least-privilege agents.
+app.include_router(estimate_supervisor_router)
 
 
 @app.get("/health")
