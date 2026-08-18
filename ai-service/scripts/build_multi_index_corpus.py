@@ -17,7 +17,7 @@ ingested, so re-running never duplicates data. Wipe with::
 Run it INSIDE the container (host macOS/arm64 hits the async-greenlet issue with
 direct pgvector access)::
 
-    docker compose run --rm estimator python scripts/build_multi_index_corpus.py
+    docker compose exec ai-service python scripts/build_multi_index_corpus.py
 """
 
 from __future__ import annotations

@@ -22,8 +22,9 @@ module Rag
 
     def subtotal = tasks.sum { |task| task.engineer_days.to_i }
 
-    # Session 10 hours flow subtotals.
-    def subtotal_hours = tasks.sum { |task| task.estimated_hours.to_i }
+    # Session 10 hours flow subtotals. ``to_f`` for the same reason TaskItemView declares
+    # the attribute as a float: half hours are real and must not be dropped.
+    def subtotal_hours = tasks.sum { |task| task.estimated_hours.to_f }
 
     def subtotal_cost = tasks.sum(&:cost_eur)
   end

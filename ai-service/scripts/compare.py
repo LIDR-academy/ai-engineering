@@ -13,7 +13,7 @@ Usage::
         --text-b "JWT-based authorization service for banking app"
 
     # inside the container:
-    docker compose exec estimator python scripts/compare.py \\
+    docker compose exec ai-service python scripts/compare.py \\
         --text-a "..." --text-b "..."
 """
 

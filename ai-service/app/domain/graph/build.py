@@ -51,17 +51,42 @@ def fan_out_hours(state: EstimationState):
     Each ``Send`` carries a single task as the branch's input state, so
     ``estimate_task_hours`` runs once per task IN PARALLEL. With no approved tasks it
     routes straight to the join so the graph never stalls.
+
+    The retrieval knobs are resolved HERE, once, and travel in the ``Send`` payload —
+    deliberately not inside the branch. The branch runs once per task (~120 times in
+    parallel), so reading the Redis-backed runtime config there would mean 120
+    synchronous round-trips from inside the event loop, and an operator flipping the
+    threshold mid-fan-out would give different branches different cuts. Resolving once
+    also makes the whole fan-out reproducible from a single logged pair of values.
     """
+    from app.dependencies import get_runtime_retrieval_config
+
+    runtime = get_runtime_retrieval_config()
+    top_k = runtime.effective_task_hours_top_k()
+    distance_threshold = runtime.effective_task_hours_distance_threshold()
+
     modules = state.get("approved_modules") or []
     sends = [
         Send(
             "estimate_task_hours",
-            {"module": m["name"], "task": t["name"], "description": t.get("description")},
+            {
+                "module": m["name"],
+                "task": t["name"],
+                "description": t.get("description"),
+                "top_k": top_k,
+                "distance_threshold": distance_threshold,
+            },
         )
         for m in modules
         for t in (m.get("tasks") or [])
         if t.get("name")
     ]
+    log.info(
+        "fan_out_hours",
+        tasks=len(sends),
+        top_k=top_k,
+        distance_threshold=distance_threshold,
+    )
     return sends or "recover_and_handover"
 
 

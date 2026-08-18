@@ -143,6 +143,15 @@ class CommercialProposal(BaseModel):
     total_engineer_days: int | None = Field(
         default=None, ge=0, description="Headline effort, echoed from the validated estimate."
     )
+    total_price_eur: int | None = Field(
+        default=None,
+        ge=0,
+        description=(
+            "The total price, echoed VERBATIM from the pricing block when one was supplied. "
+            "It exists so the caller can verify the model quoted the figure it was given "
+            "instead of deriving its own; leave it null when no pricing was provided."
+        ),
+    )
     body_markdown: str = Field(
         description="The full proposal as Markdown, grounded ONLY in the validated estimate."
     )

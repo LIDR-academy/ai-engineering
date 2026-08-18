@@ -2,7 +2,7 @@
 
 Run BEFORE touching any retrieval code (the exercise's gate)::
 
-    docker compose exec estimator python -m app.generation.rag.retrieval.verify_reranker
+    docker compose exec ai-service python -m app.generation.rag.retrieval.verify_reranker
 
 It loads the configured model and scores a tiny sanity pair where one document is
 obviously more relevant than the other, asserting the model ranks them correctly.

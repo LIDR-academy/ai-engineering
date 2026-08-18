@@ -105,6 +105,11 @@ class EstimationState(TypedDict, total=False):
     # --- analysis_agent + human gate 2 ------------------------------------- #
     analysis_report: Optional[dict]  # ReliabilityReport.model_dump()
     gate2_decision: Optional[dict]
+    # Money, computed by the BUSINESS BACKEND and handed over at gate 2 (the first moment
+    # the final hours exist). The graph never derives it — it only carries it so the
+    # proposal agent can quote it. Shape: currency / rate_eur_per_hour / contingency_pct /
+    # base_eur / contingency_eur / total_eur.
+    pricing: Optional[dict]
 
     # --- proposal_agent (bonus) -------------------------------------------- #
     proposal: Optional[str]

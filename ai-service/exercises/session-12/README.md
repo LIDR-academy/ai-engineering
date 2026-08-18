@@ -104,7 +104,7 @@ Cómo ejecutar la referencia:
 
 ```bash
 # Depuración barata del bucle (retrieval real: stack arriba + corpus de tareas ingerido)
-docker compose exec estimator python scripts/run_agent_s12.py \
+docker compose exec ai-service python scripts/run_agent_s12.py \
     exercises/session-12/sample_transcript_simple.txt --model gpt-5-mini --effort minimal
 
 # Depuración offline con el stub (sin base de datos)
@@ -112,12 +112,12 @@ uv run python scripts/run_agent_s12.py \
     exercises/session-12/sample_transcript_simple.txt --model gpt-5-mini --stub
 
 # Ejecución real (entregable) sobre la transcripción compleja
-docker compose exec estimator python scripts/run_agent_s12.py \
+docker compose exec ai-service python scripts/run_agent_s12.py \
     exercises/session-12/sample_transcript_complex.txt --model gpt-5 --effort medium \
     --out exercises/session-12/example_trace_complex.txt
 ```
 
 > `search_budgets` filtra por `chunk_type='historical_task'`, así que el retrieval real necesita el
-> corpus de tareas ingerido: `docker compose exec estimator python scripts/build_task_corpus.py --ingest`.
+> corpus de tareas ingerido: `docker compose exec ai-service python scripts/build_task_corpus.py --ingest`.
 
 La traza de la ejecución real queda en `example_trace_complex.txt` (el entregable).

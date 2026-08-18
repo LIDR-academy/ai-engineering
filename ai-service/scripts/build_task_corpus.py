@@ -15,10 +15,10 @@ idempotent ingest never duplicates.
 Usage::
 
     # generate data/task_corpus.json only (review before ingesting)
-    docker compose run --rm estimator python scripts/build_task_corpus.py --generate-only
+    docker compose exec ai-service python scripts/build_task_corpus.py --generate-only
 
     # generate + ingest into pgvector (needs OPENAI_API_KEY for embeddings)
-    docker compose run --rm estimator python scripts/build_task_corpus.py --ingest
+    docker compose exec ai-service python scripts/build_task_corpus.py --ingest
 
     # from the host with the API on localhost:8000
     uv run python scripts/build_task_corpus.py --ingest
@@ -853,18 +853,45 @@ def _resolve_base_url(client: httpx.Client) -> str:
     raise SystemExit(1)
 
 
-def ingest_corpus(corpus: list[dict], base_url: str | None = None) -> None:
-    """One document per project; 409 means already ingested (idempotent)."""
+def _service_headers() -> dict[str, str]:
+    """``X-Service-Token`` when the Session 15 guard is on, ``{}`` otherwise.
+
+    ``app/api/service_token.py`` covers every route except ``/health`` (which is
+    why the base-url probe still succeeds when the token is missing) — so without
+    this header the first ingest POST 401s and the run dies at the first project.
+    An unset ``AI_SERVICE_TOKEN`` disables the middleware, so an empty dict is the
+    correct payload there, not a blank header.
+    """
+    token = os.environ.get("AI_SERVICE_TOKEN")
+    return {"X-Service-Token": token} if token else {}
+
+
+def ingest_corpus(
+    corpus: list[dict],
+    base_url: str | None = None,
+    *,
+    document_type: str = DOCUMENT_TYPE,
+    chunk_type: str = CHUNK_TYPE,
+    source_prefix: str = "data/task_corpus.json",
+) -> None:
+    """One document per project; 409 means already ingested (idempotent).
+
+    The keyword arguments let a sibling corpus (see ``build_clinic_corpus.py``)
+    reuse this loop while landing under its own ``document_type`` — which is what
+    makes that corpus independently droppable — without touching this one.
+    """
+    headers = _service_headers()
     with httpx.Client(timeout=120.0) as client:
         base_url = base_url or _resolve_base_url(client)
         created, skipped = 0, 0
         for project in corpus:
             response = client.post(
                 f"{base_url}/embeddings/ingest",
+                headers=headers,
                 json={
-                    "source_path": f"data/task_corpus.json::{project['budget_id']}",
-                    "document_type": DOCUMENT_TYPE,
-                    "chunk_type": CHUNK_TYPE,
+                    "source_path": f"{source_prefix}::{project['budget_id']}",
+                    "document_type": document_type,
+                    "chunk_type": chunk_type,
                     "content": project,
                 },
             )
@@ -882,7 +909,7 @@ def ingest_corpus(corpus: list[dict], base_url: str | None = None) -> None:
         tasks = sum(len(p["components"]) for p in corpus)
         print(
             f"Task corpus: {len(corpus)} projects / {tasks} tasks — "
-            f"{created} ingested, {skipped} already present (chunk_type={CHUNK_TYPE})."
+            f"{created} ingested, {skipped} already present (chunk_type={chunk_type})."
         )
 
 

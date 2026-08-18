@@ -46,18 +46,26 @@ async def estimate_task_hours(state: dict) -> dict:
 
     ``state`` here is the ``Send`` argument ``{"module", "task", "description"}`` —
     NOT the whole graph state. A deterministic, embeddings-only search; no LLM.
+
+    ``top_k``/``distance_threshold`` ride in that payload when ``fan_out_hours``
+    resolved them from the runtime config; the settings defaults are the fallback, so
+    a ``Send`` built without them (the offline runner, the tests) behaves as before.
     """
     with logfire.span("node: estimate_task_hours"):
         settings = get_settings()
         module = state["module"]
         task = state["task"]
         description = state.get("description")
+        top_k = state.get("top_k") or settings.TASK_HOURS_TOP_K
+        distance_threshold = state.get("distance_threshold")
+        if distance_threshold is None:
+            distance_threshold = settings.TASK_HOURS_DISTANCE_THRESHOLD
         est = await estimate_one(
             module,
             task,
             description,
-            top_k=settings.TASK_HOURS_TOP_K,
-            distance_threshold=settings.TASK_HOURS_DISTANCE_THRESHOLD,
+            top_k=top_k,
+            distance_threshold=distance_threshold,
         )
         log.info(
             "estimate_task_hours_branch",
@@ -65,6 +73,8 @@ async def estimate_task_hours(state: dict) -> dict:
             task=task,
             has_match=est.has_match,
             hours=est.estimated_hours,
+            top_k=top_k,
+            distance_threshold=distance_threshold,
         )
         # One-element list — the keyed reducer accumulates it into task_hours.
         return {"task_hours": [est.model_dump()]}
@@ -102,13 +112,30 @@ async def recover_and_handover(state: dict) -> Command:
                 )
             )
 
-        from app.dependencies import get_async_openai_client
+        from app.dependencies import get_async_openai_client, get_runtime_retrieval_config
 
         client = get_async_openai_client()
         merged = task_hours
         recovered_count = 0
+        # THE knob that decides how many tasks finish with no hours at all. The fan-out cut
+        # only decides who is handed to this agent; this one decides who it can rescue, and
+        # with a large corpus a loose value here means nothing is ever left unmatched. Read
+        # from the runtime config so it can be calibrated against the structure of the day
+        # during the gate-1 pause — this join runs ONCE per run, so unlike the fan-out
+        # branch there is no per-task Redis traffic and no risk of a mid-flight change
+        # splitting the run across two thresholds.
+        agent_distance_threshold = (
+            get_runtime_retrieval_config().effective_agent_search_distance_threshold()
+        )
+        stopped_reason = None
+        iterations = 0
         if flagged and client is not None:
-            log.info("agentic_recovery_start", flagged=len(flagged), total=len(task_hours))
+            log.info(
+                "agentic_recovery_start",
+                flagged=len(flagged),
+                total=len(task_hours),
+                distance_threshold=agent_distance_threshold,
+            )
             run = await run_task_hours_recovery_agent(
                 flagged,
                 client=client,
@@ -116,7 +143,7 @@ async def recover_and_handover(state: dict) -> Command:
                 reasoning_effort=settings.AGENT_REASONING_EFFORT,
                 max_iterations=settings.AGENT_MAX_ITERATIONS,
                 retrieval_backend=make_retrieval_backend(
-                    settings.AGENT_SEARCH_TOP_K, settings.AGENT_SEARCH_DISTANCE_THRESHOLD
+                    settings.AGENT_SEARCH_TOP_K, agent_distance_threshold
                 ),
                 consensus_fn=distance_weighted_consensus,
                 persona=persona_for("recover_and_handover", enabled=settings.GRAPH_PERSONAS_ENABLED),
@@ -139,12 +166,21 @@ async def recover_and_handover(state: dict) -> Command:
                     "hours_range": None,
                 }
             merged = list(merged_map.values())
+            stopped_reason = run.stopped_reason
+            iterations = run.iterations
 
         estimate = build_estimate(approved, merged)
         log.info(
             "recover_and_handover_done",
             flagged=len(flagged),
             recovered=recovered_count,
+            # Without these three, a recovery truncated by the iteration budget is
+            # indistinguishable from one that genuinely found no analog — and the whole
+            # point of the unmatched rows is that they mean "no precedent", not "ran out
+            # of turns". ``max_iterations`` here invalidates the coverage number.
+            stopped_reason=stopped_reason,
+            iterations=iterations,
+            distance_threshold=agent_distance_threshold,
             total_engineer_days=estimate.get("total_engineer_days"),
         )
         # Explicit handover: pass the estimate + merged hours to analysis_agent.

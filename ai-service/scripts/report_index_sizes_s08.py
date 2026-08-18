@@ -11,7 +11,7 @@ Sources: ``pg_stat_user_indexes`` (usage), ``pg_relation_size`` (size) and
 
 Usage::
 
-    docker compose run --rm estimator python scripts/report_index_sizes_s08.py
+    docker compose exec ai-service python scripts/report_index_sizes_s08.py
 """
 
 from __future__ import annotations

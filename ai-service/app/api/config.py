@@ -116,6 +116,15 @@ class RetrievalUpdateRequest(BaseModel):
     task_hours_distance_threshold: float | None = Field(
         default=None, ge=0.0, le=2.0, description="Red-flag floor: no match beyond this distance."
     )
+    # Session 13 live: the agentic hours-recovery cut. Distinct from the one above —
+    # that one decides who gets handed to the recovery agent, this one decides who the
+    # agent can actually rescue, and therefore how many tasks end with no hours at all.
+    agent_search_distance_threshold: float | None = Field(
+        default=None,
+        ge=0.0,
+        le=2.0,
+        description="Distance cut for the agentic hours-recovery search.",
+    )
 
 
 @router.get("/retrieval")
@@ -179,6 +188,18 @@ def update_retrieval(
                 "runtime_retrieval_changed",
                 key="task_hours_distance_threshold",
                 new_value=request.task_hours_distance_threshold,
+            )
+        if "agent_search_distance_threshold" in sent:
+            try:
+                runtime_retrieval.set_agent_search_distance_threshold(
+                    request.agent_search_distance_threshold
+                )
+            except ValueError as exc:
+                raise HTTPException(status_code=422, detail=str(exc)) from exc
+            log.info(
+                "runtime_retrieval_changed",
+                key="agent_search_distance_threshold",
+                new_value=request.agent_search_distance_threshold,
             )
     except RuntimeConfigUnavailable as exc:
         log.error("runtime_retrieval_write_failed", error=str(exc)[:200])

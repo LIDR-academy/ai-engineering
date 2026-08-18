@@ -173,8 +173,8 @@ uv run python scripts/run_supervisor_s14.py --memory --stub \
 uv run python scripts/run_supervisor_s14.py --memory --stub --violate
 
 # Ejecución real (entregable): stack arriba + corpus ingerido.
-docker compose exec estimator python scripts/build_task_corpus.py --ingest
-docker compose exec estimator python scripts/run_supervisor_s14.py \
+docker compose exec ai-service python scripts/build_task_corpus.py --ingest
+docker compose exec ai-service python scripts/run_supervisor_s14.py \
     --out exercises/session-14/example_run_edge_case.txt
 ```
 

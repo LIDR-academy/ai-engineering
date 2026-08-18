@@ -43,7 +43,7 @@
                 <div class="flex items-center gap-1 shrink-0">
                   <input type="number" min="0" step="0.5"
                          name="modules[<%= m %>][tasks][<%= t %>][estimated_hours]"
-                         value="<%= task.estimated_hours %>" placeholder="—"
+                         value="<%= format_hours(task.estimated_hours) %>" placeholder="—"
                          data-graph-hours-editor-target="hours"
                          data-action="input->graph-hours-editor#recompute"
                          class="w-24 border <%= task.estimated_hours.present? ? "border-white/15" : "border-danger/60" %> rounded p-1.5 text-right text-white bg-ink/40 tabular-nums focus:outline-none focus:border-brand">

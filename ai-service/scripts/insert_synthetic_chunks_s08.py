@@ -24,8 +24,8 @@ anytime with::
 
 Usage::
 
-    docker compose run --rm estimator python scripts/insert_synthetic_chunks_s08.py        # 100
-    docker compose run --rm estimator python scripts/insert_synthetic_chunks_s08.py 30000  # pre-flight
+    docker compose exec ai-service python scripts/insert_synthetic_chunks_s08.py        # 100
+    docker compose exec ai-service python scripts/insert_synthetic_chunks_s08.py 30000  # pre-flight
 """
 
 from __future__ import annotations

@@ -12,7 +12,7 @@ Usage::
 
     uv run python scripts/demo_cleaning_s06.py
     # or, inside docker:
-    docker compose exec estimator python scripts/demo_cleaning_s06.py
+    docker compose exec ai-service python scripts/demo_cleaning_s06.py
 """
 
 from __future__ import annotations

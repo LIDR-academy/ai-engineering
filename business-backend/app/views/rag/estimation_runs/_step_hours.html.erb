@@ -48,7 +48,7 @@
     <div class="rounded-md border border-white/10 overflow-hidden mb-4">
       <div class="flex items-center justify-between bg-ink/40 px-3 py-2">
         <span class="font-bold text-white"><%= mod.name %></span>
-        <span class="text-white/80 tabular-nums text-sm shrink-0"><%= mod.subtotal_hours %> <span class="text-white/40">h</span></span>
+        <span class="text-white/80 tabular-nums text-sm shrink-0"><%= format_hours(mod.subtotal_hours) %> <span class="text-white/40">h</span></span>
       </div>
       <table class="w-full text-sm">
         <tbody class="divide-y divide-white/10">
@@ -69,10 +69,10 @@
                     ⚠ <%= task.hours_range.label %>
                   </span>
                   <div class="text-white/40 text-[11px] font-normal normal-case mt-0.5 max-w-48 ml-auto leading-tight">
-                    consenso <%= task.estimated_hours %> h · <%= task.hours_range.reason %>
+                    consenso <%= format_hours(task.estimated_hours) %> h · <%= task.hours_range.reason %>
                   </div>
                 <% else %>
-                  <span class="text-white font-bold"><%= task.estimated_hours %></span> <span class="text-white/40 text-xs">h</span>
+                  <span class="text-white font-bold"><%= format_hours(task.estimated_hours) %></span> <span class="text-white/40 text-xs">h</span>
                 <% end %>
               </td>
               <td class="p-3 text-right align-top w-24">

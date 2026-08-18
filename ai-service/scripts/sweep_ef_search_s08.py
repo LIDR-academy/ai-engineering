@@ -25,7 +25,7 @@ must own the SQL session. Queries are embedded once via the project embedder.
 
 Usage::
 
-    docker compose run --rm estimator python scripts/sweep_ef_search_s08.py
+    docker compose exec ai-service python scripts/sweep_ef_search_s08.py
 """
 
 from __future__ import annotations

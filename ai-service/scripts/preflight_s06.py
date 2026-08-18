@@ -9,7 +9,7 @@ Usage::
 
     uv run python scripts/preflight_s06.py
     # or, inside docker:
-    docker compose exec estimator python scripts/preflight_s06.py
+    docker compose exec ai-service python scripts/preflight_s06.py
 """
 
 from __future__ import annotations

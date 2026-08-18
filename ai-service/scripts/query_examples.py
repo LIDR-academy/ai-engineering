@@ -14,7 +14,7 @@ the script never duplicates data.
 Usage::
 
     # stack up first: docker compose up -d
-    docker compose run --rm estimator python scripts/query_examples.py
+    docker compose exec ai-service python scripts/query_examples.py
 
     # or from the host (with the API on localhost:8000):
     uv run python scripts/query_examples.py

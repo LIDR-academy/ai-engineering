@@ -275,6 +275,55 @@ async def test_flagged_task_triggers_agentic_recovery(monkeypatch):
     assert len(snap.values["task_hours"]) == 2
 
 
+@pytest.mark.asyncio
+async def test_recovery_search_cut_comes_from_the_runtime_config(monkeypatch):
+    """The recovery agent's distance cut is the knob that decides the unmatched count.
+
+    The fan-out cut only decides who is HANDED to the agent; this one decides who the
+    agent can rescue. With a large corpus a loose value here means no task is ever left
+    without hours, which is exactly the failure this is guarding against — so it must be
+    live-tunable, not frozen at process start.
+    """
+    captured: dict = {}
+
+    async def _recovery(flagged, **kwargs):
+        captured["backend"] = kwargs["retrieval_backend"]
+        return AgentTaskHoursRun(
+            derivations=[], trace=AgentTrace(), iterations=1, stopped_reason="completed"
+        )
+
+    def _fake_backend(top_k, distance_threshold):
+        captured["top_k"] = top_k
+        captured["distance_threshold"] = distance_threshold
+        return object()
+
+    class FakeRuntime:
+        def effective_task_hours_top_k(self):
+            return 5
+
+        def effective_task_hours_distance_threshold(self):
+            return 0.44
+
+        def effective_agent_search_distance_threshold(self):
+            return 0.45
+
+    monkeypatch.setattr("app.dependencies.get_runtime_retrieval_config", lambda: FakeRuntime())
+    monkeypatch.setattr("app.domain.graph.agents.hours.make_retrieval_backend", _fake_backend)
+    _wire(
+        monkeypatch,
+        wrapper=_FakeWrapper(),
+        structure_fn=_structure({"Backend": ["API", "Legacy"]}),
+        estimate_one_fn=_estimate_one({"API": 40}, no_match={"Legacy"}),
+        recovery_fn=_recovery,
+    )
+    graph = build_graph(MemorySaver())
+    await _start(graph)
+    await graph.ainvoke(Command(resume={"approved": True}), CONFIG)
+
+    # The recovery cut is its own knob, NOT the fan-out's 0.44.
+    assert captured["distance_threshold"] == 0.45
+
+
 def test_fan_out_hours_emits_one_send_per_task():
     state = {
         "approved_modules": [
@@ -289,6 +338,65 @@ def test_fan_out_hours_emits_one_send_per_task():
 
 def test_fan_out_hours_with_no_tasks_routes_to_join():
     assert fan_out_hours({"approved_modules": []}) == "recover_and_handover"
+
+
+def test_fan_out_hours_resolves_the_retrieval_knobs_once(monkeypatch):
+    """The runtime config is read in the edge, not in each of the N parallel branches.
+
+    Resolving per branch would mean one Redis round-trip per task and would let an
+    operator's mid-fan-out change give different tasks different thresholds.
+    """
+    calls = []
+
+    class FakeRuntime:
+        def effective_task_hours_top_k(self):
+            calls.append("top_k")
+            return 7
+
+        def effective_task_hours_distance_threshold(self):
+            calls.append("threshold")
+            return 0.4
+
+    monkeypatch.setattr("app.dependencies.get_runtime_retrieval_config", lambda: FakeRuntime())
+
+    state = {
+        "approved_modules": [
+            {"name": "Backend", "tasks": [{"name": "API"}, {"name": "Auth"}]},
+            {"name": "Mobile", "tasks": [{"name": "App"}]},
+        ]
+    }
+    sends = fan_out_hours(state)
+
+    assert calls == ["top_k", "threshold"]  # once each, for three tasks
+    assert all(s.arg["top_k"] == 7 for s in sends)
+    assert all(s.arg["distance_threshold"] == 0.4 for s in sends)
+
+
+@pytest.mark.asyncio
+async def test_estimate_task_hours_falls_back_to_settings(monkeypatch):
+    """A Send built without the knobs (offline runner, older tests) still works."""
+    from app.config import get_settings
+    from app.domain.graph.agents import hours as hours_module
+
+    seen = {}
+
+    async def fake_estimate_one(module, task, description, *, top_k, distance_threshold, **kw):
+        seen["top_k"] = top_k
+        seen["distance_threshold"] = distance_threshold
+        return TaskHoursEstimate(module=module, task=task, has_match=False)
+
+    monkeypatch.setattr(hours_module, "estimate_one", fake_estimate_one)
+
+    await hours_module.estimate_task_hours({"module": "Backend", "task": "API"})
+    settings = get_settings()
+    assert seen["top_k"] == settings.TASK_HOURS_TOP_K
+    assert seen["distance_threshold"] == settings.TASK_HOURS_DISTANCE_THRESHOLD
+
+    seen.clear()
+    await hours_module.estimate_task_hours(
+        {"module": "Backend", "task": "API", "top_k": 9, "distance_threshold": 0.33}
+    )
+    assert seen == {"top_k": 9, "distance_threshold": 0.33}
 
 
 def test_route_after_gate2_honours_want_proposal():

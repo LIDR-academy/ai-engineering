@@ -28,21 +28,11 @@
         <% end %>
         <span class="text-white font-bold tracking-tight text-lg">Estimator</span>
         <nav class="ml-auto flex items-center gap-4 text-sm">
-          <%# One link per context of the Master's journey; active section in brand. %>
-          <%= link_to "Estimación", new_estimation_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_name == 'estimations' ? 'text-brand' : 'text-white/80'}" %>
-          <%= link_to "Conversación", new_chat_session_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_name == 'chat_sessions' ? 'text-brand' : 'text-white/80'}" %>
-          <%= link_to "RAG Lab", new_rag_chunking_comparison_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_name == 'chunking_comparisons' ? 'text-brand' : 'text-white/80'}" %>
-          <%= link_to "RAG Wizard", new_rag_estimation_run_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_name == 'estimation_runs' ? 'text-brand' : 'text-white/80'}" %>
-          <%= link_to "Grafo", new_rag_graph_estimation_run_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_name == 'graph_estimation_runs' ? 'text-brand' : 'text-white/80'}" %>
-          <%= link_to "Agentes", agents_profiles_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_path == 'agents/profiles' ? 'text-brand' : 'text-white/80'}" %>
-          <%= link_to "Ajustes", ai_settings_path,
-                class: "font-bold tracking-tight hover:text-white #{controller_name == 'ai_settings' ? 'text-brand' : 'text-white/80'}" %>
+          <%# One link per context; the active one in brand. On the demo screens this
+              collapses to just Grafo + Agentes (see ApplicationHelper::DEMO_NAV_KEYS). %>
+          <% nav_items.each do |item| %>
+            <%= link_to item[:label], public_send(item[:path]), class: nav_link_classes(item) %>
+          <% end %>
           <%# Active primary model, always visible during live sessions. Hidden when the service is down. %>
           <% if (active_model = current_primary_model) %>
             <span class="px-2 py-0.5 rounded bg-brand/20 text-brand text-xs font-bold tracking-tight font-mono"

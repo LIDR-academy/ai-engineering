@@ -17,7 +17,7 @@ the gate actually fire.
 Run variants::
 
     # Deliverable run: real retrieval + Postgres checkpointer + Logfire
-    docker compose exec estimator python scripts/run_supervisor_s14.py \\
+    docker compose exec ai-service python scripts/run_supervisor_s14.py \\
         --out exercises/session-14/example_run_edge_case.txt
 
     # Offline smoke: no DB, canned retrieval (still needs OPENAI_API_KEY for the

@@ -13,8 +13,11 @@ module Rag
     attribute :name, :string
     attribute :description, :string
     attribute :engineer_days, :integer
-    # Session 10 hours flow.
-    attribute :estimated_hours, :integer
+    # Session 10 hours flow. FLOAT, not integer: the graph emits halves (a gate-2 input is
+    # step="0.5" and the service rounds to one decimal). Declaring this as :integer silently
+    # truncated 7.5 h to 7, so the per-module subtotals under-reported the real hours — and
+    # any money derived from them would inherit the same loss.
+    attribute :estimated_hours, :float
     attribute :hours_reliability, :float
     attribute :rate_eur_per_hour, :integer
     attribute :has_match, :boolean, default: true

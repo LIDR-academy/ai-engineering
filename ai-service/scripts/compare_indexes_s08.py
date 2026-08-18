@@ -23,7 +23,7 @@ Requires both indexes (run ``scripts/sql_s08/01_create_hnsw.sql`` and
 
 Usage::
 
-    docker compose run --rm estimator python scripts/compare_indexes_s08.py
+    docker compose exec ai-service python scripts/compare_indexes_s08.py
 """
 
 from __future__ import annotations

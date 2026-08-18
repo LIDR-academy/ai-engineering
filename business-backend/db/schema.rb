@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_20_120000) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_18_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -125,6 +125,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_20_120000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "proposal_title"
+    t.integer "rate_eur_per_hour", default: 75, null: false
+    t.integer "contingency_pct", default: 15, null: false
     t.index ["created_at"], name: "index_graph_estimation_runs_on_created_at"
     t.index ["estimation_id"], name: "index_graph_estimation_runs_on_estimation_id", unique: true
   end

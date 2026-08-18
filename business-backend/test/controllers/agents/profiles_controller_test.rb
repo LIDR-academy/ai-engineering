@@ -17,9 +17,11 @@ class AgentsProfilesControllerTest < ActionDispatch::IntegrationTest
     Agents::Profile.create!(name: "Estándar", is_default: true, config: { "model" => "gpt-5" })
     get agents_profiles_path
     assert_response :success
-    assert_match "Agente hecho a mano (S12)", response.body
+    assert_match "Agente hecho a mano", response.body
     assert_match "Actor-Critic-Boss", response.body
     assert_match "Estándar", response.body
+    # The screens carry no Master-course session tags — they are shown at public events.
+    assert_no_match(/\(S\d+\)|S4\/S5|Sesión \d/, response.body)
   end
 
   test "show renders the profile knobs and persona" do

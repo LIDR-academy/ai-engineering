@@ -17,7 +17,7 @@ so it is retrieved by the same filtered search and coexists with it. Idempotent
 
 Usage::
 
-    docker compose exec estimator python scripts/build_contradictions_s11.py
+    docker compose exec ai-service python scripts/build_contradictions_s11.py
     uv run python scripts/build_contradictions_s11.py            # host, API on :8000
 
 Wipe it (or the whole task corpus) anytime::

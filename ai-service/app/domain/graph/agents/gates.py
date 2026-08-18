@@ -88,4 +88,9 @@ async def human_gate_analysis(state: dict) -> dict:
             want_proposal=decision.get("want_proposal"),
             overrides=len(overrides),
         )
-        return {"estimate": estimate, "gate2_decision": decision, "status": status}
+        # Pricing rides along with the human's decision. Kept verbatim: the graph is a
+        # carrier here, not a calculator.
+        update = {"estimate": estimate, "gate2_decision": decision, "status": status}
+        if decision.get("pricing"):
+            update["pricing"] = decision["pricing"]
+        return update

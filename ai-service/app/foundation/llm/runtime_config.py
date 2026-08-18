@@ -135,6 +135,12 @@ TEMPORAL_DECAY_KEY = "TEMPORAL_DECAY_ENABLED"
 # distance threshold is the red-flag floor the instructor calibrates mid-session.
 TASK_HOURS_TOP_K_KEY = "TASK_HOURS_TOP_K"
 TASK_HOURS_DISTANCE_THRESHOLD_KEY = "TASK_HOURS_DISTANCE_THRESHOLD"
+# Session 13 live: the SECOND distance cut, used by the agentic hours-recovery join.
+# It is the one that decides how many tasks finally end up with no hours at all: the
+# fan-out only decides who gets HANDED to the agent, the agent's own cut decides who it
+# can rescue. Runtime-configurable for the same reason as the one above — it is
+# calibrated against the structure of the day, at the gate-1 pause, before the fan-out.
+AGENT_SEARCH_DISTANCE_THRESHOLD_KEY = "AGENT_SEARCH_DISTANCE_THRESHOLD"
 # Session 11 live: generation-quality stage toggles (same override pattern), so
 # the instructor flips the semantic gate, augmentation and synthesis from Ajustes.
 HALLUCINATION_GATE_KEY = "HALLUCINATION_GATE_ENABLED"
@@ -148,6 +154,7 @@ RETRIEVAL_KEYS: tuple[str, ...] = (
     TEMPORAL_DECAY_KEY,
     TASK_HOURS_TOP_K_KEY,
     TASK_HOURS_DISTANCE_THRESHOLD_KEY,
+    AGENT_SEARCH_DISTANCE_THRESHOLD_KEY,
     HALLUCINATION_GATE_KEY,
     AUGMENTATION_KEY,
     SYNTHESIS_KEY,
@@ -263,6 +270,15 @@ class RuntimeRetrievalConfig:
         except ValueError:
             return self._settings.TASK_HOURS_DISTANCE_THRESHOLD
 
+    def effective_agent_search_distance_threshold(self) -> float:
+        override = self._get_raw(AGENT_SEARCH_DISTANCE_THRESHOLD_KEY)
+        if override is None:
+            return self._settings.AGENT_SEARCH_DISTANCE_THRESHOLD
+        try:
+            return float(override)
+        except ValueError:
+            return self._settings.AGENT_SEARCH_DISTANCE_THRESHOLD
+
     def set_task_hours_top_k(self, value: int | None) -> None:
         if value is not None and value < 1:
             raise ValueError("TASK_HOURS_TOP_K must be >= 1")
@@ -273,6 +289,13 @@ class RuntimeRetrievalConfig:
             raise ValueError("TASK_HOURS_DISTANCE_THRESHOLD must be in [0, 2]")
         self._set_raw(
             TASK_HOURS_DISTANCE_THRESHOLD_KEY, None if value is None else str(float(value))
+        )
+
+    def set_agent_search_distance_threshold(self, value: float | None) -> None:
+        if value is not None and not (0.0 <= value <= 2.0):
+            raise ValueError("AGENT_SEARCH_DISTANCE_THRESHOLD must be in [0, 2]")
+        self._set_raw(
+            AGENT_SEARCH_DISTANCE_THRESHOLD_KEY, None if value is None else str(float(value))
         )
 
     def snapshot(self) -> dict[str, dict[str, object]]:
@@ -312,6 +335,11 @@ class RuntimeRetrievalConfig:
                 "effective": self.effective_task_hours_top_k(),
                 "default": self._settings.TASK_HOURS_TOP_K,
                 "overridden": TASK_HOURS_TOP_K_KEY in overrides,
+            },
+            AGENT_SEARCH_DISTANCE_THRESHOLD_KEY: {
+                "effective": self.effective_agent_search_distance_threshold(),
+                "default": self._settings.AGENT_SEARCH_DISTANCE_THRESHOLD,
+                "overridden": AGENT_SEARCH_DISTANCE_THRESHOLD_KEY in overrides,
             },
             TASK_HOURS_DISTANCE_THRESHOLD_KEY: {
                 "effective": self.effective_task_hours_distance_threshold(),

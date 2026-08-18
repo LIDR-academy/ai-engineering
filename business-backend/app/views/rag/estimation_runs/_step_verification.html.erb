@@ -20,7 +20,7 @@
     <div class="p-3 rounded-md bg-success/15 border border-success/40 text-success-light text-sm mb-5">
       ✓ Confirmada el <%= run.adjusted_breakdown["confirmed_at"] %> ·
       <span class="font-bold"><%= run.adjusted_total_hours %></span> h ·
-      <span class="font-bold"><%= number_to_currency(run.adjusted_total_cost, unit: "€", format: "%n %u", precision: 0) %></span>
+      <span class="font-bold"><%= format_eur(run.adjusted_total_cost) %></span>
     </div>
   <% end %>
 

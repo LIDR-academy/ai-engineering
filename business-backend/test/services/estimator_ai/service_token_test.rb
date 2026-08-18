@@ -6,6 +6,13 @@ module EstimatorAi
   # service on every call, plus the 401 mapping that goes with it.
   class ServiceTokenTest < ActiveSupport::TestCase
     setup do
+      # The whole EstimatorAi error taxonomy (Error, Unauthorized, …) is defined INSIDE
+      # base_client.rb, so Zeitwerk cannot autoload ``EstimatorAi::Unauthorized`` by name:
+      # it only exists once that file has been loaded. Referencing BaseClient here makes
+      # this file pass in isolation instead of depending on some earlier test having
+      # instantiated a client first.
+      EstimatorAi::BaseClient
+
       WebMock.disable_net_connect!
       @original_token = Rails.application.config.estimator_ai.service_token
       Rails.application.config.estimator_ai.service_token = "test-service-token"

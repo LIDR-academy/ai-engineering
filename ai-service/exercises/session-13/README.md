@@ -52,8 +52,8 @@ El grafo se construye en el `lifespan` de `app/main.py` (con el checkpointer) y 
 uv run python scripts/run_graph_s13.py --memory --stub
 
 # Ejecución real (entregable): stack arriba + corpus de tareas ingerido.
-docker compose exec estimator python scripts/build_task_corpus.py --ingest
-docker compose exec estimator python scripts/run_graph_s13.py \
+docker compose exec ai-service python scripts/build_task_corpus.py --ingest
+docker compose exec ai-service python scripts/run_graph_s13.py \
     --out exercises/session-13/example_run_complex.txt
 ```
 
@@ -120,7 +120,7 @@ Novedades que se explican en la sesión (todo en `app/domain/graph/`):
 Recórrelo entero (auto-aprobando las puertas) con:
 
 ```bash
-docker compose exec estimator python scripts/run_graph_s13.py --out data/example_run_complex.txt
+docker compose exec ai-service python scripts/run_graph_s13.py --out data/example_run_complex.txt
 # o offline (sin DB, horas enlatadas; necesita OPENAI para los agentes LLM):
 uv run python scripts/run_graph_s13.py --memory --stub
 ```

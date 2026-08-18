@@ -15,9 +15,9 @@ the exact same SELECT the ``/search`` endpoint runs.
 
 Usage::
 
-    docker compose run --rm estimator python scripts/measure_baseline_s08.py
+    docker compose exec ai-service python scripts/measure_baseline_s08.py
     # or, with the stack already up:
-    docker compose exec estimator python scripts/measure_baseline_s08.py
+    docker compose exec ai-service python scripts/measure_baseline_s08.py
 
 At the end it prints the first query's embedding as a pgvector literal — copy
 it into ``scripts/sql_s08/02_test_antipatron.sql`` for the psql demos.

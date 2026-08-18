@@ -45,7 +45,7 @@ module Agents
         model: "gpt-5",
         config_key: "AGENT_MODEL",
         role: "Descompone el brief en módulos → tareas (sin horas).",
-        explanation: "Reutiliza el agente hecho a mano de la S12 (bucle Responses API) para convertir " \
+        explanation: "Reutiliza el agente hecho a mano (bucle sobre la Responses API) para convertir " \
                      "el brief en un árbol de módulos y tareas, todavía sin horas. El esfuerzo de " \
                      "razonamiento se elige según la complejidad del classifier " \
                      "(GRAPH_STRUCTURE_EFFORT_BY_COMPLEXITY).",
@@ -75,7 +75,7 @@ module Agents
         role: "Horas por tarea vía búsqueda vectorial determinista.",
         explanation: "No usa LLM: es un fan-out con la Send API (una rama en paralelo por cada tarea " \
                      "aprobada). Cada rama busca las tareas históricas más cercanas y deriva las horas " \
-                     "por consenso ponderado por distancia (reutiliza la lógica de la S10). Sin análogo " \
+                     "por consenso ponderado por distancia. Sin análogo " \
                      "por debajo del umbral → tarea marcada en rojo.",
         edge: :join
       ),
@@ -88,7 +88,7 @@ module Agents
         config_key: "AGENT_MODEL",
         role: "Junta las ramas, recupera tareas dudosas y construye la estimación.",
         explanation: "Nodo de join del fan-out. Detecta tareas dudosas (sin match, rango contradictorio " \
-                     "o fiabilidad baja) y, si las hay, lanza un bucle agéntico de recuperación (S12). " \
+                     "o fiabilidad baja) y, si las hay, lanza un bucle agéntico de recuperación. " \
                      "Fusiona las horas y construye el Estimate consolidado. Termina con el segundo " \
                      "handover (Command(goto) → analysis).",
         edge: :handover

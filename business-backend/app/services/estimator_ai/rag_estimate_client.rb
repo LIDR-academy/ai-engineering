@@ -132,8 +132,10 @@ module EstimatorAi
     # estimate, WITHOUT re-running the graph. Returns the full CommercialProposal
     # { title, executive_summary, scope, total_engineer_days, body_markdown }.
     # 409 if the run has no validated estimate yet.
-    def graph_proposal(estimation_id:)
-      handle_response(json_conn.post("/v1/estimate/graph/#{estimation_id}/proposal"))
+    def graph_proposal(estimation_id:, pricing: nil)
+      handle_response(
+        json_conn.post("/v1/estimate/graph/#{estimation_id}/proposal", { pricing: pricing }.compact)
+      )
     end
 
     # --- Session 14: the SUPERVISOR flow -------------------------------------

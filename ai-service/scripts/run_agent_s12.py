@@ -23,7 +23,7 @@ Cost discipline (from the statement): debug the LOOP MECHANICS cheaply first wit
         exercises/session-12/sample_transcript_simple.txt --model gpt-5-mini --stub
 
     # 2) the real run (needs the stack up + task corpus ingested)
-    docker compose exec estimator python scripts/run_agent_s12.py \\
+    docker compose exec ai-service python scripts/run_agent_s12.py \\
         exercises/session-12/sample_transcript_complex.txt --model gpt-5 --effort medium \\
         --out exercises/session-12/example_trace_complex.txt
 

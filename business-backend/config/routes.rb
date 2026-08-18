@@ -51,6 +51,7 @@ Rails.application.routes.draw do
         get  :progress         # live per-agent activity feed (polled while a leg runs)
         post :generate_proposal # draft/redraft the commercial proposal after completion
         get  :proposal_pdf      # download the proposal as a PDF (Prawn)
+        get  :proposal_md       # the same document as Markdown, budget tables included
       end
     end
 
@@ -71,6 +72,12 @@ Rails.application.routes.draw do
     # Session 13 — read-only visual resource of the multi-agent graph flow.
     get "graph_flow", to: "graph_flow#show"
   end
+
+  # Atajo para el evento: una URL corta y memorizable que lleva al flujo de estimación
+  # por grafo de agentes. Sin controlador ni vista propios — es el flujo del proyecto.
+  # 302 y no el 301 que Rails pone por defecto: un permanente se queda cacheado en el
+  # navegador y luego no hay forma de reapuntar /demo a otro sitio.
+  get "demo", to: redirect("/rag/graph_estimation_runs/new", status: 302)
 
   # Runtime model configuration of the AI service (Ajustes).
   resource :ai_settings, only: [ :show, :update ]

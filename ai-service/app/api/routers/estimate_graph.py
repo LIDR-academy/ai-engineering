@@ -36,6 +36,7 @@ from app.domain.graph.activity import GraphActivityLog, describe_node
 from app.domain.graph.agents.proposal import build_proposal
 from app.domain.graph.personas import persona_for
 from app.domain.schemas.graph_estimation import (
+    GraphProposalRequest,
     ActivityEntry,
     GraphEstimateRequest,
     GraphProgress,
@@ -331,6 +332,7 @@ async def graph_progress(
 async def graph_proposal(
     request: Request,
     estimation_id: str,
+    payload: GraphProposalRequest | None = None,
     settings: Settings = Depends(get_settings),
 ) -> GraphProposalResponse:
     """Draft (or re-draft) the commercial proposal from the run's validated estimate.
@@ -352,7 +354,19 @@ async def graph_proposal(
         with log_stage("graph_proposal", request_id, estimation_id=estimation_id):
             persona = persona_for("proposal_agent", enabled=settings.GRAPH_PERSONAS_ENABLED)
             proposal = await build_proposal(
-                estimate, (snapshot.values or {}).get("analysis_report") or {}, persona=persona
+                estimate,
+                (snapshot.values or {}).get("analysis_report") or {},
+                persona=persona,
+                # Read from the run's state, where gate 2 left it, so a proposal drafted
+                # after the fact quotes the same price the in-graph agent would have.
+                # The caller's current pricing wins over the one frozen at gate 2, so a
+                # re-draft after changing the rate quotes the new figure.
+                pricing=(payload.pricing if payload else None)
+                or (snapshot.values or {}).get("pricing"),
+                # Raw transcript first — the reformulation is translated to English by the
+                # classifier, and the brief is what sets the proposal's language.
+                brief=(snapshot.values or {}).get("transcript")
+                or (snapshot.values or {}).get("reformulated_transcript"),
             )
     except Exception as exc:  # noqa: BLE001 — any LLM failure → 502.
         log.error(
@@ -369,5 +383,6 @@ async def graph_proposal(
         executive_summary=proposal.executive_summary,
         scope=proposal.scope,
         total_engineer_days=proposal.total_engineer_days,
+        total_price_eur=proposal.total_price_eur,
         body_markdown=proposal.body_markdown,
     )

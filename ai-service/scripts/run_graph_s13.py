@@ -22,7 +22,7 @@ Persistence + observability:
 Run variants::
 
     # Deliverable run: real retrieval + gpt-5 agents + Postgres checkpointer + Logfire
-    docker compose exec estimator python scripts/run_graph_s13.py \\
+    docker compose exec ai-service python scripts/run_graph_s13.py \\
         --out exercises/session-13/example_run_complex.txt
 
     # Partial-offline smoke: no DB, canned per-task hours (still needs OPENAI_API_KEY

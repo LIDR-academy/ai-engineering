@@ -8,10 +8,10 @@
       Un agente es <span class="text-white font-bold">un bucle</span>: un modelo que decide, unas
       tools que ejecutan, una condición de parada. Aquí revisas cada agente y creas
       <span class="text-white font-bold">perfiles</span> nombrados y personalizados (modelo, esfuerzo,
-      iteraciones, recuperación y una <span class="text-white font-bold">persona</span>). Desde la S13
-      conviven tres estilos: el <span class="text-white font-bold">agente hecho a mano</span> (S12), la
-      orquestación <span class="text-white font-bold">Actor-Critic-Boss</span> (S4/S5) y el nuevo
-      <span class="text-white font-bold">flujo multi-agente por grafo</span> (S13).
+      iteraciones, recuperación y una <span class="text-white font-bold">persona</span>). Conviven tres estilos: el
+      <span class="text-white font-bold">agente hecho a mano</span>, la orquestación
+      <span class="text-white font-bold">Actor-Critic-Boss</span> y el
+      <span class="text-white font-bold">flujo multi-agente por grafo</span>.
     </p>
   </div>
 
@@ -25,7 +25,7 @@
   <section class="rounded-md border border-white/10 overflow-hidden mb-8">
     <div class="bg-ink/40 px-4 py-3 flex items-center justify-between">
       <div>
-        <h2 class="text-lg font-bold tracking-tight text-white">Agente hecho a mano (S12)</h2>
+        <h2 class="text-lg font-bold tracking-tight text-white">Agente hecho a mano</h2>
         <p class="text-white/50 text-xs mt-0.5">
           Bucle manual sobre la Responses API: <span class="text-white/80">reason → act → observe</span>.
           Tools: <code class="text-brand">search_budgets</code>,
@@ -101,7 +101,7 @@
   <section class="rounded-md border border-white/10 overflow-hidden mb-8">
     <div class="bg-ink/40 px-4 py-3 flex items-center justify-between gap-4">
       <div>
-        <h2 class="text-lg font-bold tracking-tight text-white">Agentes del grafo (S13)</h2>
+        <h2 class="text-lg font-bold tracking-tight text-white">Agentes del grafo</h2>
         <p class="text-white/50 text-xs mt-0.5 max-w-2xl">
           El pipeline de estimación reexpresado como un <span class="text-white/80">grafo LangGraph</span>:
           agentes especializados encadenados con dos <span class="text-white/80">handovers</span>
@@ -154,7 +154,7 @@
   <%# --- Actor-Critic-Boss (S4/S5): informativo, solo lectura ------------- %>
   <section class="rounded-md border border-white/10 overflow-hidden">
     <div class="bg-ink/40 px-4 py-3">
-      <h2 class="text-lg font-bold tracking-tight text-white">Actor-Critic-Boss (S4/S5)</h2>
+      <h2 class="text-lg font-bold tracking-tight text-white">Actor-Critic-Boss</h2>
       <p class="text-white/50 text-xs mt-0.5">Orquestación, no tool-calling — solo lectura aquí.</p>
     </div>
     <div class="px-4 py-4 text-sm text-white/70 space-y-2">

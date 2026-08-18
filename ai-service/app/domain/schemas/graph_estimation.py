@@ -120,6 +120,19 @@ class GraphProgress(GraphRunState):
     activity: list[ActivityEntry] = Field(default_factory=list)
 
 
+class GraphProposalRequest(BaseModel):
+    """Optional body for ``POST …/graph/{id}/proposal``.
+
+    The business backend owns the money, so it may hand over the CURRENT pricing instead of
+    letting the service reuse whatever was frozen into the graph state at gate 2. Without
+    this, re-drafting a proposal after changing the rate would quote the old figure.
+    """
+
+    pricing: dict | None = Field(
+        default=None, description="Pricing block to quote; falls back to the run's state."
+    )
+
+
 class GraphProposalResponse(BaseModel):
     """The full commercial proposal drafted by ``POST …/graph/{id}/proposal``.
 
@@ -133,4 +146,7 @@ class GraphProposalResponse(BaseModel):
     executive_summary: str
     scope: list[str] = Field(default_factory=list)
     total_engineer_days: int | None = None
+    # The price the model QUOTED. The caller computed it in the first place, so this is a
+    # check, not a source: a mismatch means the agent derived its own figure.
+    total_price_eur: int | None = None
     body_markdown: str

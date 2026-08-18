@@ -26,7 +26,7 @@
         <div class="text-danger text-xs font-bold mb-1" title="Sin tarea histórica similar">🔴 sin dato</div>
       <% end %>
       <input type="number" min="0" name="modules[<%= m %>][tasks][<%= t %>][estimated_hours]"
-             value="<%= task&.estimated_hours %>" placeholder="—"
+             value="<%= format_hours(task&.estimated_hours) %>" placeholder="—"
              data-estimate-hours data-action="input->estimate-modules-editor#recompute"
              class="w-full border <%= flagged ? "border-danger/60" : "border-white/15" %> rounded p-2 text-right text-white bg-ink/40 tabular-nums focus:outline-none focus:border-brand">
     </td>

@@ -145,6 +145,30 @@ class RagGraphEstimationRunsControllerTest < ActionDispatch::IntegrationTest
     assert_requested resume
   end
 
+  test "resume_structure sends module and task names free of HTML entities" do
+    # Regression: runs whose module name contains "&" reached the service as
+    # "Architecture &amp; Project Setup". The service keys per-task hours rows by
+    # (module, task), so the escaped form made the recovery-agent merge insert phantom
+    # rows instead of updating the real ones — the recovered hours were then dropped by
+    # build_estimate and the human retyped them at gate 2.
+    run = Rag::GraphEstimationRun.create!(transcript: "x" * 150, estimation_id: SecureRandom.uuid,
+                                          graph_state: "paused", current_gate: "structure_review")
+    stub_request(:post, %r{#{GRAPH}/#{run.estimation_id}/resume-stream\z})
+      .to_return(json(running, status: 202))
+
+    post resume_structure_rag_graph_estimation_run_path(run),
+         params: { modules: { "0" => { name: "Architecture &amp; Project Setup",
+                                       tasks: { "0" => { name: "Jobs &amp; queues",
+                                                         description: "Retries &amp; backoff" } } } } }
+
+    assert_requested(:post, %r{#{GRAPH}/#{run.estimation_id}/resume-stream\z}) do |req|
+      mod = JSON.parse(req.body).dig("decision", "modules", 0)
+      mod["name"] == "Architecture & Project Setup" &&
+        mod.dig("tasks", 0, "name") == "Jobs & queues" &&
+        mod.dig("tasks", 0, "description") == "Retries & backoff"
+    end
+  end
+
   test "resume_final resumes in the background carrying the proposal choice" do
     run = Rag::GraphEstimationRun.create!(transcript: "x" * 150, estimation_id: SecureRandom.uuid,
                                           graph_state: "paused", current_gate: "final_review")
@@ -220,6 +244,54 @@ class RagGraphEstimationRunsControllerTest < ActionDispatch::IntegrationTest
     assert run.proposal?
   end
 
+  # --- The 202 race: two terminal answers that are lies ----------------------
+  # START and RESUME both return 202 and run the graph in a BackgroundTask, so the first
+  # poll can arrive before the checkpoint has moved. See #leg_finished?.
+
+  test "a terminal state with no evidence of progress is treated as still running" do
+    run = running_run
+    # What the service answers right after START, before the first checkpoint exists:
+    # no ``snapshot.next`` at all, so it reports "completed" for a run that has not begun.
+    stub_request(:get, %r{#{GRAPH}/#{run.estimation_id}/progress\z}).to_return(json(
+      { estimation_id: run.estimation_id, state: "completed", activity: [],
+        pending_gate: nil, structure: nil, estimate: nil, analysis_report: nil,
+        task_hours: [], proposal: nil, errors: [] }
+    ))
+
+    get progress_rag_graph_estimation_run_path(run)
+
+    body = JSON.parse(response.body)
+    assert_equal false, body["finished"], "must keep polling, not reload into an empty result"
+    assert_equal "running", body["state"]
+    assert run.reload.running?, "nothing may be persisted from that poll"
+  end
+
+  test "a poll still reporting the gate we resumed FROM is stale, not finished" do
+    # The reviewer has just approved gate 1, so the run still records structure_review;
+    # the checkpoint has not advanced yet and the service repeats that same gate.
+    run = running_run
+    run.update!(current_gate: Rag::GraphEstimationRun::GATE_STRUCTURE)
+    stub_request(:get, %r{#{GRAPH}/#{run.estimation_id}/progress\z})
+      .to_return(json(paused_at_structure))
+
+    get progress_rag_graph_estimation_run_path(run)
+
+    body = JSON.parse(response.body)
+    assert_equal false, body["finished"], "must not bounce back to the gate just approved"
+    assert_equal "running", body["state"]
+  end
+
+  test "once the leg reaches the NEXT gate it is honoured as finished" do
+    run = running_run
+    run.update!(current_gate: Rag::GraphEstimationRun::GATE_STRUCTURE)
+    stub_request(:get, %r{#{GRAPH}/#{run.estimation_id}/progress\z}).to_return(json(paused_at_final))
+
+    get progress_rag_graph_estimation_run_path(run)
+
+    assert_equal true, JSON.parse(response.body)["finished"]
+    assert run.reload.at_final_gate?
+  end
+
   test "progress keeps the poller alive on a transient service error" do
     run = running_run
     stub_request(:get, %r{#{GRAPH}/#{run.estimation_id}/progress\z}).to_return(status: 502, body: "boom")
@@ -281,6 +353,78 @@ class RagGraphEstimationRunsControllerTest < ActionDispatch::IntegrationTest
     get proposal_pdf_rag_graph_estimation_run_path(run)
     assert_redirected_to rag_graph_estimation_run_path(run)
     assert_match(/genérala/i, flash[:alert])
+  end
+
+  # --- Pricing: set on the transcript screen, quoted by the proposal ----------
+
+  test "create keeps the pricing knobs from the transcript screen" do
+    stub_request(:post, %r{#{GRAPH}/stream\z}).to_return(json({ estimation_id: "x", state: "running", activity: [] }))
+
+    post rag_graph_estimation_runs_path, params: {
+      graph_estimation_run: { transcript: "x" * 150, rate_eur_per_hour: "90", contingency_pct: "20" }
+    }
+
+    run = Rag::GraphEstimationRun.order(:id).last
+    assert_equal 90, run.rate_eur_per_hour
+    assert_equal 20, run.contingency_pct
+  end
+
+  test "blank pricing fields fall back to the defaults, never to zero" do
+    stub_request(:post, %r{#{GRAPH}/stream\z}).to_return(json({ estimation_id: "x", state: "running", activity: [] }))
+
+    post rag_graph_estimation_runs_path, params: {
+      graph_estimation_run: { transcript: "x" * 150, rate_eur_per_hour: "", contingency_pct: "" }
+    }
+
+    run = Rag::GraphEstimationRun.order(:id).last
+    assert_equal 75, run.rate_eur_per_hour
+    assert run.pricing.priced?, "un run sin tarifa no se podría presupuestar"
+  end
+
+  test "resume_final hands the computed price to the service, derived from the confirmed hours" do
+    run = Rag::GraphEstimationRun.create!(
+      transcript: "x" * 150, estimation_id: SecureRandom.uuid,
+      rate_eur_per_hour: 75, contingency_pct: 15,
+      estimate: { "modules" => [ { "name" => "Backend",
+                                   "tasks" => [ { "name" => "API" }, { "name" => "Auth" } ] } ] }
+    )
+    stub_request(:post, %r{#{GRAPH}/#{run.estimation_id}/resume-stream\z})
+      .to_return(json({ estimation_id: run.estimation_id, state: "running", activity: [] }))
+
+    post resume_final_rag_graph_estimation_run_path(run), params: {
+      modules: { "0" => { name: "Backend",
+                          tasks: { "0" => { estimated_hours: "10.5" }, "1" => { estimated_hours: "20" } } } }
+    }
+
+    assert_requested :post, %r{#{GRAPH}/#{run.estimation_id}/resume-stream\z} do |req|
+      pricing = JSON.parse(req.body)["decision"]["pricing"]
+      # 30,5 h × 75 € = 2287,5 € · +15% = 343,125 € → 2631 € en total.
+      pricing["base_eur"] == 2288 && pricing["contingency_eur"] == 343 &&
+        pricing["total_eur"] == 2631 && pricing["currency"] == "EUR"
+    end
+  end
+
+  test "the result screen shows the price and the breakdown adds up" do
+    run = completed_run
+    run.update!(rate_eur_per_hour: 100, contingency_pct: 10)
+
+    get rag_graph_estimation_run_path(run)
+
+    assert_response :success
+    assert_match "Contingencia 10%", response.body
+    # 40 h × 100 € = 4.000 € base, +10% = 4.400 € total.
+    assert_match "4.000 €", response.body
+    assert_match "4.400 €", response.body
+  end
+
+  test "a zero rate hides the money instead of showing a confident zero" do
+    run = completed_run
+    run.update!(rate_eur_per_hour: 0)
+
+    get rag_graph_estimation_run_path(run)
+
+    assert_response :success
+    assert_no_match(/Contingencia|0 €/, response.body)
   end
 
   test "a guardrail violation on start is surfaced as a flash alert" do
