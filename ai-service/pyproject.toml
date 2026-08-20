@@ -33,7 +33,7 @@ dependencies = [
     "nltk>=3.9",
     # Session 8 — pgvector persistence (async driver + vector type for SQLAlchemy)
     "asyncpg>=0.29",
-    "pgvector>=0.3",
+    "pgvector>=0.5.0",
     # SQLAlchemy's async engine requires greenlet; declared explicitly so host
     # runs (scripts/evals via `uv run`) work, not only the Docker image.
     "greenlet>=3.0",
