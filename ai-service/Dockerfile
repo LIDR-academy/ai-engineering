@@ -3,7 +3,7 @@
 # =============================================================================
 # We use a multi-stage build so that build tools (uv, compilers, headers) stay
 # out of the final image, keeping it small and reducing the attack surface.
-FROM python:3.11-slim AS builder
+FROM python:3.14-slim AS builder
 
 # Install uv — a fast Python package manager written in Rust.
 # Copying the static binary from the official image is the fastest method.
@@ -26,7 +26,7 @@ RUN uv sync --no-install-project --no-dev
 # =============================================================================
 # Start from a clean slim image — no build tools, no uv, no cached layers
 # from the builder stage. Only the virtual environment is carried over.
-FROM python:3.11-slim AS runtime
+FROM python:3.14-slim AS runtime
 
 # Never run containers as root. Create a dedicated user and group so the
 # process has minimal filesystem and OS-level privileges.
