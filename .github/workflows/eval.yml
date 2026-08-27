@@ -121,7 +121,7 @@ jobs:
           direction: download
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
 
       # THE GATE. Compares this run against eval/baseline.json and fails on a
       # quality drop beyond tolerance. This is the LLMOps equivalent of a failing
