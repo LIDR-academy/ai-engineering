@@ -56,7 +56,7 @@ jobs:
       business-backend: ${{ steps.filter.outputs.business-backend }}
       deployment: ${{ steps.filter.outputs.deployment }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: dorny/paths-filter@v3
         id: filter
@@ -124,7 +124,7 @@ jobs:
       APP_ENV: development
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
@@ -174,7 +174,7 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -229,7 +229,7 @@ jobs:
       OPENAI_API_KEY: sk-test-not-a-real-key
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
@@ -289,7 +289,7 @@ jobs:
             build-args: RAILS_ENV=production
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Declarar EN VOZ ALTA a qué registro se va a escribir, y hacerlo ANTES de
       # construir nada. Sin esto el fallo de namespace o de credenciales aparece
@@ -413,7 +413,7 @@ jobs:
     steps:
       # The runner needs the repository twice over: to ship the deployment
       # files in the next step, and to run the smoke test in the last one.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # The deployment files travel FROM THE RUNNER. /opt/estimator is not a
       # git clone and turning it into one would mean leaving git credentials on
