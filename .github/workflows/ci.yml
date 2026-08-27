@@ -322,7 +322,7 @@ jobs:
           echo "EC2_USER set   : ${{ secrets.EC2_USER != '' }}"
           echo "EC2_SSH_KEY set: ${{ secrets.EC2_SSH_KEY != '' }}"
 
-      - uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@v4
 
       # Only needed when we are actually going to push.
       #
