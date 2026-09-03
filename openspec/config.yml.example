@@ -1,0 +1,81 @@
+# Copy to openspec/config.yml after running `openspec init`.
+# This is what makes the generated artifacts speak your project's language instead
+# of generic software-engineering prose.
+
+context: |
+  Monorepo with two deployable services:
+  - business-backend/ : Ruby on Rails 8. Frontend + business backend. Users, sessions,
+    persistence, business rules. The only publicly exposed service. Tests are Minitest
+    under test/, run with `bin/rails test`.
+  - ai-service/ : Python 3.11 + FastAPI. LLM calls, CAG/RAG pipeline, agent and graph
+    orchestration. Private network only, authenticated with the X-Service-Token
+    middleware plus per-router X-API-Key. Never exposed publicly. Tests run with
+    `uv run pytest`.
+
+  Datastores: two PostgreSQL instances — `postgres` (relational, owned by Rails) and
+  `vector-db` (pgvector, owned by the AI service). Neither reads the other's data.
+  Redis Stack backs the semantic cache and the runtime config.
+
+  AI service layers, outermost import first: foundation/ -> domain/ -> generation/
+  (cag, rag, agentic, conversation) -> ingestion/ -> api/. A generation sibling never
+  imports another generation sibling; they compose only inside a conductor in domain/.
+  Routers are transport only.
+
+  Business backend: contexts (estimation, conversation, rag, agents) over the
+  EstimatorAi foundation in app/services/estimator_ai/, which is the ONLY layer that
+  speaks HTTP to the AI service. Contract POROs mirror the Pydantic schemas 1:1.
+
+  Domain: software effort estimation. A transcript or a task description goes in; a
+  structured estimate comes out, grounded in a corpus of historical budgets and tasks
+  retrieved from the vector database, with its supporting sources and a confidence.
+
+  Two URL prefixes coexist on purpose: /api/v1/* (Session 4 estimate, sessions,
+  ingestion, config) and /v1/* (Session 9+ RAG, graph and supervisor routes). The
+  routes the business backend consumes are pinned in
+  docs/contract/business-backend-consumed-routes.json and verified in CI by
+  ai-service/scripts/check_contract.py.
+
+  Never write "backend" unqualified. Use "ai-service" or "business-backend".
+
+  All code, comments, logs, tests, commit messages and API schemas are written in
+  English. The prose documentation under docs/ is written in Spanish, except the five
+  standards documents below, which the agent reads and which stay in English.
+
+  Project standards (single source of truth). Read and apply these before creating
+  any artifact or writing any code:
+  - docs/base-standards.md — core principles, decision closure, definition of done
+  - docs/doc-architecture.md — layers, ownership boundaries, the contract between layers
+  - docs/doc-verification-guide.md — which verification path proves which change
+  - docs/ai-service-standards.md — FastAPI layering, schemas, typed errors, guardrails
+  - docs/business-backend-standards.md — Rails client boundary, degradation, persistence
+
+  Use ai-specs/skills/ for workflow guidance. Use templates/ for artifact shapes.
+
+rules:
+  _global:
+    - Before creating any artifact, read docs/base-standards.md
+    - Forbidden in any artifact when it affects behaviour: "if needed", "if applicable",
+      "when available", "if present", "optional depending on", "or", "prefer", "may be".
+      If you cannot remove the word, ask a blocking question instead.
+    - Every externally visible field must declare presence, source of truth,
+      missing-data behaviour and transformation rule.
+    - Every requirement needs at least one failure scenario.
+    - Cite real files from this repository. Never invent a path, a route or a symbol;
+      read the code first and name what you actually found.
+
+  proposal:
+    - State explicitly which of the two services owns each new responsibility.
+    - State explicitly whether the contract changes, whether
+      docs/contract/business-backend-consumed-routes.json must be updated, and whether
+      the change is backward compatible.
+    - For the AI service, name the layer (foundation / domain / generation / api) and
+      justify it against docs/doc-architecture.md.
+
+  tasks:
+    - Task 0 is always "create the feature branch".
+    - Verification tasks are executed by the agent, never delegated to the user.
+    - Use `uv run pytest` for the AI service and `bin/rails test` for the business
+      backend. There is no tests/unit, tests/integration or tests/e2e split, and the
+      business backend does not use RSpec.
+    - A task may only be marked [x] once its verification evidence exists.
+    - End the file with the Execution Report template.

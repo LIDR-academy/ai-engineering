@@ -2,6 +2,65 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Naming: never say "backend" unqualified
+
+| Folder              | Name in the programme | Stack             | Responsibility                                  |
+| ------------------- | --------------------- | ----------------- | ----------------------------------------------- |
+| `business-backend/` | backend de negocio    | Ruby on Rails 8   | UI, users, sessions, persistence, business rules |
+| `ai-service/`       | servicio IA           | Python + FastAPI  | LLM calls, CAG/RAG pipeline, agent orchestration |
+
+There are two backends and the ambiguity breaks every conversation about this system.
+Use `ai-service` and `business-backend`. The third layer, when it matters, is the
+*frontend* served by Rails.
+
+## Non-negotiable rules
+
+1. All code, comments, log messages, error messages, commit messages, test names and
+   API schemas are written in **English**. The prose documentation under `docs/` is
+   written in **Spanish** on purpose — students of the programme read it. The five
+   standards documents listed below are the exception to that exception: the agent
+   reads them, so they stay in English.
+2. The AI service is **Python + FastAPI**. It is never exposed publicly: only the
+   business backend calls it, over the internal network, authenticated with
+   `X-Service-Token`.
+3. The AI service contract is versioned. Payloads are Pydantic models. Error codes are
+   part of the contract, not an implementation detail. The routes the business backend
+   consumes are pinned in `docs/contract/business-backend-consumed-routes.json` and
+   verified in CI by `ai-service/scripts/check_contract.py`.
+4. Secrets never enter the repository or an image. `.env.example` holds names only.
+5. `GET /health` on the AI service is cheap and **never calls the LLM**.
+6. CI never calls the real model. Tests mock the LLM.
+
+## Working agreement with the agent
+
+Read these before proposing anything:
+
+- `docs/base-standards.md` — core principles, decision closure, definition of done
+- `docs/doc-architecture.md` — layers, ownership boundaries, where a file belongs
+- `docs/doc-verification-guide.md` — how to prove a change works, per risk level
+- `docs/ai-service-standards.md` — AI service conventions
+- `docs/business-backend-standards.md` — business backend conventions
+
+**When a document and the code disagree, the code is the fact and the document is the
+bug.** Cite real files; never invent a path, a route or a symbol.
+
+## Skills
+
+Skills live in `ai-specs/skills/` (`close-requirement`, `spec-review`,
+`adversarial-review`). When a request matches a skill description, load and follow its
+`SKILL.md` before continuing, and load any file the skill references. Claude Code sees
+them through the local symlink `.claude/skills -> ../ai-specs/skills`; `.claude/` is
+git-ignored, so the versioned source is `ai-specs/skills/`. Setup and the full flow are
+documented in `ai-specs/README.md`.
+
+## Planning discipline
+
+Do not write code until the requirement is decision-closed and a technical contract has
+been approved by a human. Planning workflows (`close-requirement`, `spec-review`,
+proposal generation) run with the strongest available reasoning model; implementation
+can run with a faster one. Artifact shapes live in `templates/`; OpenSpec's project
+context lives in `openspec/config.yml`.
+
 ## Repository layout
 
 Two-project monorepo for the Master en AI Engineering programme:
@@ -125,6 +184,12 @@ Key design points future changes should respect:
   The live session closes the two loops that were left open. (1) **The flag now exists on the paths the UI actually uses.** It used to be written in exactly one place — `estimate_from_transcript` — and Rails never called that endpoint, so `_review_banner.html.erb` was unreachable in every screen. The guardrail now also runs where the hours are DERIVED: `generation/rag/guardrails.py::review_reasons_for_task_hours` (wizard, via `task_hours.py::build_result`, which every `TaskHoursResult` construction goes through so the recovery merge cannot drop the verdict) and `domain/graph/agents/_common.py::review_fields` (graph, in `build_estimate` AND re-derived at gate 2, so a human who fills the gaps clears the badge). **Same field names as `Estimate` on purpose** so Rails routes on one predicate. Critically it is a DIFFERENT measurement wearing the same arithmetic: where the model invents the total the ratio catches a fabricated number (3x, `ESTIMATE_MAX_EVIDENCE_RATIO`); where the total is derived from the neighbours it cannot be fabricated, and the ratio measures analog REUSE — hence `check_total_bounds` gained `max_evidence_ratio` + `evidence_description`, and a separate `TASK_HOURS_MAX_EVIDENCE_RATIO` (6.0). The banner was REMOVED from the wizard's `generation` step (a free structure has no hours, so no bound can fire there) and added to `hours` + `verification`; its local is now `subject:`, not `estimate:`. (2) **The panel is a screen of the product**: `GET /api/v1/eval/dashboard` (`app/api/eval_reports.py`, deliberately NOT token-exempt) → Rails `/rag/dashboard` (`Rag::DashboardController`, `EstimatorAi::EvalClient`), embedded in an **iframe** because the page is a complete document with its own palette. It is not generated on request — a container cannot read its own Docker log — so `scripts/refresh_dashboard.sh` pipes host logs through `stdin` into the generator inside the container, writing to the new `eval_reports` volume.
 
   On the cliente: `requires_human_review` is mirrored from JSONB into a **column** on both `estimation_runs` and `graph_estimation_runs` (partial index; one writer each — `sync_review_flag!` and `apply_run_state!`), both listings gain an amber badge and a `?review=1` filter with a count over the whole table, and the nav's «Grafo» link now points at the **index** rather than `new` (the history was previously only reachable by bouncing off a run's detail page). Two pre-existing bugs fixed on the way: `graph_estimation_runs/_completed.html.erb` was handing the banner a raw `Hash`, so `respond_to?(:needs_review?)` silently rendered nothing; and `--color-warning` was never defined in `app/assets/tailwind/application.css`, so the S14 supervisor inbox's "esperando revisión" chip has been rendering colourless since it shipped. Contract grew to **32 routes**. Guide: `guides/session-16-live-guide.md`.
+
+- **Session 17 is an auxiliary LAB on Spec-Driven Development, and the only session that adds no product code.** It teaches how to *build software with* an agent rather than how to *build products with AI*: the bottleneck stopped being code generation and became **closing decisions**, so the process forces them closed before the agent writes anything. What it installs at the repo root is a **context layer the agent reads**, not a feature: the `## Naming` / `## Non-negotiable rules` / `## Working agreement` / `## Skills` / `## Planning discipline` sections at the top of this file; five English standards documents (`docs/base-standards.md`, `doc-architecture.md`, `doc-verification-guide.md`, `ai-service-standards.md`, `business-backend-standards.md` — English **because the agent reads them**, which is the one exception to `docs/` being Spanish); three skills in `ai-specs/skills/` (`close-requirement`, `spec-review`, `adversarial-review`); four artifact templates in `templates/`; and `openspec/config.yml`. Tooling is **OpenSpec** (`npm i -g @fission-ai/openspec`, `openspec init`, extended profile → `/opsx:explore|propose|apply|verify|archive`); the exact command names depend on profile and version, so they are verified before each run, never assumed. **Claude Code sees the skills through `.claude/skills -> ../ai-specs/skills`, a symlink that is deliberately NOT versioned** (`.claude/` is git-ignored): the single source is `ai-specs/skills/`, and Cursor/Codex get their own symlinks to the same directory. Setup and the full nine-step flow are in `ai-specs/README.md`.
+
+  **Two things about the kit are worth knowing before touching it.** First, it arrived written against an *idealized* repository and was adapted on install: 36 of its 39 path/command references were wrong here (`app/services/`, `app/repositories/`, `app/api/schemas.py`, `tests/unit|integration|e2e`, `bundle exec rspec`, `app/clients/ai_service_client.rb`). Only 3 were correct — the `openspec/changes/<name>/...` paths, which OpenSpec itself generates. The rewrite points at the real layers, `uv run pytest` / `bin/rails test`, the `EstimatorAi` namespace, and maps the kit's abstract "contract test" onto the one that already exists and runs in CI (`scripts/check_contract.py`). This matters because the lab's own thesis is that a generic context produces generic specs; a `doc-architecture.md` describing an architecture this repo does not have would be an authoritative-sounding lie. Second, `docs/doc-architecture.md` is deliberately a **decision index** that links to `ai-service/ARCHITECTURE.md`, `business-backend/ARCHITECTURE.md` and `docs/architecture.md` rather than competing with them — without that, the repo would carry five architecture documents.
+
+  **The worked example is "explicabilidad de la estimación"**: show the user which historical tasks an estimate was derived from. It was chosen because it is small to implement and large to specify, and because the repo makes every teaching point real rather than hypothetical. The analogs are already computed and typed (`TaskNeighbor{source_id, budget_id, estimated_hours, distance}` in `app/generation/rag/schemas.py`), returned by `POST /v1/estimate/tasks/hours`, and parsed into `Rag::TaskNeighborView` — **and no ERB renders them**, so the feature is "expose", not "calculate". Three facts pinned by inspection, all of which the live session depends on: the cosine `distance` reaches the LLM prompt (`context_assembler.py` renders it on every `<source>`) but dies before the response (`estimator.py::estimate_from_transcript`, where the retrieved chunks collapse to an id set); the distance→0-100 normalizer **already exists in the wrong layer** — `business-backend/app/models/rag/task_neighbor_view.rb::closeness_pct`, presentation-layer domain logic with zero call sites, plus a dead twin in `retrieved_chunk_view.rb::relevance_pct`; and **`project_id`/`tenant_id`/`owner_id` appear nowhere in `ai-service/app`** — the chunk tables have no owner column and `ChunkStore.search_filtered` filters only on sector, year and chunk type, so the corpus is a single global tenant and the "who is allowed to see this analog?" question is genuinely open. That last one is the lab's pedagogical climax and is left undiscovered on purpose until the spec audit. Guide: `guides/session-17-live-guide.md`.
 
 ## Configuration
 

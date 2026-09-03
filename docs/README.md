@@ -19,6 +19,20 @@ Cómo está construido el sistema.
 | [Decisiones](decisions.md) | Qué se decidió, por qué, y qué queda por confirmar |
 | [`contract/`](contract/) | Las rutas que el backend de negocio consume, verificadas en CI |
 
+## Estándares para el agente (Spec-Driven Development)
+
+Los únicos documentos de `docs/` escritos **en inglés**, porque quien los lee es el
+agente de código, no una persona. Instalados en la Sesión 17 (Lab SDD).
+
+| Documento | Qué responde |
+|---|---|
+| [Base standards](base-standards.md) | Principios, cierre de decisiones, definition of done, palabras prohibidas |
+| [Architecture guide](doc-architecture.md) | Dónde vive cada responsabilidad y qué contratos no se mueven por accidente |
+| [Verification guide](doc-verification-guide.md) | Qué verificación prueba qué cambio, con los comandos reales |
+| [AI service standards](ai-service-standards.md) | FastAPI: capas, schemas, errores tipados, guardrails, prompts |
+| [Business backend standards](business-backend-standards.md) | Rails: frontera del cliente, degradación, persistencia, snapshot vs refetch |
+| [`ai-specs/README.md`](../ai-specs/README.md) | El flujo de nueve pasos, las tres skills y cómo montarlo |
+
 ## Operativa
 
 Cómo se arranca, se despliega y se arregla.
@@ -40,6 +54,7 @@ Cómo se arranca, se despliega y se arregla.
 | <http://localhost:3000> | La interfaz. Punto de entrada de cualquier persona usuaria |
 | `/docs` del servicio IA | Swagger generado desde los modelos Pydantic (solo alcanzable desde la red interna) |
 | [`ai-service/exercises/`](../ai-service/exercises/) | Material de los ejercicios por sesión |
+| [`templates/`](../templates/) | Las cuatro plantillas de artefacto del flujo SDD |
 
 ---
 
