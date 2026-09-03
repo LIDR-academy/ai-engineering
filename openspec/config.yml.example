@@ -54,7 +54,8 @@ context: |
 rules:
   _global:
     - Before creating any artifact, read docs/base-standards.md
-    - Forbidden in any artifact when it affects behaviour: "if needed", "if applicable",
+    - >-
+      Forbidden in any artifact when it affects behaviour: "if needed", "if applicable",
       "when available", "if present", "optional depending on", "or", "prefer", "may be".
       If you cannot remove the word, ask a blocking question instead.
     - Every externally visible field must declare presence, source of truth,

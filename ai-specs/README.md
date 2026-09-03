@@ -37,17 +37,30 @@ Lo único que hace falta en una máquina nueva:
 ```bash
 # 1. OpenSpec (requiere Node >= 20.19)
 npm install -g @fission-ai/openspec@latest
-openspec init
-openspec config profile          # perfil extendido: /opsx:propose, /opsx:apply, ...
+openspec init                    # crea .claude/commands/opsx y 6 skills openspec-*
 
-# 2. Exponer las skills a Claude Code
-mkdir -p .claude
-ln -s ../ai-specs/skills .claude/skills
+# 2. Exponer NUESTRAS skills a Claude Code, una a una
+mkdir -p .claude/skills
+for s in close-requirement spec-review adversarial-review; do
+  ln -s "../../ai-specs/skills/$s" ".claude/skills/$s"
+done
 ```
 
 `.claude/` está en `.gitignore` a propósito: la fuente única versionada es
-`ai-specs/skills/`, y cada quien la expone a su herramienta con un symlink (Claude
-Code, Cursor, Codex). Una sola copia, varios clientes.
+`ai-specs/skills/`, y cada quien la expone a su herramienta con symlinks (Claude Code,
+Cursor, Codex). Una sola copia, varios clientes.
+
+> **No enlaces el directorio entero** (`ln -s ../ai-specs/skills .claude/skills`), que es
+> lo que parecía natural. `openspec init` **escribe sus propias skills en
+> `.claude/skills/`**, sigue el symlink y te deja seis directorios `openspec-*`
+> generados dentro de tu carpeta versionada. Con un symlink por skill, las suyas caen en
+> `.claude/` (ignorado) y las tuyas quedan limpias.
+
+> **`openspec/config.yml` tiene que ser YAML válido antes de `openspec init`.** Si no lo
+> es, el comando falla con un mensaje engañoso — *"The store declaration ... is invalid.
+> Fix or remove the `store:` line"*— aunque no haya ninguna línea `store:`. La causa real
+> es el fallo de parseo. El error clásico: una entrada de lista con `: ` dentro, que YAML
+> interpreta como un mapa. Se arregla con un escalar de bloque `- >-`.
 
 Verifica que ha funcionado abriendo Claude Code en la raíz y preguntando:
 
