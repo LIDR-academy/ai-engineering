@@ -84,9 +84,20 @@ leyendo el contexto. Si no cita ficheros, el contexto no está cargado.
 | 6 | `/opsx:apply` implementa tarea a tarea | código + checkboxes |
 | 7 | Verificación con evidencia | `reports/YYYY-MM-DD-verification.md` |
 | 8 | `adversarial-review` en **sesión nueva** | informe de red team |
-| 9 | `/opsx:archive` y PR | historial |
+| 9 | `/opsx:archive` y PR | spec viva en `openspec/specs/` + carpeta fechada en `openspec/changes/archive/` |
 
 El paso 5 es el único punto donde un humano bloquea el flujo. Es deliberado.
+
+**Sobre el paso 9.** El delta spec es un *diff*: se aplica contra la spec viva de la
+capacidad. Al archivar, el cambio se funde en `openspec/specs/<capability>/spec.md` (que
+ya no lleva cabeceras de delta: todo queda aplanado en `## Requirements`) y la carpeta del
+cambio se mueve entera a `openspec/changes/archive/YYYY-MM-DD-<cambio>/`, con su delta sin
+tocar. Si necesitas actualizar la spec viva **sin** cerrar el cambio —porque otro cambio
+depende de ese requisito— existe `/opsx:sync`, que hace el merge y deja el cambio abierto.
+
+OpenSpec no guarda qué cambio introdujo cada requisito: no hay id ni metadato. La
+trazabilidad son `git log -p openspec/specs/<cap>/spec.md` y un `grep` sobre la carpeta de
+archivo, y funciona porque los requisitos se emparejan **por nombre literal**.
 
 Los nombres exactos de los comandos dependen del perfil y de la versión de OpenSpec, y
 cada herramienta los escribe distinto (Cursor y Copilot usan `/opsx-propose`, Codex

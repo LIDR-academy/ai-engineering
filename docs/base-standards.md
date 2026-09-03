@@ -63,7 +63,9 @@ A change is done when all of the following hold:
 5. Apply — implement tasks one at a time, updating checkboxes.
 6. Verify — run the verification path, produce evidence.
 7. Adversarial review — a different session tries to break it.
-8. Archive — the delta spec merges into the capability spec.
+8. Archive — the delta spec merges into the living spec at
+   `openspec/specs/<capability-path>/spec.md`, and the whole change folder moves to
+   `openspec/changes/archive/YYYY-MM-DD-<change-name>/` with its delta intact.
 
 Step 4 is the only point where a human blocks the flow. That is deliberate.
 

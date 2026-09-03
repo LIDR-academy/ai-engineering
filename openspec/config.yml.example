@@ -63,6 +63,13 @@ rules:
     - Every requirement needs at least one failure scenario.
     - Cite real files from this repository. Never invent a path, a route or a symbol;
       read the code first and name what you actually found.
+    - >-
+      A delta spec is a diff against openspec/specs/<capability-path>/spec.md, not a
+      standalone spec. Use the four sections ADDED, MODIFIED, REMOVED and RENAMED.
+      A MODIFIED block REPLACES the whole requirement: copy its "### Requirement:"
+      header verbatim from the living spec (matching is case-sensitive) and repeat every
+      scenario it already has, including the ones you are not changing. Prefer RENAMED
+      over a REMOVED plus ADDED pair.
 
   proposal:
     - State explicitly which of the two services owns each new responsibility.

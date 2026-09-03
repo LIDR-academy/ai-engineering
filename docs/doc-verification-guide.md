@@ -82,6 +82,18 @@ cd business-backend && bin/rails test
 
 Add `bin/rails test:system` when the change is visible in a screen.
 
+### I changed a spec
+
+```bash
+openspec validate <change-name> --strict
+openspec change show <change-name> --diff
+```
+
+`--strict` turns warnings into failures, which is what makes "a requirement must say
+SHALL or MUST" an error instead of a note. `--diff` shows each MODIFIED block against the
+living spec, requirement by requirement — the fastest way to catch a header that differs
+only in case, or a scenario the block forgot to repeat. Both run offline and cost nothing.
+
 ### I changed a guardrail
 
 ```bash
