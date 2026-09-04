@@ -52,6 +52,32 @@ class Rag::EstimationRunTest < ActiveSupport::TestCase
     assert run.task_hours.blank?, "task_hours cleared"
   end
 
+  test "task_hours_neighbors_by_task indexes neighbors by [module, task], empty when absent" do
+    run = Rag::EstimationRun.create!(
+      transcript: "t",
+      task_hours: { "tasks" => [
+        { "module" => "Auth", "task" => "OAuth", "has_match" => true,
+          "neighbors" => [ { "source_id" => 1, "budget_id" => "b1", "estimated_hours" => 40, "distance" => 0.1 } ] },
+        { "module" => "Auth", "task" => "RBAC", "has_match" => true }
+      ] }
+    )
+
+    lookup = run.task_hours_neighbors_by_task
+
+    oauth_neighbors = lookup[[ "Auth", "OAuth" ]]
+    assert_equal 1, oauth_neighbors.size
+    assert_kind_of Rag::TaskNeighborView, oauth_neighbors.first
+    assert_equal 40, oauth_neighbors.first.estimated_hours
+
+    assert_equal [], lookup[[ "Auth", "RBAC" ]]
+  end
+
+  test "task_hours_neighbors_by_task returns an empty hash when task_hours is blank" do
+    run = Rag::EstimationRun.create!(transcript: "t")
+
+    assert_equal({}, run.task_hours_neighbors_by_task)
+  end
+
   test "insufficient estimate exposes no numbers" do
     run = Rag::EstimationRun.create!(
       transcript: "t",

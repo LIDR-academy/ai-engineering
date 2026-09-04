@@ -255,6 +255,10 @@ def derive_task_hours(raw_args: dict[str, Any], *, consensus_fn: ConsensusFn) ->
         "reliability": reliability,
         "dispersion": dispersion,
         "has_match": True,
+        # Echoed, not recomputed, so the conductor can carry them onto
+        # AgentTaskDerivation instead of discarding them (see agent_estimation.py).
+        # Never reaches the model: the loop observes result["summary"], not this dict.
+        "neighbors": [n.model_dump() for n in args.neighbors],
         "summary": f"{args.task!r}: {hours}h (reliability {reliability}) from {len(pairs)} analogs",
     }
 

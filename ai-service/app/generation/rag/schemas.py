@@ -725,7 +725,11 @@ class VerifyRequest(BaseModel):
 class TaskNeighbor(BaseModel):
     """One historical task that matched the query task, for transparency."""
 
-    source_id: int = Field(description="DB id of the matched historical_task chunk.")
+    source_id: int | None = Field(
+        default=None,
+        description="DB id of the matched historical_task chunk, when known "
+        "(an agent-derived analog may not carry one).",
+    )
     budget_id: str | None = Field(default=None, description="Traceable parent corpus id.")
     estimated_hours: int = Field(ge=0, description="Hours recorded for this historical task.")
     distance: float = Field(description="Cosine distance to the query task (lower = closer).")
@@ -868,7 +872,10 @@ class AgentHoursRequest(BaseModel):
         default=None, ge=1, le=20, description="Override AGENT_MAX_ITERATIONS (recovery safeguard)."
     )
     search_top_k: int | None = Field(
-        default=None, ge=1, le=30, description="Neighbours per search (else runtime/settings default)."
+        default=None,
+        ge=1,
+        le=30,
+        description="Neighbours per search (else runtime/settings default).",
     )
     search_distance_threshold: float | None = Field(
         default=None, ge=0.0, le=2.0, description="Cosine cutoff (else runtime/settings default)."

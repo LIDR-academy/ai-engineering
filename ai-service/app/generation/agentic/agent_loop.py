@@ -142,7 +142,9 @@ async def run_structure_agent(
     """
     instructions = STRUCTURE_SYSTEM_PROMPT
     if persona and persona.strip():
-        instructions = f"{STRUCTURE_SYSTEM_PROMPT}\n\n# Additional operator instructions\n{persona.strip()}"
+        instructions = (
+            f"{STRUCTURE_SYSTEM_PROMPT}\n\n# Additional operator instructions\n{persona.strip()}"
+        )
 
     log.info("agent_structure_start", model=model, effort=reasoning_effort, persona=bool(persona))
     response = await client.responses.parse(
@@ -203,9 +205,7 @@ async def run_task_hours_recovery_agent(
 
     instructions = HOURS_RECOVERY_SYSTEM_PROMPT
     if persona and persona.strip():
-        instructions = (
-            f"{HOURS_RECOVERY_SYSTEM_PROMPT}\n\n# Additional operator instructions\n{persona.strip()}"
-        )
+        instructions = f"{HOURS_RECOVERY_SYSTEM_PROMPT}\n\n# Additional operator instructions\n{persona.strip()}"
 
     task_lines = "\n".join(
         f"- module={t.module!r} task={t.task!r}"
@@ -287,6 +287,7 @@ async def run_task_hours_recovery_agent(
                     estimated_hours=result.get("estimated_hours"),
                     reliability=result.get("reliability"),
                     has_match=bool(result.get("has_match", False)),
+                    neighbors=result.get("neighbors") or [],
                 )
 
             observation = result.get("summary") or result.get("error") or json.dumps(result)[:200]

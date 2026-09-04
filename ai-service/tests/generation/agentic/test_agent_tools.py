@@ -40,7 +40,8 @@ def test_derive_task_hours_matches_the_deterministic_consensus_exactly():
         {"estimated_hours": 180, "distance": 0.2, "source_id": 2, "budget_id": None},
     ]
     result = derive_task_hours(
-        {"module": "M", "task": "T", "neighbors": neighbors}, consensus_fn=distance_weighted_consensus
+        {"module": "M", "task": "T", "neighbors": neighbors},
+        consensus_fn=distance_weighted_consensus,
     )
     hours, reliability, _ = distance_weighted_consensus([(120, 0.1), (180, 0.2)])
     assert result["estimated_hours"] == hours
@@ -54,6 +55,38 @@ def test_derive_task_hours_no_neighbors_is_a_no_match_not_a_zero():
     )
     assert result["has_match"] is False
     assert "estimated_hours" not in result  # never fabricates a number
+
+
+def test_derive_task_hours_echoes_the_neighbors_it_was_given():
+    # The neighbors are already validated (DeriveTaskHoursNeighbor) and consumed by
+    # the consensus; they must also be echoed back so the conductor can carry them
+    # onto AgentTaskDerivation instead of discarding them (see agent_estimation.py).
+    neighbors = [
+        {"estimated_hours": 100, "distance": 0.05, "source_id": 1, "budget_id": "B-1"},
+        {"estimated_hours": 300, "distance": 0.8, "source_id": None, "budget_id": None},
+    ]
+    result = derive_task_hours(
+        {"module": "Auth", "task": "OAuth backend", "neighbors": neighbors},
+        consensus_fn=distance_weighted_consensus,
+    )
+    assert result["neighbors"] == neighbors
+
+
+def test_derive_task_hours_summary_unaffected_by_the_echoed_neighbors():
+    # The agent loop's observation is result["summary"] (or "error", or a JSON dump
+    # fallback) -- never the raw dict -- so adding "neighbors" to the return value
+    # must not change what the model sees. This is the safety property that makes
+    # it safe to touch a live agent path.
+    neighbors = [{"estimated_hours": 100, "distance": 0.05, "source_id": 1, "budget_id": "B-1"}]
+    result = derive_task_hours(
+        {"module": "Auth", "task": "OAuth backend", "neighbors": neighbors},
+        consensus_fn=distance_weighted_consensus,
+    )
+    assert result["summary"] == (
+        f"'OAuth backend': {result['estimated_hours']}h "
+        f"(reliability {result['reliability']}) from 1 analogs"
+    )
+    assert "neighbors" not in result["summary"]
 
 
 def test_derive_task_hours_rejects_bad_args():
@@ -128,7 +161,10 @@ async def test_search_budgets_passes_sector_filter_to_backend():
         return []
 
     await search_budgets(
-        {"query": "logistics tracking", "filters": {"sectors": ["logistics"], "component_type": None}},
+        {
+            "query": "logistics tracking",
+            "filters": {"sectors": ["logistics"], "component_type": None},
+        },
         backend=fake_backend,
     )
     assert seen["sectors"] == ["logistics"]

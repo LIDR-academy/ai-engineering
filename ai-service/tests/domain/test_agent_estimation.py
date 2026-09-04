@@ -17,6 +17,7 @@ from app.generation.agentic.agent_schemas import (
     AgentTaskDerivation,
     AgentTaskHoursRun,
     AgentTaskNode,
+    DeriveTaskHoursNeighbor,
 )
 from app.generation.rag.schemas import (
     TaskHoursEstimate,
@@ -72,7 +73,11 @@ def _base_result() -> TaskHoursResult:
     return TaskHoursResult(
         tasks=[
             TaskHoursEstimate(
-                module="Auth", task="OAuth backend", estimated_hours=120, reliability=0.8, has_match=True
+                module="Auth",
+                task="OAuth backend",
+                estimated_hours=120,
+                reliability=0.8,
+                has_match=True,
             ),
             TaskHoursEstimate(module="Auth", task="RBAC", has_match=False),
         ]
@@ -121,7 +126,11 @@ async def test_hybrid_skips_agent_when_nothing_flagged(monkeypatch):
         return TaskHoursResult(
             tasks=[
                 TaskHoursEstimate(
-                    module="Auth", task="OAuth backend", estimated_hours=120, reliability=0.9, has_match=True
+                    module="Auth",
+                    task="OAuth backend",
+                    estimated_hours=120,
+                    reliability=0.9,
+                    has_match=True,
                 )
             ]
         )
@@ -140,6 +149,55 @@ async def test_hybrid_skips_agent_when_nothing_flagged(monkeypatch):
     assert called["recovery"] is False  # zero extra cost in the happy path
     assert result.agent_trace is not None
     assert result.agent_trace.steps == []  # empty-step trace = "no recovery needed"
+
+
+async def test_hybrid_recovered_task_carries_its_analogs(monkeypatch):
+    """The adversarial-review finding: an agent-recovered task must not merge in
+    with an empty analog list. The agent's derive_task_hours args already carry
+    every field TaskNeighbor needs; the merge must not discard them."""
+
+    async def fake_estimate_all(modules, *, top_k=None, distance_threshold=None):
+        return _base_result()
+
+    async def fake_recovery(flagged, **kwargs):
+        return AgentTaskHoursRun(
+            derivations=[
+                AgentTaskDerivation(
+                    module="Auth",
+                    task="RBAC",
+                    estimated_hours=64,
+                    reliability=0.55,
+                    has_match=True,
+                    neighbors=[
+                        DeriveTaskHoursNeighbor(
+                            estimated_hours=60, distance=0.2, source_id=9, budget_id="B-9"
+                        ),
+                        DeriveTaskHoursNeighbor(
+                            estimated_hours=68, distance=0.3, source_id=None, budget_id=None
+                        ),
+                    ],
+                )
+            ],
+            trace=AgentTrace(),
+            iterations=1,
+            stopped_reason="completed",
+        )
+
+    monkeypatch.setattr(conductor, "estimate_all", fake_estimate_all)
+    monkeypatch.setattr(conductor, "run_task_hours_recovery_agent", fake_recovery)
+
+    result = await agent_estimate_task_hours(_modules(), client=object(), model="gpt-5-mini")
+    by_task = {t.task: t for t in result.tasks}
+
+    recovered = by_task["RBAC"]
+    assert recovered.has_match is True
+    assert len(recovered.neighbors) == 2
+    assert [n.estimated_hours for n in recovered.neighbors] == [60, 68]
+    assert recovered.neighbors[0].source_id == 9
+    assert recovered.neighbors[1].source_id is None  # optional, per design.md
+
+    # The already-grounded task's own neighbors are untouched by the merge.
+    assert by_task["OAuth backend"].neighbors == []
 
 
 async def test_hybrid_keeps_deterministic_when_agent_finds_nothing(monkeypatch):

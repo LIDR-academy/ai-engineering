@@ -1,5 +1,6 @@
 <% hours = run.task_hours_view %>
 <% modules = run.adjusted_modules %>
+<% neighbors_by_task = run.task_hours_neighbors_by_task %>
 
 <h2 class="text-lg font-bold tracking-tight text-white mb-1">4 · Horas por tarea (búsqueda semántica)</h2>
 <p class="text-white/50 text-sm mb-5">
@@ -63,6 +64,24 @@
                 <div class="text-white/90"><%= task.name %></div>
                 <% if task.description.present? %>
                   <div class="text-white/50 text-xs mt-0.5"><%= task.description %></div>
+                <% end %>
+                <%# Session 17 lab: the historical task analogs the hours (or the range) were
+                    derived from — always visible, no extra click. A flagged task has none by
+                    definition. A matched task with no analog data (a legacy payload, a
+                    module/task rename losing the join) gets its OWN muted indication —
+                    never a silent blank, which is what let an agent-recovered task with a
+                    dropped analog list look identical to a well-grounded one. %>
+                <% task_neighbors = neighbors_by_task[[ mod.name, task.name ]] || [] %>
+                <% if task.flagged? %>
+                  <div class="text-danger/70 text-[11px] mt-1 leading-tight">sin análogo histórico</div>
+                <% elsif task_neighbors.any? %>
+                  <ul class="text-white/40 text-[11px] mt-1 leading-tight space-y-0.5">
+                    <% task_neighbors.each do |neighbor| %>
+                      <li><%= neighbor.estimated_hours %> h · <%= neighbor.closeness_pct %>% cercanía</li>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <div class="text-white/30 text-[11px] mt-1 leading-tight italic">sin detalle de análogos</div>
                 <% end %>
               </td>
               <td class="p-3 text-right align-top tabular-nums w-40">

@@ -230,6 +230,79 @@ class RagEstimationRunsControllerTest < ActionDispatch::IntegrationTest
     assert_select "template[data-estimate-modules-editor-target='taskTemplate']"
   end
 
+  test "the hours step shows the historical analogs behind each task's hours" do
+    run = Rag::EstimationRun.create!(
+      transcript: "x" * 200,
+      task_hours: { "tasks" => [
+        { "module" => "Auth", "task" => "OAuth", "estimated_hours" => 40, "reliability" => 0.8,
+          "has_match" => true,
+          "neighbors" => [ { "source_id" => 1, "budget_id" => "b1", "estimated_hours" => 40, "distance" => 0.1 } ] },
+        { "module" => "Auth", "task" => "SSO", "estimated_hours" => 60, "reliability" => 0.5,
+          "has_match" => true, "dispersion" => 0.6,
+          "neighbors" => [
+            { "source_id" => 2, "budget_id" => "b2", "estimated_hours" => 40, "distance" => 0.2 },
+            { "source_id" => 3, "budget_id" => "b3", "estimated_hours" => 80, "distance" => 0.3 }
+          ],
+          "hours_range" => { "low" => 40, "high" => 80, "reason" => "sources disagree" } },
+        { "module" => "Auth", "task" => "RBAC", "has_match" => false },
+        # Simulates a payload stored before this change: has_match true, no "neighbors" key at all.
+        { "module" => "Auth", "task" => "MFA", "estimated_hours" => 20, "reliability" => 0.7,
+          "has_match" => true },
+        # Simulates what the AI service now returns for a task the deterministic pass
+        # could not ground but the RECOVERY AGENT did (post adversarial-review fix):
+        # has_match true, with the analogs the agent actually derived hours from.
+        # Regression for review finding F1 — this used to arrive as has_match:true
+        # with an empty neighbors list and render with no evidence at all.
+        { "module" => "Auth", "task" => "SSO Recovered", "estimated_hours" => 32,
+          "reliability" => 0.55, "has_match" => true,
+          "neighbors" => [ { "source_id" => 9, "budget_id" => "b9", "estimated_hours" => 32, "distance" => 0.25 } ] }
+      ] },
+      adjusted_breakdown: { "modules" => [ { "name" => "Auth", "tasks" => [
+                              { "name" => "OAuth", "estimated_hours" => 40, "rate_eur_per_hour" => 75,
+                                "hours_reliability" => 0.8, "has_match" => true },
+                              { "name" => "SSO", "estimated_hours" => 60, "rate_eur_per_hour" => 75,
+                                "hours_reliability" => 0.5, "has_match" => true,
+                                "hours_range" => { "low" => 40, "high" => 80, "reason" => "sources disagree" } },
+                              { "name" => "RBAC", "estimated_hours" => nil, "rate_eur_per_hour" => 75,
+                                "hours_reliability" => nil, "has_match" => false },
+                              { "name" => "MFA", "estimated_hours" => 20, "rate_eur_per_hour" => 75,
+                                "hours_reliability" => 0.7, "has_match" => true },
+                              { "name" => "SSO Recovered", "estimated_hours" => 32, "rate_eur_per_hour" => 75,
+                                "hours_reliability" => 0.55, "has_match" => true }
+                            ] } ],
+                            "total_hours" => 152, "total_cost_eur" => 11400, "confirmed_at" => nil }
+    )
+
+    get rag_estimation_run_path(run, step: "hours")
+    assert_response :success
+
+    # Matched task: shows its analog's hours and closeness.
+    assert_select "li", text: /40 h · 90% cercanía/ # OAuth, distance 0.1
+
+    # Contradicted task: still shows its full analog list (2 entries). Asserted on
+    # text unique to an analog row (the neighbor's own hours), not on the bare
+    # percentage — "80%"/"70%" also appear in unrelated reliability badges
+    # (OAuth 0.8 -> "80% fiab.", MFA 0.7 -> "70% fiab."), so a bare substring
+    # match would pass even if this list rendered nothing.
+    assert_select "li", text: /40 h · 80% cercanía/ # SSO neighbor 1, distance 0.2
+    assert_select "li", text: /80 h · 70% cercanía/ # SSO neighbor 2, distance 0.3
+
+    # Unmatched task: explicit red message, no analog list for it.
+    assert_match "sin análogo histórico", response.body
+
+    # Missing-neighbors-key task (MFA): matched but no analog detail -> the
+    # distinct, muted "no detail" indication, not the unmatched message and not
+    # a silently empty block.
+    assert_match "sin detalle de análogos", response.body
+
+    # The two indications are textually distinguishable from each other.
+    assert_not_equal "sin análogo histórico", "sin detalle de análogos"
+
+    # Agent-recovered task: arrives matched WITH analogs (the ai-service fix) and
+    # renders them exactly like a deterministically matched task.
+    assert_select "li", text: /32 h · 75% cercanía/ # SSO Recovered's analog, distance 0.25
+  end
+
   test "show renders the grounding warning when citations are fabricated" do
     run = Rag::EstimationRun.create!(
       transcript: "x" * 200,

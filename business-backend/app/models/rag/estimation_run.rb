@@ -61,6 +61,18 @@ module Rag
       Rag::TaskHoursView.from_hash(task_hours) if task_hours.present?
     end
 
+    # The historical analogs behind each task's hours, indexed by [module, task] so
+    # the "hours" step can attach them to the rows it renders from adjusted_modules
+    # (which has no "neighbors" attribute of its own). Empty when task_hours is blank;
+    # a task with no recorded neighbors maps to an empty array, same as a lookup miss.
+    def task_hours_neighbors_by_task
+      return {} unless task_hours_view
+
+      task_hours_view.tasks.each_with_object({}) do |task, index|
+        index[[ task.module_name, task.task ]] = task.neighbors
+      end
+    end
+
     # The human-confirmed breakdown ({ "modules" => [...], "total_hours" => n,
     # "total_cost_eur" => n, "confirmed_at" => iso }). Falsy until saved.
     def adjusted_modules

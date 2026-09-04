@@ -35,6 +35,7 @@ from app.generation.rag.schemas import (
     TaskHoursModuleInput,
     TaskHoursResult,
     TaskItem,
+    TaskNeighbor,
     WorkModule,
 )
 from app.generation.rag.task_hours import (
@@ -197,6 +198,19 @@ async def agent_estimate_task_hours(
                     "has_match": True,
                     # The agent recovered a point estimate; drop the stale range.
                     "hours_range": None,
+                    # Carry the analogs the agent actually used, mapped from the
+                    # agentic-local type to the RAG one HERE, in the conductor:
+                    # generation/agentic may not import generation/rag/schemas
+                    # (ARCHITECTURE.md §7 — siblings compose only in domain/).
+                    "neighbors": [
+                        TaskNeighbor(
+                            source_id=n.source_id,
+                            budget_id=n.budget_id,
+                            estimated_hours=n.estimated_hours,
+                            distance=n.distance,
+                        )
+                        for n in d.neighbors
+                    ],
                 }
             )
         )

@@ -120,8 +120,18 @@ def _recovery_script():
                     "module": "Auth",
                     "task": "OAuth backend",
                     "neighbors": [
-                        {"estimated_hours": 100, "distance": 0.1, "source_id": 1, "budget_id": None},
-                        {"estimated_hours": 140, "distance": 0.3, "source_id": 2, "budget_id": None},
+                        {
+                            "estimated_hours": 100,
+                            "distance": 0.1,
+                            "source_id": 1,
+                            "budget_id": None,
+                        },
+                        {
+                            "estimated_hours": 140,
+                            "distance": 0.3,
+                            "source_id": 2,
+                            "budget_id": None,
+                        },
                     ],
                 },
             ),
@@ -160,6 +170,9 @@ async def test_recovery_runs_search_then_derive_and_captures_derivations():
     expected_hours, expected_reliability, _ = distance_weighted_consensus([(100, 0.1), (140, 0.3)])
     assert d.estimated_hours == expected_hours
     assert d.reliability == expected_reliability
+    # The analogs the agent searched are carried onto the derivation, not dropped.
+    assert [n.estimated_hours for n in d.neighbors] == [100, 140]
+    assert [n.distance for n in d.neighbors] == [0.1, 0.3]
 
 
 async def test_recovery_empty_flagged_list_short_circuits():

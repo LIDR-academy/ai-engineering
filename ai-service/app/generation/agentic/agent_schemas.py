@@ -173,6 +173,11 @@ class AgentTaskDerivation(BaseModel):
     estimated_hours: int | None = Field(default=None, ge=0)
     reliability: float | None = Field(default=None, ge=0.0, le=1.0)
     has_match: bool = False
+    neighbors: list[DeriveTaskHoursNeighbor] = Field(
+        default_factory=list,
+        description="The analogs the agent's derive_task_hours call was given, "
+        "carried through so the merge does not have to discard them.",
+    )
 
 
 class AgentTaskHoursRun(BaseModel):
